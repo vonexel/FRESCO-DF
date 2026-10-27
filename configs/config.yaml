@@ -1,0 +1,50 @@
+defaults:
+  - experiment: main
+  - _self_
+
+stages: [index, faces, features, train, report]
+force: false
+paths:
+  ffpp_root: ${oc.env:FFPP_ROOT,datasets/ff_c23/FaceForensics++_C23}
+  celeb_root: ${oc.env:CELEBDFPP_ROOT,datasets/celebdfpp}
+  data_dir: data
+  output_dir: outputs
+  feature_cache: ${paths.data_dir}/cache/clip_vitl14
+preprocess:
+  frames: 32
+  workers: 4
+  detector: yunet
+  limit: null
+features:
+  device: cuda
+  batch_size: 32
+  encoder_name: ViT-L-14
+  pretrained: openai
+  recover_provenance: false
+  conditions: [clean, jpeg90, jpeg70, jpeg50, jpeg30, blur1, blur2, blur3, resize0.5, resize0.25]
+model:
+  grid_size: 5
+  spline_degree: 3
+  grid_min: -3.0
+  grid_max: 3.0
+train:
+  device: cuda
+  epochs: 30
+  patience: 6
+  batch_size: 1024
+  lrs: [0.001, 0.0003, 0.003]
+  weight_decay: 0.0001
+  wall_seconds: 60
+  target_hidden: 72
+  threads: 4
+eval:
+  bootstrap: 10000
+  margin: 0.01
+  interpretation_samples: 512
+  grid_points: 31
+  min_seeds_confirmatory: 10
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: ${paths.output_dir}/hydra/${now:%Y-%m-%d_%H-%M-%S}

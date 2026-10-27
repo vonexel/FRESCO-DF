@@ -1,0 +1,11 @@
+name: functions
+synthetic: false
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+heads: [linear, mlp_relu, mlp_gelu, mlp_bspline, kan_spline, kan_fast, kan_rational, kan_wavelet]
+budgets: [params, time]
+tasks: [smooth_additive, composition, oscillatory, piecewise_smooth, noisy_additive]
+data_seed: 2026
+train_points: 2048
+val_points: 512
+test_points: 2048
+noise_std: 0.1
