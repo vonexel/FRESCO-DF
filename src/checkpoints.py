@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import open_clip
 from pathlib import Path
 from .data import sha256_file
 from dataclasses import dataclass
@@ -17,7 +18,6 @@ class EncoderCheckpoint:
 def resolve_encoder_checkpoint(encoder_name: str, pretrained: str, cache_dir: Path) -> EncoderCheckpoint:
     if encoder_name.startswith(("hf-hub:", "local-dir:")):
         raise ValueError("Use a registered OpenCLIP encoder_name and a pretrained tag or .safetensors path")
-    import open_clip
 
     metadata = dict(open_clip.get_pretrained_cfg(encoder_name, pretrained) or {})
     if pretrained == "openai":
