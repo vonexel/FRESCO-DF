@@ -1,0 +1,14 @@
+# separate optional response-surrogate environment. Do not install into .venv.
+interpret-core==0.7.8
+numpy==2.4.6
+scipy==1.17.1
+pandas==2.3.3
+scikit-learn==1.9.1
+joblib==1.6.0
+threadpoolctl==3.7.0
+python-dateutil==3.0.0
+pytz==2026.5
+tzdata==2026.5
+six==1.17.0
+cloudpickle==3.1.2
+narwhals==2.28.0

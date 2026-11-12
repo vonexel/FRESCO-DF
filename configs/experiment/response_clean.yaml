@@ -1,0 +1,18 @@
+name: response_clean
+synthetic: false
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+heads: [kan_spline, mlp_gelu]
+budgets: [params, time]
+ks: [16]
+covariates: [true, false]
+held_out_methods: [null]
+# Both recipes consume exactly the same cache. Coordinates stay train-clean fitted.
+cache_name: clip_vitl14_response
+source_conditions: [clean, jpeg70, blur1, resize0.5]
+training_conditions: [clean]
+# Match both optimizer updates and examples, independent of recipe row count.
+training_max_steps: 3000
+validation_every_steps: 100
+# Common across covariate on/off; for an exploratory k128 run set target_params=9585.
+target_params: 1585
+analysis_role: exploratory extension after inspection of Celeb-DF++ results

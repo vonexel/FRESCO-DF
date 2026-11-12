@@ -1,0 +1,16 @@
+name: support_geometry1
+synthetic: false
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+heads: [kan_spline, mlp_gelu]
+budgets: [params]
+ks: [16]
+covariates: [true]
+covariate_indices: [2]
+held_out_methods: [null]
+cache_name: clip_vitl14_response
+source_conditions: [clean, jpeg70, blur1, resize0.5]
+training_conditions: [clean]
+target_params: 1585
+training_max_steps: 3000
+validation_every_steps: 100
+analysis_role: exploratory geometry-only context control; geometry is unchanged by the fixed-crop probes

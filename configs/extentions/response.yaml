@@ -1,0 +1,12 @@
+name: response
+question: "Does poor response fidelity persist on the same source-supported pairs?"
+primary: "G_curve on common support versus zero prediction; matched pairs and equal-video weights"
+analysis_role: exploratory_after_target_inspection
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+heads: [kan_spline, mlp_gelu]
+dimension: 16
+covariates: true
+coverage_rule: legacy_v2
+zero_denominator_epsilon: 1.0e-8
+bootstrap_resamples: 10000
+bootstrap_seed: 2026
