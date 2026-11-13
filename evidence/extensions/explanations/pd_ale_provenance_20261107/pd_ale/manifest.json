@@ -1,0 +1,153 @@
+{
+  "signature": "6fe8782b78af17e603b6d5150638700fc7e07ce731b448b8410d1e6d326d1282",
+  "identity": {
+    "analysis": "pd_ale",
+    "config": {
+      "name": "explanations",
+      "question": "Do PD/ALE, quality-only response surrogates, or genuine KAN simplification show reproducible fidelity?",
+      "analysis_role": "exploratory_after_target_inspection",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "heads": [
+        "kan_spline",
+        "mlp_gelu"
+      ],
+      "dimension": 16,
+      "covariates": true,
+      "sign_tolerance": 1e-08,
+      "analyses": [
+        "pd_ale",
+        "surrogates",
+        "symbolic"
+      ],
+      "pd_ale": {
+        "bins": 20,
+        "min_bin_count": 5,
+        "background_rows": 2048
+      },
+      "surrogates": {
+        "inputs": [
+          "clean_quality_4",
+          "changed_quality_4"
+        ],
+        "primary_ebm_interactions": 0,
+        "exploratory_ebm_interactions": 2,
+        "candidate_count_per_family": 3
+      },
+      "symbolic": {
+        "vocabulary": [
+          "zero",
+          "constant",
+          "linear",
+          "silu",
+          "quadratic",
+          "cubic"
+        ],
+        "max_expression_degree": 3,
+        "max_rows_per_split": 2048,
+        "edge_validation_rmse_tolerance": 0.02,
+        "max_candidates_per_edge": 6,
+        "prune_order": "layer_output_input",
+        "representative_edges": [
+          {
+            "seed": 0,
+            "layer": 0,
+            "output": 0,
+            "input": 0
+          },
+          {
+            "seed": 0,
+            "layer": 1,
+            "output": 0,
+            "input": 0
+          }
+        ]
+      },
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 2026
+    },
+    "original_manifest_sha256": "1c4373aaaeaaf8aa9ddff4beff769265131ec3ec2ed4b87dee3a6ea48a91d1db",
+    "coordinates_sha256": "21b1e34e33381168e70923a5ed78c0897ee8238f37d78df62d1389b1f80d89b9",
+    "cache_hashes": {
+      "features.npy": "c7ef6368c63165213dfcbea4e057c00ee0e47360544778bfb012fdaf6244ed54",
+      "covariates.npy": "9fee8218e6eb5aaf99cc32e03430c7144bdb05c7737a57153b50aedc5882c5df",
+      "metadata.csv": "1d853f9f56526a1106b7048398167fd881349ad0487940c3c4f0ca7d5a2f0d34"
+    },
+    "teacher_hashes": [
+      "0b85c5e04ae17fd8148d30105830f6fa950e9189aade7cc92a4f8ac662b7b0fe",
+      "bfb8750192f4ccba577065d99a02235f892d66d0fb71ad448e91c7aaadd3e27b",
+      "62cafa9a41146493c7668185d1d6414f0598d338a5770d8b4ce5b67a9dad0fe6",
+      "4a2d3d26d8b81aa5844199fef9ab5b0958ffed94ad3ec017d9a16dc3e5a2ede9",
+      "25b1472754e3f1b9d4a353e692e8332f28f236bd43859090b01cfa911632dc4d",
+      "ff9e6bd246a4bb3a62ad6ef217afb1b4009f3ccf5eb1c609e9866c24fdd44d48",
+      "d90b10f593bf71d7d80fe107e4f358a62367174c859536ef2b7cc39ca79a8e25",
+      "7a452261087528f10676d934bb61fccbcb542f6db5d278854114495d007f1010",
+      "0df08bb0635087429ff29d2295a4f9e93cefe37a070796bba2899526424ed686",
+      "ddc54fe2dc9d8425ae51bb61dd7447f8a79d0fe628ddfd2d9e253be92070e5d2",
+      "20f045717b7a7ea2bd6329fbba17ea0c7568fe3be27febf5348fd46fb34c473f",
+      "cf0d8caff250d70ea6b1b24783dc792b48fcc52992f673498c50b5d679932303",
+      "8947e1da17e926f1482f4207843ff9acbbbdbd504e18b0d754a5f3a9dd2b8818",
+      "8bc2adce85ad666b0086c425305413c0d8eae29d255593dd6960f5752f555b84",
+      "82381e2f2071b663f6e7ff3e6e8068c1bc0e005acea474de542ac6ae8a69722c",
+      "1f22cf6c52be140162c931980e768959c9f0206bf4fa47c5e7164393e5d6227e",
+      "1d561e88c6894da0a4b4da2df5a7cfbd4d4a6b3c77bd7f2c3bc6c90030d25453",
+      "47f4f665058004f9fe8fb9ad1ef536e687fe5212a2adceeaad11f980457644fa",
+      "2510c84e76832e9368b95cc16017345e4ece3c61381010763c115041a7ae657d",
+      "89e32cfa6d713bb42ea430e5a63ebb033be3724d6d5e5f7ffc00dc3cb9bef197"
+    ],
+    "code": {
+      "__main__.py": "4795618b62b76c81c6484c6c5fe99cae762ae8024530b184f6816558b703904a",
+      "analysis_store.py": "5683600f40f31a451e5a49cd13495a2f19415210f586d7c130acc11641af3d05",
+      "effect_run.py": "5155263e45ec42a30edbd7592518164aa9c867a0703f323403168f4ee35fd7e5",
+      "effect_visuals.py": "4a6fe6cb2e4fab3e53ae01696a148e2a6a1dfb20c838dbffb880d7f01312e362",
+      "effects.py": "979b84c3e649128ade831f6bca29cca55f7285c993fcfb3674db536c085ebfe1",
+      "figure_manifest.py": "ce8c7741ed1bf4f7addb8445336f567b951b2f2b863f05d2757ce58cbc0ce073",
+      "inventory.py": "2b38e25fd7474222d9e7464931aacff6796ecbe5c4002cb1b34b9999b8f8902a",
+      "paired.py": "c0bdde953411f288c71de6aef9c60dc192158eb73248562a7cba7e255ab7dd76",
+      "preflight.py": "248a1a9ad84e8d33bc345873592e81022fe001dad11c565fabd480a0232b24fb",
+      "provenance.py": "5827c8efe491851e0189694a7840a36626fa05aa8702a99d480f47b093db0abb",
+      "response_run.py": "b8d18dfe21270b82a2f8dbd76cb1afcf3f3ecfdd6027e03350710453c0d9d436",
+      "runtime.py": "12c091807ad1516fb764d0d0b7cc5d73a187eebe73684e999cfdea1fa0aa5b82"
+    },
+    "environment": {
+      "python": "3.11.5",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "torch": "2.6.0+cu124",
+      "cuda": "12.4",
+      "gpu": "NVIDIA GeForce RTX 2060 SUPER",
+      "source_sha256": "2e43d911f97be7590b71",
+      "deterministic": true,
+      "packages": {
+        "torch": "2.6.0+cu124",
+        "numpy": "2.4.6",
+        "scipy": "1.17.1",
+        "pandas": "2.3.3",
+        "scikit-learn": "1.9.1",
+        "hydra-core": "1.3.2",
+        "matplotlib": "3.11.2",
+        "opencv-python-headless": "4.14.0.94",
+        "open-clip-torch": "2.32.0"
+      }
+    },
+    "extra": {
+      "device": "cuda"
+    }
+  },
+  "workspace": {
+    "status": "UNAVAILABLE",
+    "commit": null,
+    "dirty": null,
+    "reason": "Git checkout metadata or a committed HEAD is unavailable"
+  },
+  "legacy_verdict": "NOT_SUPPORTED; unchanged"
+}

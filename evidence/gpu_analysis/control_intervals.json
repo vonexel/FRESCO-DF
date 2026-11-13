@@ -1,0 +1,835 @@
+{
+  "resamples": 10000,
+  "scope": "12 posthoc exploratory contrasts; unadjusted intervals; current source train and target generator mixture",
+  "inputs_modified": false,
+  "comparisons": [
+    {
+      "status": "COMPUTED",
+      "difference": 0.17066397203876832,
+      "seed_differences": [
+        0.05096438373788492,
+        -0.0967021185350374,
+        0.1976552448752037,
+        0.2653293592932498,
+        0.18056115447293936,
+        0.0387667252766104,
+        0.2598850673299597,
+        0.2428199245218286,
+        0.3353010549789862,
+        0.23205892443605802
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.13209387011082238,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          0.15674530075968846,
+          0.18583033568719814
+        ],
+        "ci90": [
+          0.1591077147791488,
+          0.18330631217408905
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          0.08803710469515927,
+          0.2461098319419249
+        ],
+        "ci90": [
+          0.10127225910938369,
+          0.23538290281192825
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.6480201989879062,
+      "head_b_mean": 0.47735622694913804,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "kan_spline: quality3 minus all4",
+      "first": [
+        "support_quality3",
+        "kan_spline",
+        16,
+        true
+      ],
+      "second": [
+        "response_clean",
+        "kan_spline",
+        16,
+        true
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": -0.022833004545844426,
+      "seed_differences": [
+        -0.012509113131486393,
+        -0.04271807187580412,
+        -0.005209494810875737,
+        -0.02902157131829497,
+        0.01541298567630156,
+        -0.027987498927866894,
+        -0.052112102238613955,
+        -0.05816214941247111,
+        0.00818788060725617,
+        -0.024210910026588817
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.02451715419646789,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.041270369606141145,
+          -0.005778343365516067
+        ],
+        "ci90": [
+          -0.038462428149160184,
+          -0.008665614674487884
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.04785921684902833,
+          -0.0009965478268266503
+        ],
+        "ci90": [
+          -0.043356363996992935,
+          -0.004561827907591165
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.6480201989879062,
+      "head_b_mean": 0.6708532035337508,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "kan_spline: quality3 minus cov-off",
+      "first": [
+        "support_quality3",
+        "kan_spline",
+        16,
+        true
+      ],
+      "second": [
+        "response_clean",
+        "kan_spline",
+        16,
+        false
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": -0.09552647096663522,
+      "seed_differences": [
+        -0.16079638047860018,
+        -0.1867430740200704,
+        -0.0974258083883695,
+        0.01324298824942105,
+        -0.13350094347714214,
+        -0.20126565314349426,
+        -0.08826443091174202,
+        -0.06948816365039884,
+        0.025526417359979403,
+        -0.05654966120593535
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.07741776415151505,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.10630658756645868,
+          -0.08527699256654568
+        ],
+        "ci90": [
+          -0.1045904921558975,
+          -0.08691705643998301
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.14238948994275377,
+          -0.048428491954227194
+        ],
+        "ci90": [
+          -0.1357233030850932,
+          -0.055820329938820516
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.3818297559825028,
+      "head_b_mean": 0.47735622694913804,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "kan_spline: range minus standard",
+      "first": [
+        "support_range",
+        "kan_spline",
+        16,
+        true
+      ],
+      "second": [
+        "response_clean",
+        "kan_spline",
+        16,
+        true
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": 0.14476236169482803,
+      "seed_differences": [
+        0.21704906081139036,
+        0.2401728278583069,
+        0.1377733939445922,
+        0.1035423278154215,
+        0.13497727077793986,
+        0.16353943305600827,
+        0.08308388369499953,
+        0.09437666180632986,
+        0.14840466592332102,
+        0.12470409125997084
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.050862932577717075,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          0.126820447261779,
+          0.16408121567029582
+        ],
+        "ci90": [
+          0.13002227351592463,
+          0.1611032196996338
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          0.11113851423233238,
+          0.18229899220594145
+        ],
+        "ci90": [
+          0.11630461874997684,
+          0.17586603601649115
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.7116859829316408,
+      "head_b_mean": 0.5669236212368127,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "mlp_gelu: quality3 minus all4",
+      "first": [
+        "support_quality3",
+        "mlp_gelu",
+        16,
+        true
+      ],
+      "second": [
+        "response_clean",
+        "mlp_gelu",
+        16,
+        true
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": 0.051318348486148024,
+      "seed_differences": [
+        0.06597263916287843,
+        0.08080238442405008,
+        0.05173256711553309,
+        0.05708572776395915,
+        0.052807916630928875,
+        0.057068037567544416,
+        0.015804314263658914,
+        0.0623381078994768,
+        0.08937730508619945,
+        -0.019805515052748968
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.03169742095273044,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          0.0288907392098974,
+          0.07575787276537475
+        ],
+        "ci90": [
+          0.03262042766333876,
+          0.07157208949455772
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          0.022310119457751333,
+          0.08265963184730121
+        ],
+        "ci90": [
+          0.02644347850770757,
+          0.07742881166413057
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.7116859829316408,
+      "head_b_mean": 0.6603676344454927,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "mlp_gelu: quality3 minus cov-off",
+      "first": [
+        "support_quality3",
+        "mlp_gelu",
+        16,
+        true
+      ],
+      "second": [
+        "response_clean",
+        "mlp_gelu",
+        16,
+        false
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": 0.015371654944677926,
+      "seed_differences": [
+        0.11755189124281668,
+        0.03961799897075219,
+        0.07478342911055835,
+        -0.038511021528433,
+        -0.022957586413929087,
+        -0.02058924436057974,
+        -0.05901127884038082,
+        -0.007215455871001031,
+        0.04415365811819194,
+        0.02589415901878378
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.054981036989663695,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          0.010028089444402324,
+          0.021922415655072056
+        ],
+        "ci90": [
+          0.010860767167970681,
+          0.02069847072339804
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.017510267136686165,
+          0.0494399252805258
+        ],
+        "ci90": [
+          -0.01216128702566994,
+          0.0441393579104988
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.5822952761814907,
+      "head_b_mean": 0.5669236212368127,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "mlp_gelu: range minus standard",
+      "first": [
+        "support_range",
+        "mlp_gelu",
+        16,
+        true
+      ],
+      "second": [
+        "response_clean",
+        "mlp_gelu",
+        16,
+        true
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": -0.06366578394373446,
+      "seed_differences": [
+        -0.08404612316665239,
+        -0.11079423621236817,
+        -0.05098529033364785,
+        -0.078888626811905,
+        -0.021383694999571157,
+        -0.07518976756154039,
+        -0.05419525688309457,
+        -0.06024959258941598,
+        -0.05194913800497469,
+        -0.04897611287417436
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.02450393125269201,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.09189364486114152,
+          -0.039681690868976306
+        ],
+        "ci90": [
+          -0.08707430252350798,
+          -0.043449361523627536
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.09636909974812088,
+          -0.036007372347384436
+        ],
+        "ci90": [
+          -0.09071973270026044,
+          -0.0402993935413865
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.6480201989879062,
+      "head_b_mean": 0.7116859829316408,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "quality3: KAN minus GELU",
+      "first": [
+        "support_quality3",
+        "kan_spline",
+        16,
+        true
+      ],
+      "second": [
+        "support_quality3",
+        "mlp_gelu",
+        16,
+        true
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": -0.20046552019898792,
+      "seed_differences": [
+        -0.1963097178145638,
+        -0.0002803628098464461,
+        -0.2830763787631872,
+        -0.18892164851187926,
+        -0.1775109357577837,
+        -0.13109346856505705,
+        -0.26024959258941593,
+        -0.2709655630843125,
+        -0.2574727678188524,
+        -0.23877476627498068
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.08540777568550216,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.23903354080804,
+          -0.16817544703869997
+        ],
+        "ci90": [
+          -0.23155281324194849,
+          -0.17327940728650063
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.2597569845184611,
+          -0.13677599477659755
+        ],
+        "ci90": [
+          -0.25084638429348177,
+          -0.14746520871794688
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.3818297559825028,
+      "head_b_mean": 0.5822952761814907,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "range: KAN minus GELU",
+      "first": [
+        "support_range",
+        "kan_spline",
+        16,
+        true
+      ],
+      "second": [
+        "support_range",
+        "mlp_gelu",
+        16,
+        true
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": -0.05044681147611287,
+      "seed_differences": [
+        -0.10463375932755808,
+        -0.22406831632215463,
+        -0.06942919632901623,
+        0.05117613002830429,
+        0.009838965605969585,
+        -0.17310018011836348,
+        -0.05683592074792004,
+        -0.0044809803585212915,
+        0.08144673642679479,
+        -0.014381593618663702
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.09620390120294588,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.06839222851463747,
+          -0.03129423816147879
+        ],
+        "ci90": [
+          -0.06561604951620666,
+          -0.0344000804868339
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.11304937778112593,
+          0.006875300255534319
+        ],
+        "ci90": [
+          -0.10214887156478235,
+          -0.0011805816308463573
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.4269094154730251,
+      "head_b_mean": 0.47735622694913804,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "spline MLP minus KAN",
+      "first": [
+        "basis_control",
+        "mlp_bspline",
+        16,
+        true
+      ],
+      "second": [
+        "response_clean",
+        "kan_spline",
+        16,
+        true
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": -0.14001420576378762,
+      "seed_differences": [
+        -0.022595205420705033,
+        0.002012393858821515,
+        -0.18029633759327557,
+        -0.18949952826142902,
+        -0.057128613088601066,
+        -0.123517239900506,
+        -0.2878323612659748,
+        -0.213173835663436,
+        -0.1573987906338451,
+        -0.17071253966892525
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.0904430731479093,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.1649481529339389,
+          -0.11820566286836072
+        ],
+        "ci90": [
+          -0.16090971950029376,
+          -0.12134234146147654
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          -0.19824824311829192,
+          -0.08108217593561484
+        ],
+        "ci90": [
+          -0.190217884337655,
+          -0.09062968925438572
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.4269094154730251,
+      "head_b_mean": 0.5669236212368127,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "spline MLP minus GELU",
+      "first": [
+        "basis_control",
+        "mlp_bspline",
+        16,
+        true
+      ],
+      "second": [
+        "response_clean",
+        "mlp_gelu",
+        16,
+        true
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": 0.051579359293249846,
+      "seed_differences": [
+        0.048802427309374674,
+        0.05761428939017066,
+        0.049500385967921834,
+        0.05270177545244015,
+        0.04457715069903079,
+        0.06580967492923917,
+        0.04985847842868174,
+        0.05247448323183812,
+        0.04226670383394804,
+        0.05218822368985332
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.006600550770866268,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          0.022502600101761822,
+          0.08399583241046006
+        ],
+        "ci90": [
+          0.02646368673977485,
+          0.07853060052671973
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          0.02237070344041517,
+          0.08450395478157718
+        ],
+        "ci90": [
+          0.026286302154748677,
+          0.07889293819882374
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.8037729436486835,
+      "head_b_mean": 0.7521935843554335,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "linear native1024 minus PCA128",
+      "first": [
+        "representation_control",
+        "linear",
+        1024,
+        false
+      ],
+      "second": [
+        "representation_control",
+        "linear",
+        128,
+        false
+      ]
+    },
+    {
+      "status": "COMPUTED",
+      "difference": 0.1524870807959516,
+      "seed_differences": [
+        0.1477002744660777,
+        0.16109872201732567,
+        0.1460063041427223,
+        0.14902435886439658,
+        0.16068809503387937,
+        0.14214126425937046,
+        0.15006754438631098,
+        0.15173471138176509,
+        0.16115286473968604,
+        0.15525666866798182
+      ],
+      "seed_count": 10,
+      "seed_difference_sd": 0.006786784440876878,
+      "videos": 5418,
+      "clusters": 129,
+      "estimand": "mean paired single-seed difference; no score ensemble",
+      "scope": "conditional on supplied source training/validation data, selected hyperparameters and current test generator mixture",
+      "interval_method": "approximate exploratory percentile bootstrap; nominal coverage is not guaranteed with ten seeds",
+      "conditional_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "test clusters conditional on the fixed training seeds",
+        "status": "COMPUTED",
+        "ci95": [
+          0.10825595910746126,
+          0.20103101309013616
+        ],
+        "ci90": [
+          0.11526527441617232,
+          0.19270015222483053
+        ]
+      },
+      "crossed_seeds_clusters": {
+        "resamples_valid": 10000,
+        "resamples_requested": 10000,
+        "uncertainty": "paired training seeds and test clusters sampled independently",
+        "status": "COMPUTED",
+        "ci95": [
+          0.10798481174418671,
+          0.20136669676267566
+        ],
+        "ci90": [
+          0.11512599007261427,
+          0.19302934672800842
+        ]
+      },
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "head_a_mean": 0.7521935843554335,
+      "head_b_mean": 0.5997065035594821,
+      "direction": "higher AUROC is better; difference is head_a minus head_b",
+      "contrast": "linear PCA128 minus PCA16",
+      "first": [
+        "representation_control",
+        "linear",
+        128,
+        false
+      ],
+      "second": [
+        "representation_control",
+        "linear",
+        16,
+        false
+      ]
+    }
+  ]
+}

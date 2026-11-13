@@ -1,0 +1,307 @@
+{
+  "primary_paired_response": {
+    "status": "NOT_SUPPORTED",
+    "contrast": "kan_spline minus mlp_gelu, k16, quality covariates, params",
+    "endpoint": "mean seed-specific sqrt(mean_video(error_sse/nframes) / mean_video(total_sse/nframes))",
+    "dataset": "celebdfpp",
+    "conditions": "all predeclared paired image degradations",
+    "gap_kan": 0.7910719037532956,
+    "gap_mlp": 0.6802126832947009,
+    "difference": 0.11085922045859475,
+    "ci95": [
+      0.08979351093082467,
+      0.13107656364837525
+    ],
+    "clusters": 129,
+    "seeds": 10,
+    "conditional_fixed_seeds": true,
+    "auc_noninferiority": {
+      "difference": -0.09721636718414961,
+      "seed_differences": [
+        -0.16927695342653748,
+        0.1656960288189382,
+        0.016692040483746506,
+        -0.1863185093061155,
+        -0.1654612316665237,
+        -0.2411409640620979,
+        0.053273758469851606,
+        -0.1436808474140151,
+        -0.3566901106441376,
+        0.054743116905394906
+      ],
+      "uncertainty": "test-cluster sampling conditional on fixed seeds",
+      "ci90": [
+        -0.12613954390764218,
+        -0.07171636659946441
+      ],
+      "ci95": [
+        -0.13230058541110995,
+        -0.06705782490751257
+      ],
+      "margin": 0.01,
+      "equivalent_tost_percentile": false,
+      "superior_beyond_margin": false,
+      "clusters": 129,
+      "resamples_valid": 10000,
+      "unit": "source/identity cluster; paired videos"
+    },
+    "median_curve_stability": 0.989279017792665,
+    "curve_stability_coverage": {
+      "complete": true,
+      "expected_covariates": 4,
+      "complete_covariates": 4,
+      "expected_pairs": 180,
+      "defined_pairs": 180,
+      "features": [
+        {
+          "feature": "jpeg_blockiness_proxy",
+          "expected_seed_curves": 10,
+          "valid_seed_curves": 10,
+          "constant_seed_curves": 0,
+          "expected_pairs": 45,
+          "defined_pairs": 45,
+          "complete": true,
+          "reasons": []
+        },
+        {
+          "feature": "log_laplacian_variance",
+          "expected_seed_curves": 10,
+          "valid_seed_curves": 10,
+          "constant_seed_curves": 0,
+          "expected_pairs": 45,
+          "defined_pairs": 45,
+          "complete": true,
+          "reasons": []
+        },
+        {
+          "feature": "face_size",
+          "expected_seed_curves": 10,
+          "valid_seed_curves": 10,
+          "constant_seed_curves": 0,
+          "expected_pairs": 45,
+          "defined_pairs": 45,
+          "complete": true,
+          "reasons": []
+        },
+        {
+          "feature": "high_frequency_ratio",
+          "expected_seed_curves": 10,
+          "valid_seed_curves": 10,
+          "constant_seed_curves": 0,
+          "expected_pairs": 45,
+          "defined_pairs": 45,
+          "complete": true,
+          "reasons": []
+        }
+      ]
+    },
+    "preregistered_gap_threshold": 0.3,
+    "reason": "Joint predeclared agreement, noninferiority, stability and budget criteria"
+  },
+  "H2a": [
+    {
+      "head": "kan_fast",
+      "comparator": "mlp_relu",
+      "budget": "params",
+      "k": 16,
+      "covariates": false,
+      "held_out": "None",
+      "status": "INCONCLUSIVE",
+      "difference": -0.005606880950338788,
+      "seed_differences": [
+        -0.025796058838665314,
+        0.03640267175572509,
+        -0.05139966978300026,
+        0.010604468650827759,
+        0.0011734496955141394,
+        0.008493974611887833,
+        0.004199545415558781,
+        -0.0479608028132773,
+        0.009171026674671956,
+        -0.0009574148726305687
+      ],
+      "uncertainty": "test-cluster sampling conditional on fixed seeds",
+      "ci90": [
+        -0.017656656127309486,
+        0.005562614267162743
+      ],
+      "ci95": [
+        -0.020236889607074572,
+        0.007568975404335993
+      ],
+      "margin": 0.01,
+      "equivalent_tost_percentile": false,
+      "superior_beyond_margin": false,
+      "clusters": 129,
+      "resamples_valid": 10000,
+      "unit": "source/identity cluster; paired videos",
+      "budget_feasible": true,
+      "seeds": 10,
+      "multiple_comparisons": "exploratory; primary prespecified kan_spline, k16, covariates=true, params",
+      "reason": "Equivalence not demonstrated; this does not establish inequality"
+    },
+    {
+      "head": "kan_spline",
+      "comparator": "mlp_relu",
+      "budget": "params",
+      "k": 16,
+      "covariates": false,
+      "held_out": "None",
+      "status": "INCONCLUSIVE",
+      "difference": -0.0023323719873059477,
+      "seed_differences": [
+        -0.06133405523629809,
+        0.03626597478342908,
+        -0.007677545244017536,
+        0.042216849644051924,
+        -0.03214415901878387,
+        0.012374024358864366,
+        0.009604704520113194,
+        -0.02230358521314013,
+        0.0038511021528434553,
+        -0.004177030620121869
+      ],
+      "uncertainty": "test-cluster sampling conditional on fixed seeds",
+      "ci90": [
+        -0.015384026643194703,
+        0.009935415360531113
+      ],
+      "ci95": [
+        -0.018036569331064792,
+        0.01232600086867822
+      ],
+      "margin": 0.01,
+      "equivalent_tost_percentile": false,
+      "superior_beyond_margin": false,
+      "clusters": 129,
+      "resamples_valid": 10000,
+      "unit": "source/identity cluster; paired videos",
+      "budget_feasible": true,
+      "seeds": 10,
+      "multiple_comparisons": "exploratory; primary prespecified kan_spline, k16, covariates=true, params",
+      "reason": "Equivalence not demonstrated; this does not establish inequality"
+    },
+    {
+      "head": "kan_fast",
+      "comparator": "mlp_gelu",
+      "budget": "params",
+      "k": 16,
+      "covariates": true,
+      "held_out": "None",
+      "status": "INCONCLUSIVE",
+      "difference": -0.13364385882151128,
+      "seed_differences": [
+        -0.1533128913285874,
+        -0.13944056094004637,
+        -0.09573291019813018,
+        -0.22137619006775888,
+        -0.21099043657260486,
+        0.04090402264345139,
+        -0.23796745003859676,
+        -0.10864139291534447,
+        -0.19267947508362637,
+        -0.017201303713869187
+      ],
+      "uncertainty": "test-cluster sampling conditional on fixed seeds",
+      "ci90": [
+        -0.15913081322383751,
+        -0.11072095877593718
+      ],
+      "ci95": [
+        -0.16457296609998634,
+        -0.10630572235507064
+      ],
+      "margin": 0.01,
+      "equivalent_tost_percentile": false,
+      "superior_beyond_margin": false,
+      "clusters": 129,
+      "resamples_valid": 10000,
+      "unit": "source/identity cluster; paired videos",
+      "budget_feasible": true,
+      "seeds": 10,
+      "multiple_comparisons": "exploratory; primary prespecified kan_spline, k16, covariates=true, params",
+      "reason": "Equivalence not demonstrated; this does not establish inequality"
+    },
+    {
+      "head": "kan_spline",
+      "comparator": "mlp_gelu",
+      "budget": "params",
+      "k": 16,
+      "covariates": true,
+      "held_out": "None",
+      "status": "INCONCLUSIVE",
+      "difference": -0.09721636718414961,
+      "seed_differences": [
+        -0.16927695342653748,
+        0.1656960288189382,
+        0.016692040483746506,
+        -0.1863185093061155,
+        -0.1654612316665237,
+        -0.2411409640620979,
+        0.053273758469851606,
+        -0.1436808474140151,
+        -0.3566901106441376,
+        0.054743116905394906
+      ],
+      "uncertainty": "test-cluster sampling conditional on fixed seeds",
+      "ci90": [
+        -0.12613954390764218,
+        -0.07171636659946441
+      ],
+      "ci95": [
+        -0.13230058541110995,
+        -0.06705782490751257
+      ],
+      "margin": 0.01,
+      "equivalent_tost_percentile": false,
+      "superior_beyond_margin": false,
+      "clusters": 129,
+      "resamples_valid": 10000,
+      "unit": "source/identity cluster; paired videos",
+      "budget_feasible": true,
+      "seeds": 10,
+      "multiple_comparisons": "exploratory; primary prespecified kan_spline, k16, covariates=true, params",
+      "reason": "Equivalence not demonstrated; this does not establish inequality"
+    }
+  ],
+  "comparator_selection": [
+    {
+      "budget": "params",
+      "k": 16,
+      "covariates": false,
+      "held_out": "None",
+      "comparator": "mlp_relu",
+      "criterion": "mean FF++ seen validation AUC"
+    },
+    {
+      "budget": "params",
+      "k": 16,
+      "covariates": true,
+      "held_out": "None",
+      "comparator": "mlp_gelu",
+      "criterion": "mean FF++ seen validation AUC"
+    }
+  ],
+  "H2b": {
+    "status": "EXPLORATORY",
+    "reason": "Report paired degradation scores; no unadjusted multiple-testing PASS"
+  },
+  "H2c": {
+    "status": "INCONCLUSIVE",
+    "reason": "PD surrogate is not edge replacement; inspect stability and actual surrogate fidelity separately"
+  },
+  "H2c_intervention": {
+    "status": "MEASURED_NO_AUTOMATIC_VERDICT",
+    "reason": "Agreement gap tests partial explanation coverage, not causality"
+  },
+  "H2d": {
+    "status": "EXPLORATORY",
+    "reason": "Adapted first-layer plasticity; dataset/method shift is confounded"
+  },
+  "H2e": {
+    "status": "EXPLORATORY",
+    "reason": "Dimension association requires k_ablation; no causal dimensionality claim"
+  },
+  "inference": "Mean seed-specific AUC differences; source/target identity cluster bootstrap conditional on fixed seeds. Secondary co-source dependence remains.",
+  "TOST": "alpha=.05, 90% percentile CI strictly inside +/-margin; superiority uses 95% CI"
+}

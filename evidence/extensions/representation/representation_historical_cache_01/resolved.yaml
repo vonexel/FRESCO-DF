@@ -1,0 +1,47 @@
+name: representation
+question: How do quality covariates interact with head, augmentation and representation
+  dimension?
+primary: 'external clean video AUROC: (KAN on-off) - (GELU on-off), k16 clean'
+analysis_role: exploratory_after_target_inspection
+seeds:
+- 0
+- 1
+- 2
+- 3
+- 4
+- 5
+- 6
+- 7
+- 8
+- 9
+heads:
+- kan_spline
+- mlp_gelu
+dimensions:
+- 16
+- 128
+covariates:
+- false
+- true
+training:
+- clean
+- augmented
+source_conditions:
+- clean
+- jpeg70
+- blur1
+- resize0.5
+source_validation: clean
+source_augmented_validation: diagnostic_only
+target_parameter_counts:
+  16: 1585
+  128: 9585
+parameter_match_tolerance: 0.05
+max_steps: 3000
+validation_every_steps: 100
+learning_rates:
+- 0.001
+- 0.0003
+- 0.003
+bootstrap_resamples: 10000
+bootstrap_seed: 2026

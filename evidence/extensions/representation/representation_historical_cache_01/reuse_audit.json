@@ -1,0 +1,1246 @@
+{
+  "clean": {
+    "status": "POSSIBLE_MATCH_REVIEW_REQUIRED",
+    "experiment": "/home/ubuntu/FRESCO/legacy_results/gpu_extension_outputs/response_clean/badcfa2dfe5dac0e1d18",
+    "regime": "clean",
+    "reasons": [],
+    "completed": [
+      {
+        "head": "kan_spline",
+        "seed": 0,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 1,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 2,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 3,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 4,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 5,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 6,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 7,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 8,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 9,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 0,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 1,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 2,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 3,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 4,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 5,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 6,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 7,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 8,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 9,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 0,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 1,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 2,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 3,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 4,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 5,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 6,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 7,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 8,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "kan_spline",
+        "seed": 9,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 0,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 1,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 2,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 3,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 4,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 5,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 6,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 7,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 8,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 9,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      }
+    ],
+    "missing_or_invalid": [],
+    "config_checks": {
+      "experiment.name": {
+        "actual": "response_clean",
+        "expected": "response_clean",
+        "match": true
+      },
+      "experiment.synthetic": {
+        "actual": false,
+        "expected": false,
+        "match": true
+      },
+      "experiment.seeds": {
+        "actual": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "match": true
+      },
+      "experiment.heads": {
+        "actual": [
+          "kan_spline",
+          "mlp_gelu"
+        ],
+        "expected": [
+          "kan_spline",
+          "mlp_gelu"
+        ],
+        "match": true
+      },
+      "experiment.ks": {
+        "actual": [
+          16
+        ],
+        "expected": [
+          16
+        ],
+        "match": true
+      },
+      "experiment.covariates": {
+        "actual": [
+          false,
+          true
+        ],
+        "expected": [
+          false,
+          true
+        ],
+        "match": true
+      },
+      "experiment.budgets": {
+        "actual": [
+          "params"
+        ],
+        "expected": [
+          "params"
+        ],
+        "match": true
+      },
+      "experiment.held_out_methods": {
+        "actual": [
+          null
+        ],
+        "expected": [
+          null
+        ],
+        "match": true
+      },
+      "experiment.source_conditions": {
+        "actual": [
+          "clean",
+          "jpeg70",
+          "blur1",
+          "resize0.5"
+        ],
+        "expected": [
+          "clean",
+          "jpeg70",
+          "blur1",
+          "resize0.5"
+        ],
+        "match": true
+      },
+      "train.conditions": {
+        "actual": [
+          "clean"
+        ],
+        "expected": [
+          "clean"
+        ],
+        "match": true
+      },
+      "train.target_params": {
+        "actual": 1585,
+        "expected": 1585,
+        "match": true
+      },
+      "train.epochs": {
+        "actual": 30,
+        "expected": 30,
+        "match": true
+      },
+      "train.patience": {
+        "actual": 6,
+        "expected": 6,
+        "match": true
+      },
+      "train.device": {
+        "actual": "cuda",
+        "expected": "cuda",
+        "match": true
+      },
+      "train.target_hidden": {
+        "actual": 72,
+        "expected": 72,
+        "match": true
+      },
+      "train.threads": {
+        "actual": 4,
+        "expected": 4,
+        "match": true
+      },
+      "train.wall_seconds": {
+        "actual": 60,
+        "expected": 60,
+        "match": true
+      },
+      "train.covariate_indices": {
+        "actual": null,
+        "expected": null,
+        "match": true
+      },
+      "train.covariate_scaling": {
+        "actual": "standard",
+        "expected": "standard",
+        "match": true
+      },
+      "train.scaling_conditions": {
+        "actual": null,
+        "expected": null,
+        "match": true
+      },
+      "train.range_quantile": {
+        "actual": 0.995,
+        "expected": 0.995,
+        "match": true
+      },
+      "train.range_limit": {
+        "actual": 2.5,
+        "expected": 2.5,
+        "match": true
+      },
+      "train.max_steps": {
+        "actual": 3000,
+        "expected": 3000,
+        "match": true
+      },
+      "train.validation_every_steps": {
+        "actual": 100,
+        "expected": 100,
+        "match": true
+      },
+      "train.batch_size": {
+        "actual": 1024,
+        "expected": 1024,
+        "match": true
+      },
+      "train.lrs": {
+        "actual": [
+          0.001,
+          0.0003,
+          0.003
+        ],
+        "expected": [
+          0.001,
+          0.0003,
+          0.003
+        ],
+        "match": true
+      },
+      "train.weight_decay": {
+        "actual": 0.0001,
+        "expected": 0.0001,
+        "match": true
+      },
+      "model": {
+        "actual": {
+          "grid_size": 5,
+          "spline_degree": 3,
+          "grid_min": -3.0,
+          "grid_max": 3.0
+        },
+        "expected": {
+          "grid_size": 5,
+          "spline_degree": 3,
+          "grid_min": -3.0,
+          "grid_max": 3.0
+        },
+        "match": true
+      }
+    },
+    "source": {
+      "saved": "e408e4a7c9a2b87a5d73",
+      "candidate": "e408e4a7c9a2b87a5d73"
+    },
+    "dependency_checks": {
+      "uv.lock": {
+        "saved": "6098f307e50c1d1e3051f5697f69d6ea7bdd3a6ea35a51bbf8b2240a56476dfa",
+        "actual": "6098f307e50c1d1e3051f5697f69d6ea7bdd3a6ea35a51bbf8b2240a56476dfa"
+      },
+      "pyproject.toml": {
+        "saved": "33ae2fc7bb8e2a7422f990698a48790c6fb1b4ce21f84bfef978ed429d1cfa60",
+        "actual": "33ae2fc7bb8e2a7422f990698a48790c6fb1b4ce21f84bfef978ed429d1cfa60"
+      }
+    },
+    "runtime_differences": {},
+    "cache_checks": {
+      "features.npy": {
+        "saved": "dca8a24c21c764d9f767de6d2ba9ed4aa7366bfe486269b4e1a33660ec0a2a55",
+        "actual": "dca8a24c21c764d9f767de6d2ba9ed4aa7366bfe486269b4e1a33660ec0a2a55"
+      },
+      "covariates.npy": {
+        "saved": "54276372971fe622e86be70182c339f249ea82dc93388d658867154c5b1de7b7",
+        "actual": "54276372971fe622e86be70182c339f249ea82dc93388d658867154c5b1de7b7"
+      },
+      "metadata.csv": {
+        "saved": "97fe37bc8d8f6dc766f8436f6fdf55fd1208b33dcd70a9d4a3b9035e95b6165b",
+        "actual": "97fe37bc8d8f6dc766f8436f6fdf55fd1208b33dcd70a9d4a3b9035e95b6165b"
+      }
+    },
+    "limitation": "Exact matching applies only to this predeclared k16 recipe; does not make k128 or other recipes equivalent."
+  },
+  "augmented": {
+    "status": "POSSIBLE_MATCH_REVIEW_REQUIRED",
+    "experiment": "/home/ubuntu/FRESCO/legacy_results/gpu_extension_outputs/response_augmented/83e15134a4249c71f3f9",
+    "regime": "augmented",
+    "reasons": [],
+    "completed": [
+      {
+        "head": "kan_spline",
+        "seed": 0,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 1,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 2,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 3,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 4,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 5,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 6,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 7,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 8,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 9,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 0,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 1,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 2,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 3,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 4,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 5,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 6,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 7,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 8,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 9,
+        "covariates": false,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.0003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 0,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 1,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 2,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 3,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 4,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 5,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 6,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 7,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 8,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "kan_spline",
+        "seed": 9,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.003
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 0,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 1,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 2,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 3,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 4,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 5,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 6,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 7,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 8,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      },
+      {
+        "head": "mlp_gelu",
+        "seed": 9,
+        "covariates": true,
+        "k": 16,
+        "held_out": null,
+        "budget": "params",
+        "lr": 0.001
+      }
+    ],
+    "missing_or_invalid": [],
+    "config_checks": {
+      "experiment.name": {
+        "actual": "response_augmented",
+        "expected": "response_augmented",
+        "match": true
+      },
+      "experiment.synthetic": {
+        "actual": false,
+        "expected": false,
+        "match": true
+      },
+      "experiment.seeds": {
+        "actual": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "match": true
+      },
+      "experiment.heads": {
+        "actual": [
+          "kan_spline",
+          "mlp_gelu"
+        ],
+        "expected": [
+          "kan_spline",
+          "mlp_gelu"
+        ],
+        "match": true
+      },
+      "experiment.ks": {
+        "actual": [
+          16
+        ],
+        "expected": [
+          16
+        ],
+        "match": true
+      },
+      "experiment.covariates": {
+        "actual": [
+          false,
+          true
+        ],
+        "expected": [
+          false,
+          true
+        ],
+        "match": true
+      },
+      "experiment.budgets": {
+        "actual": [
+          "params"
+        ],
+        "expected": [
+          "params"
+        ],
+        "match": true
+      },
+      "experiment.held_out_methods": {
+        "actual": [
+          null
+        ],
+        "expected": [
+          null
+        ],
+        "match": true
+      },
+      "experiment.source_conditions": {
+        "actual": [
+          "clean",
+          "jpeg70",
+          "blur1",
+          "resize0.5"
+        ],
+        "expected": [
+          "clean",
+          "jpeg70",
+          "blur1",
+          "resize0.5"
+        ],
+        "match": true
+      },
+      "train.conditions": {
+        "actual": [
+          "clean",
+          "jpeg70",
+          "blur1",
+          "resize0.5"
+        ],
+        "expected": [
+          "clean",
+          "jpeg70",
+          "blur1",
+          "resize0.5"
+        ],
+        "match": true
+      },
+      "train.target_params": {
+        "actual": 1585,
+        "expected": 1585,
+        "match": true
+      },
+      "train.epochs": {
+        "actual": 30,
+        "expected": 30,
+        "match": true
+      },
+      "train.patience": {
+        "actual": 6,
+        "expected": 6,
+        "match": true
+      },
+      "train.device": {
+        "actual": "cuda",
+        "expected": "cuda",
+        "match": true
+      },
+      "train.target_hidden": {
+        "actual": 72,
+        "expected": 72,
+        "match": true
+      },
+      "train.threads": {
+        "actual": 4,
+        "expected": 4,
+        "match": true
+      },
+      "train.wall_seconds": {
+        "actual": 60,
+        "expected": 60,
+        "match": true
+      },
+      "train.covariate_indices": {
+        "actual": null,
+        "expected": null,
+        "match": true
+      },
+      "train.covariate_scaling": {
+        "actual": "standard",
+        "expected": "standard",
+        "match": true
+      },
+      "train.scaling_conditions": {
+        "actual": null,
+        "expected": null,
+        "match": true
+      },
+      "train.range_quantile": {
+        "actual": 0.995,
+        "expected": 0.995,
+        "match": true
+      },
+      "train.range_limit": {
+        "actual": 2.5,
+        "expected": 2.5,
+        "match": true
+      },
+      "train.max_steps": {
+        "actual": 3000,
+        "expected": 3000,
+        "match": true
+      },
+      "train.validation_every_steps": {
+        "actual": 100,
+        "expected": 100,
+        "match": true
+      },
+      "train.batch_size": {
+        "actual": 1024,
+        "expected": 1024,
+        "match": true
+      },
+      "train.lrs": {
+        "actual": [
+          0.001,
+          0.0003,
+          0.003
+        ],
+        "expected": [
+          0.001,
+          0.0003,
+          0.003
+        ],
+        "match": true
+      },
+      "train.weight_decay": {
+        "actual": 0.0001,
+        "expected": 0.0001,
+        "match": true
+      },
+      "model": {
+        "actual": {
+          "grid_size": 5,
+          "spline_degree": 3,
+          "grid_min": -3.0,
+          "grid_max": 3.0
+        },
+        "expected": {
+          "grid_size": 5,
+          "spline_degree": 3,
+          "grid_min": -3.0,
+          "grid_max": 3.0
+        },
+        "match": true
+      }
+    },
+    "source": {
+      "saved": "e408e4a7c9a2b87a5d73",
+      "candidate": "e408e4a7c9a2b87a5d73"
+    },
+    "dependency_checks": {
+      "uv.lock": {
+        "saved": "6098f307e50c1d1e3051f5697f69d6ea7bdd3a6ea35a51bbf8b2240a56476dfa",
+        "actual": "6098f307e50c1d1e3051f5697f69d6ea7bdd3a6ea35a51bbf8b2240a56476dfa"
+      },
+      "pyproject.toml": {
+        "saved": "33ae2fc7bb8e2a7422f990698a48790c6fb1b4ce21f84bfef978ed429d1cfa60",
+        "actual": "33ae2fc7bb8e2a7422f990698a48790c6fb1b4ce21f84bfef978ed429d1cfa60"
+      }
+    },
+    "runtime_differences": {},
+    "cache_checks": {
+      "features.npy": {
+        "saved": "dca8a24c21c764d9f767de6d2ba9ed4aa7366bfe486269b4e1a33660ec0a2a55",
+        "actual": "dca8a24c21c764d9f767de6d2ba9ed4aa7366bfe486269b4e1a33660ec0a2a55"
+      },
+      "covariates.npy": {
+        "saved": "54276372971fe622e86be70182c339f249ea82dc93388d658867154c5b1de7b7",
+        "actual": "54276372971fe622e86be70182c339f249ea82dc93388d658867154c5b1de7b7"
+      },
+      "metadata.csv": {
+        "saved": "97fe37bc8d8f6dc766f8436f6fdf55fd1208b33dcd70a9d4a3b9035e95b6165b",
+        "actual": "97fe37bc8d8f6dc766f8436f6fdf55fd1208b33dcd70a9d4a3b9035e95b6165b"
+      }
+    },
+    "limitation": "Exact matching applies only to this predeclared k16 recipe; does not make k128 or other recipes equivalent."
+  }
+}

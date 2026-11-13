@@ -1,0 +1,3104 @@
+{
+  "status": "RUN",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "contrasts": {
+    "k16/ffpp": {
+      "status": "COMPUTED",
+      "seed_count": 10,
+      "videos": 840,
+      "clusters": 70,
+      "analysis_status": "EXPLORATORY_RETROSPECTIVE",
+      "estimand": "mean single-seed AUROC; no score ensemble",
+      "scope": "conditional on supplied source training data and declared training recipes",
+      "cell_order": [
+        "clean/kan_spline/cov0",
+        "clean/kan_spline/cov1",
+        "clean/mlp_gelu/cov0",
+        "clean/mlp_gelu/cov1",
+        "augmented/kan_spline/cov0",
+        "augmented/kan_spline/cov1",
+        "augmented/mlp_gelu/cov0",
+        "augmented/mlp_gelu/cov1"
+      ],
+      "cells": [
+        {
+          "cell": "clean/kan_spline/cov0",
+          "mean_auc": 0.7874632653061223,
+          "seed_aucs": [
+            0.7888469387755102,
+            0.7898979591836734,
+            0.7836632653061224,
+            0.7908061224489796,
+            0.7825612244897959,
+            0.7897755102040817,
+            0.7899285714285714,
+            0.7854387755102041,
+            0.7881938775510204,
+            0.7855204081632653
+          ],
+          "seed_sd": 0.002931026411022457
+        },
+        {
+          "cell": "clean/kan_spline/cov1",
+          "mean_auc": 0.8074826530612246,
+          "seed_aucs": [
+            0.8113265306122449,
+            0.8123469387755102,
+            0.8070918367346939,
+            0.810530612244898,
+            0.8093265306122449,
+            0.8078163265306122,
+            0.8053163265306122,
+            0.8008367346938775,
+            0.8053877551020409,
+            0.8048469387755102
+          ],
+          "seed_sd": 0.0035211657471351503
+        },
+        {
+          "cell": "clean/mlp_gelu/cov0",
+          "mean_auc": 0.785684693877551,
+          "seed_aucs": [
+            0.7859897959183674,
+            0.789,
+            0.7852448979591836,
+            0.7870714285714285,
+            0.7863469387755102,
+            0.7889081632653061,
+            0.7823061224489796,
+            0.786704081632653,
+            0.7780408163265307,
+            0.7872346938775511
+          ],
+          "seed_sd": 0.0032882852506831988
+        },
+        {
+          "cell": "clean/mlp_gelu/cov1",
+          "mean_auc": 0.8075714285714286,
+          "seed_aucs": [
+            0.8059183673469388,
+            0.8074081632653061,
+            0.8074081632653061,
+            0.8056632653061224,
+            0.8091938775510205,
+            0.810561224489796,
+            0.8097857142857143,
+            0.8041632653061225,
+            0.8062551020408163,
+            0.8093571428571429
+          ],
+          "seed_sd": 0.002093332245675856
+        },
+        {
+          "cell": "augmented/kan_spline/cov0",
+          "mean_auc": 0.7805775510204082,
+          "seed_aucs": [
+            0.7814897959183673,
+            0.7806020408163266,
+            0.7805918367346939,
+            0.7821326530612245,
+            0.7812755102040816,
+            0.7759081632653061,
+            0.7850510204081632,
+            0.7787142857142857,
+            0.7838163265306123,
+            0.7761938775510204
+          ],
+          "seed_sd": 0.002957694519355023
+        },
+        {
+          "cell": "augmented/kan_spline/cov1",
+          "mean_auc": 0.7998632653061225,
+          "seed_aucs": [
+            0.801469387755102,
+            0.8000510204081632,
+            0.7965612244897959,
+            0.7962448979591836,
+            0.8021020408163265,
+            0.8099387755102041,
+            0.8002142857142858,
+            0.7981428571428572,
+            0.7968979591836735,
+            0.7970102040816327
+          ],
+          "seed_sd": 0.004125193289651586
+        },
+        {
+          "cell": "augmented/mlp_gelu/cov0",
+          "mean_auc": 0.7813938775510204,
+          "seed_aucs": [
+            0.7778877551020408,
+            0.7816836734693877,
+            0.7842448979591837,
+            0.7837857142857143,
+            0.7777857142857143,
+            0.7817142857142857,
+            0.7820102040816327,
+            0.7823265306122449,
+            0.7762551020408164,
+            0.7862448979591836
+          ],
+          "seed_sd": 0.0031716923811282733
+        },
+        {
+          "cell": "augmented/mlp_gelu/cov1",
+          "mean_auc": 0.8008142857142857,
+          "seed_aucs": [
+            0.7982857142857143,
+            0.8039285714285714,
+            0.7999285714285714,
+            0.7990510204081632,
+            0.8015816326530613,
+            0.7998469387755102,
+            0.801530612244898,
+            0.8047040816326531,
+            0.7969897959183674,
+            0.8022959183673469
+          ],
+          "seed_sd": 0.00244895030216801
+        }
+      ],
+      "contrasts": [
+        {
+          "contrast": "clean: KAN minus MLP, cov0",
+          "difference": 0.0017785714285714293,
+          "seed_differences": [
+            0.0028571428571427804,
+            0.0008979591836734135,
+            -0.0015816326530612157,
+            0.0037346938775510985,
+            -0.003785714285714281,
+            0.0008673469387755484,
+            0.007622448979591856,
+            -0.001265306122448906,
+            0.010153061224489779,
+            -0.0017142857142857792
+          ],
+          "seed_difference_sd": 0.0044044928082117435,
+          "coefficients": [
+            1.0,
+            0.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.0035765561224489918,
+              0.00711124999999999
+            ],
+            "ci90": [
+              -0.0026439285714285536,
+              0.006265306122448956
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.004420051020408167,
+              0.008025535714285704
+            ],
+            "ci90": [
+              -0.00337454081632653,
+              0.007006326530612231
+            ]
+          }
+        },
+        {
+          "contrast": "clean: KAN minus MLP, cov1",
+          "difference": -8.877551020408658e-05,
+          "seed_differences": [
+            0.005408163265306132,
+            0.004938775510204163,
+            -0.00031632653061219873,
+            0.004867346938775552,
+            0.00013265306122445253,
+            -0.0027448979591837563,
+            -0.004469387755102083,
+            -0.003326530612244971,
+            -0.0008673469387754373,
+            -0.004510204081632718
+          ],
+          "seed_difference_sd": 0.003902130148457069,
+          "coefficients": [
+            0.0,
+            1.0,
+            0.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.011406403061224502,
+              0.01062966836734693
+            ],
+            "ci90": [
+              -0.009492857142857147,
+              0.00900066326530613
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.012052091836734755,
+              0.010830331632653066
+            ],
+            "ci90": [
+              -0.009954183673469372,
+              0.009182857142857128
+            ]
+          }
+        },
+        {
+          "contrast": "clean: covariate effect, kan_spline",
+          "difference": 0.020019387755102036,
+          "seed_differences": [
+            0.022479591836734758,
+            0.022448979591836782,
+            0.023428571428571465,
+            0.019724489795918343,
+            0.026765306122448984,
+            0.01804081632653054,
+            0.015387755102040823,
+            0.015397959183673371,
+            0.01719387755102042,
+            0.019326530612244874
+          ],
+          "seed_difference_sd": 0.00371723254685462,
+          "coefficients": [
+            -1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.010661147959183695,
+              0.030159234693877542
+            ],
+            "ci90": [
+              0.012146836734693857,
+              0.028649285714285717
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.010284642857142857,
+              0.030761250000000028
+            ],
+            "ci90": [
+              0.011735714285714283,
+              0.02890790816326531
+            ]
+          }
+        },
+        {
+          "contrast": "clean: covariate effect, mlp_gelu",
+          "difference": 0.02188673469387755,
+          "seed_differences": [
+            0.019928571428571407,
+            0.018408163265306032,
+            0.02216326530612245,
+            0.01859183673469389,
+            0.02284693877551025,
+            0.021653061224489845,
+            0.027479591836734762,
+            0.017459183673469436,
+            0.028214285714285636,
+            0.022122448979591813
+          ],
+          "seed_difference_sd": 0.0036335015506314835,
+          "coefficients": [
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.011973392857142865,
+              0.03323783163265306
+            ],
+            "ci90": [
+              0.013531479591836742,
+              0.03119448979591836
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.011302704081632644,
+              0.033678596938775514
+            ],
+            "ci90": [
+              0.013098775510204093,
+              0.03158836734693878
+            ]
+          }
+        },
+        {
+          "contrast": "clean: architecture x covariates interaction",
+          "difference": -0.0018673469387755159,
+          "seed_differences": [
+            0.0025510204081633514,
+            0.0040408163265307495,
+            0.001265306122449017,
+            0.0011326530612244534,
+            0.003918367346938734,
+            -0.0036122448979593047,
+            -0.01209183673469394,
+            -0.002061224489796065,
+            -0.011020408163265216,
+            -0.002795918367346939
+          ],
+          "seed_difference_sd": 0.005763675446147736,
+          "coefficients": [
+            -1.0,
+            1.0,
+            1.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.010944897959183663,
+              0.006764362244897998
+            ],
+            "ci90": [
+              -0.0094707142857143,
+              0.005350255102040792
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.012018418367346937,
+              0.007705357142857126
+            ],
+            "ci90": [
+              -0.010301377551020438,
+              0.006229642857142866
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: KAN minus MLP, cov0",
+          "difference": -0.0008163265306122547,
+          "seed_differences": [
+            0.003602040816326535,
+            -0.0010816326530611597,
+            -0.0036530612244898286,
+            -0.0016530612244898268,
+            0.003489795918367289,
+            -0.0058061224489796,
+            0.0030408163265305266,
+            -0.0036122448979591937,
+            0.0075612244897959036,
+            -0.010051020408163192
+          ],
+          "seed_difference_sd": 0.005269808583113875,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.007054107142857156,
+              0.0055081887755101915
+            ],
+            "ci90": [
+              -0.006084795918367345,
+              0.004501224489795921
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.008200255102040846,
+              0.00655316326530608
+            ],
+            "ci90": [
+              -0.00698887755102044,
+              0.005343010204081616
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: KAN minus MLP, cov1",
+          "difference": -0.0009510204081632611,
+          "seed_differences": [
+            0.003183673469387749,
+            -0.0038775510204082098,
+            -0.003367346938775495,
+            -0.0028061224489795977,
+            0.0005204081632652624,
+            0.010091836734693937,
+            -0.0013163265306121996,
+            -0.006561224489795903,
+            -9.183673469392861e-05,
+            -0.005285714285714227
+          ],
+          "seed_difference_sd": 0.004832594360586073,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.010609260204081657,
+              0.008275153061224463
+            ],
+            "ci90": [
+              -0.008935051020408157,
+              0.0067867857142857235
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.011260739795918333,
+              0.009031734693877544
+            ],
+            "ci90": [
+              -0.009404336734693855,
+              0.007370918367346943
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: covariate effect, kan_spline",
+          "difference": 0.019285714285714295,
+          "seed_differences": [
+            0.0199795918367347,
+            0.019448979591836668,
+            0.015969387755102038,
+            0.014112244897959147,
+            0.02082653061224493,
+            0.034030612244898006,
+            0.015163265306122553,
+            0.01942857142857146,
+            0.01308163265306117,
+            0.020816326530612272
+          ],
+          "seed_difference_sd": 0.005924576459873424,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.011228469387755085,
+              0.02803887755102042
+            ],
+            "ci90": [
+              0.012590357142857125,
+              0.026678724489795917
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.010291836734693893,
+              0.029160229591836704
+            ],
+            "ci90": [
+              0.011671173469387772,
+              0.02754387755102039
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: covariate effect, mlp_gelu",
+          "difference": 0.0194204081632653,
+          "seed_differences": [
+            0.020397959183673486,
+            0.022244897959183718,
+            0.015683673469387704,
+            0.015265306122448918,
+            0.023795918367346958,
+            0.01813265306122447,
+            0.01952040816326528,
+            0.02237755102040817,
+            0.020734693877551003,
+            0.016051020408163308
+          ],
+          "seed_difference_sd": 0.003033143311926975,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.009587729591836737,
+              0.029947040816326514
+            ],
+            "ci90": [
+              0.011244744897959175,
+              0.028198010204081633
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.009251581632653064,
+              0.030312908163265317
+            ],
+            "ci90": [
+              0.010935612244897955,
+              0.028374744897959183
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: architecture x covariates interaction",
+          "difference": -0.0001346938775510065,
+          "seed_differences": [
+            -0.0004183673469387861,
+            -0.00279591836734705,
+            0.00028571428571433355,
+            -0.0011530612244897709,
+            -0.0029693877551020265,
+            0.015897959183673538,
+            -0.004357142857142726,
+            -0.002948979591836709,
+            -0.007653061224489832,
+            0.0047653061224489646
+          ],
+          "seed_difference_sd": 0.006495665068086197,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            1.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.011212346938775548,
+              0.010593214285714287
+            ],
+            "ci90": [
+              -0.009335918367346964,
+              0.008827091836734696
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.01202653061224486,
+              0.01188387755102043
+            ],
+            "ci90": [
+              -0.009971581632653043,
+              0.009791836734693884
+            ]
+          }
+        },
+        {
+          "contrast": "augmentation change in architecture x covariates interaction",
+          "difference": 0.0017326530612245094,
+          "seed_differences": [
+            -0.0029693877551021375,
+            -0.0068367346938777995,
+            -0.0009795918367346834,
+            -0.0022857142857142243,
+            -0.00688775510204076,
+            0.019510204081632843,
+            0.007734693877551213,
+            -0.0008877551020406438,
+            0.003367346938775384,
+            0.0075612244897959036
+          ],
+          "seed_difference_sd": 0.008089330434562688,
+          "coefficients": [
+            1.0,
+            -1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            1.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.0064419132653061074,
+              0.00993982142857146
+            ],
+            "ci90": [
+              -0.0049602551020408,
+              0.008555612244897978
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.00821749999999994,
+              0.012279821428571426
+            ],
+            "ci90": [
+              -0.00653811224489793,
+              0.010559438775510221
+            ]
+          }
+        }
+      ],
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "primary_diagnostic": null,
+      "multiple_comparisons": "eleven fixed exploratory contrasts; intervals are unadjusted",
+      "direction": "AUROC higher is better; negative architecture x covariates interaction means the covariate effect is less favorable for KAN than MLP",
+      "historical_engine_primary_diagnostic": "augmentation change in architecture x covariates interaction",
+      "analysis_role": "predeclared secondary or sensitivity analysis"
+    },
+    "k16/celebdfpp": {
+      "status": "COMPUTED",
+      "seed_count": 10,
+      "videos": 5418,
+      "clusters": 129,
+      "analysis_status": "EXPLORATORY_RETROSPECTIVE",
+      "estimand": "mean single-seed AUROC; no score ensemble",
+      "scope": "conditional on supplied source training data and declared training recipes",
+      "cell_order": [
+        "clean/kan_spline/cov0",
+        "clean/kan_spline/cov1",
+        "clean/mlp_gelu/cov0",
+        "clean/mlp_gelu/cov1",
+        "augmented/kan_spline/cov0",
+        "augmented/kan_spline/cov1",
+        "augmented/mlp_gelu/cov0",
+        "augmented/mlp_gelu/cov1"
+      ],
+      "cells": [
+        {
+          "cell": "clean/kan_spline/cov0",
+          "mean_auc": 0.6708532035337508,
+          "seed_aucs": [
+            0.6370014581010378,
+            0.6611887811990736,
+            0.6669858049575436,
+            0.6806801612488207,
+            0.6649348143065443,
+            0.6678531606484261,
+            0.7154740972639163,
+            0.6988624667638734,
+            0.6468715155673729,
+            0.6686797752808988
+          ],
+          "seed_sd": 0.022974099711544176
+        },
+        {
+          "cell": "clean/kan_spline/cov1",
+          "mean_auc": 0.47735622694913804,
+          "seed_aucs": [
+            0.5735279612316665,
+            0.7151728278583069,
+            0.46412106527146413,
+            0.3863292306372759,
+            0.49978664550990654,
+            0.6010989364439489,
+            0.40347692769534266,
+            0.3978803928295737,
+            0.31975834119564284,
+            0.412409940818252
+          ],
+          "seed_sd": 0.12060582088330449
+        },
+        {
+          "cell": "clean/mlp_gelu/cov0",
+          "mean_auc": 0.6603676344454927,
+          "seed_aucs": [
+            0.6425658289733254,
+            0.6484625611115876,
+            0.6610290333647826,
+            0.6734614889784716,
+            0.6489235783514882,
+            0.6579873917145552,
+            0.701752937644738,
+            0.6386118020413415,
+            0.6176312290934043,
+            0.7132504931812333
+          ],
+          "seed_sd": 0.029013809268710472
+        },
+        {
+          "cell": "clean/mlp_gelu/cov1",
+          "mean_auc": 0.5669236212368127,
+          "seed_aucs": [
+            0.49148940732481344,
+            0.4890921176773308,
+            0.5749882065357235,
+            0.6270048889270092,
+            0.5667542242044772,
+            0.5515159962260914,
+            0.6344733682133974,
+            0.6065732481344884,
+            0.5586038682562827,
+            0.5687408868685135
+          ],
+          "seed_sd": 0.04929262443785146
+        },
+        {
+          "cell": "augmented/kan_spline/cov0",
+          "mean_auc": 0.6705293121193928,
+          "seed_aucs": [
+            0.664365511621923,
+            0.6753731023243846,
+            0.7030287760528348,
+            0.6933710009434771,
+            0.6702729650913457,
+            0.6459655630843125,
+            0.6688223689853332,
+            0.6790944763701862,
+            0.5928381507848014,
+            0.712161205935329
+          ],
+          "seed_sd": 0.0334801150777958
+        },
+        {
+          "cell": "augmented/kan_spline/cov1",
+          "mean_auc": 0.49854634831460676,
+          "seed_aucs": [
+            0.5282721502701776,
+            0.6574727678188524,
+            0.4308570632129685,
+            0.43379470795093916,
+            0.5903754610172399,
+            0.41262758384080966,
+            0.5718066515138519,
+            0.33175872716356464,
+            0.534554850330217,
+            0.4939435200274466
+          ],
+          "seed_sd": 0.09731589183562799
+        },
+        {
+          "cell": "augmented/mlp_gelu/cov0",
+          "mean_auc": 0.6353604511536154,
+          "seed_aucs": [
+            0.6257783686422507,
+            0.6231902393001115,
+            0.6366766017668753,
+            0.6413875546787889,
+            0.6276921262543957,
+            0.6372877176430226,
+            0.6525441718843812,
+            0.6348346770735055,
+            0.620997727077794,
+            0.6532153272150271
+          ],
+          "seed_sd": 0.011358537134966479
+        },
+        {
+          "cell": "augmented/mlp_gelu/cov1",
+          "mean_auc": 0.5002653529462219,
+          "seed_aucs": [
+            0.4601606055407839,
+            0.47670576378763185,
+            0.5090906166909683,
+            0.5218414958401235,
+            0.445841195642851,
+            0.510724547559825,
+            0.522144909511965,
+            0.5531617205592246,
+            0.5167145552791834,
+            0.4862681190496612
+          ],
+          "seed_sd": 0.032526029567058426
+        }
+      ],
+      "contrasts": [
+        {
+          "contrast": "clean: KAN minus MLP, cov0",
+          "difference": 0.010485569088257995,
+          "seed_differences": [
+            -0.005564370872287561,
+            0.012726220087486029,
+            0.005956771592760979,
+            0.0072186722703491135,
+            0.016011235955056158,
+            0.009865768933870922,
+            0.013721159619178303,
+            0.06025066472253193,
+            0.02924028647396859,
+            -0.04457071790033451
+          ],
+          "seed_difference_sd": 0.026235448471541325,
+          "coefficients": [
+            1.0,
+            0.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.002445721231554728,
+              0.02409917425837534
+            ],
+            "ci90": [
+              -0.00044370911419152107,
+              0.02169899979407995
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.010055467253954347,
+              0.032422289448457084
+            ],
+            "ci90": [
+              -0.006747739189444396,
+              0.028615345516502484
+            ]
+          }
+        },
+        {
+          "contrast": "clean: KAN minus MLP, cov1",
+          "difference": -0.08956739428767475,
+          "seed_differences": [
+            0.08203855390685305,
+            0.22608071018097614,
+            -0.11086714126425934,
+            -0.2406756582897333,
+            -0.06696757869457065,
+            0.049582940217857474,
+            -0.23099644051805474,
+            -0.20869285530491472,
+            -0.23884552706063988,
+            -0.15633094605026154
+          ],
+          "seed_difference_sd": 0.16096157739851563,
+          "coefficients": [
+            0.0,
+            1.0,
+            0.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.12384539255051404,
+              -0.05969917142662219
+            ],
+            "ci90": [
+              -0.11809451108251584,
+              -0.06417274250626363
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.18429617011612204,
+              0.015299647949617893
+            ],
+            "ci90": [
+              -0.1707970725402489,
+              -0.0020162467016249267
+            ]
+          }
+        },
+        {
+          "contrast": "clean: covariate effect, kan_spline",
+          "difference": -0.19349697658461273,
+          "seed_differences": [
+            -0.06347349686937132,
+            0.05398404665923329,
+            -0.20286473968607943,
+            -0.29435093061154477,
+            -0.1651481687966378,
+            -0.0667542242044773,
+            -0.31199716956857365,
+            -0.3009820739342997,
+            -0.32711317437173004,
+            -0.25626983446264684
+          ],
+          "seed_difference_sd": 0.13024279858195362,
+          "coefficients": [
+            -1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.21657297597338168,
+              -0.17293998274154704
+            ],
+            "ci90": [
+              -0.21260762103051162,
+              -0.17648063046571852
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.27084332048555876,
+              -0.1117720689763033
+            ],
+            "ci90": [
+              -0.26016202158708746,
+              -0.12424220563738206
+            ]
+          }
+        },
+        {
+          "contrast": "clean: covariate effect, mlp_gelu",
+          "difference": -0.09344401320868001,
+          "seed_differences": [
+            -0.15107642164851193,
+            -0.15937044343425683,
+            -0.08604082682905911,
+            -0.04645660005146235,
+            -0.08216935414701099,
+            -0.10647139548846385,
+            -0.06727956943134061,
+            -0.03203855390685306,
+            -0.05902736083712157,
+            -0.1445096063127198
+          ],
+          "seed_difference_sd": 0.04530716500172323,
+          "coefficients": [
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.12441456885453565,
+              -0.06254246261391061
+            ],
+            "ci90": [
+              -0.11933470097792388,
+              -0.06754279937724147
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.1356311935959635,
+              -0.05306082490142134
+            ],
+            "ci90": [
+              -0.12855572953643632,
+              -0.05969956481502177
+            ]
+          }
+        },
+        {
+          "contrast": "clean: architecture x covariates interaction",
+          "difference": -0.10005296337593275,
+          "seed_differences": [
+            0.08760292477914061,
+            0.2133544900934901,
+            -0.11682391285702032,
+            -0.24789433056008242,
+            -0.08297881464962681,
+            0.03971717128398655,
+            -0.24471760013723304,
+            -0.26894352002744665,
+            -0.2680858135346085,
+            -0.11176022814992703
+          ],
+          "seed_difference_sd": 0.16773937852801662,
+          "coefficients": [
+            -1.0,
+            1.0,
+            1.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.13617357269473626,
+              -0.06765187668884566
+            ],
+            "ci90": [
+              -0.12999804313101893,
+              -0.07254117009580831
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.20176658684486826,
+              0.00794492174930215
+            ],
+            "ci90": [
+              -0.18692250434253546,
+              -0.00991744419923729
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: KAN minus MLP, cov0",
+          "difference": 0.035168860965777496,
+          "seed_differences": [
+            0.03858714297967236,
+            0.05218286302427311,
+            0.06635217428595941,
+            0.051983446264688205,
+            0.042580838836949964,
+            0.00867784544128991,
+            0.01627819710095202,
+            0.04425979929668067,
+            -0.028159576292992594,
+            0.05894587872030188
+          ],
+          "seed_difference_sd": 0.028535244145092724,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.018854497848872356,
+              0.05271091016548399
+            ],
+            "ci90": [
+              0.02132441451745948,
+              0.04979649235649197
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.011374454274034744,
+              0.06061703855863897
+            ],
+            "ci90": [
+              0.01493281665498474,
+              0.05644104088516597
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: KAN minus MLP, cov1",
+          "difference": -0.0017190046316150453,
+          "seed_differences": [
+            0.06811154472939368,
+            0.1807670040312206,
+            -0.07823355347799982,
+            -0.08804678788918435,
+            0.1445342653743889,
+            -0.09809696371901533,
+            0.04966174200188689,
+            -0.22140299339566,
+            0.017840295051033572,
+            0.007675400977785407
+          ],
+          "seed_difference_sd": 0.1218081362084163,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.02548562118993724,
+              0.020606798688729645
+            ],
+            "ci90": [
+              -0.02178185585290627,
+              0.01702225829147709
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.07816224423985653,
+              0.07310357321269298
+            ],
+            "ci90": [
+              -0.06580927917695377,
+              0.06118425034345066
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: covariate effect, kan_spline",
+          "difference": -0.171982963804786,
+          "seed_differences": [
+            -0.13609336135174543,
+            -0.01790033450553219,
+            -0.27217171283986624,
+            -0.259576292992538,
+            -0.07989750407410579,
+            -0.23333797924350286,
+            -0.0970157174714813,
+            -0.3473357492066215,
+            -0.05828330045458441,
+            -0.21821768590788232
+          ],
+          "seed_difference_sd": 0.10873924831938964,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.19330214544700122,
+              -0.15264581953056267
+            ],
+            "ci90": [
+              -0.18949512276877775,
+              -0.15610702409738586
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.2403734215215825,
+              -0.10601035025337051
+            ],
+            "ci90": [
+              -0.22991777312531472,
+              -0.11619923699344206
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: covariate effect, mlp_gelu",
+          "difference": -0.13509509820739346,
+          "seed_differences": [
+            -0.16561776310146675,
+            -0.14648447551247967,
+            -0.12758598507590702,
+            -0.11954605883866543,
+            -0.18185093061154473,
+            -0.12656317008319762,
+            -0.13039926237241617,
+            -0.08167295651428086,
+            -0.10428317179861057,
+            -0.16694720816536585
+          ],
+          "seed_difference_sd": 0.030656374847891334,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.17071244232503896,
+              -0.0993405496976463
+            ],
+            "ci90": [
+              -0.16529940532612505,
+              -0.10540851699134948
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.17538431199701665,
+              -0.09427909483958029
+            ],
+            "ci90": [
+              -0.16921760075828557,
+              -0.10106999016091674
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: architecture x covariates interaction",
+          "difference": -0.03688786559739254,
+          "seed_differences": [
+            0.02952440174972132,
+            0.12858414100694748,
+            -0.14458572776395923,
+            -0.14003023415387256,
+            0.10195342653743894,
+            -0.10677480916030524,
+            0.03338354490093487,
+            -0.26566279269234067,
+            0.045999871344026166,
+            -0.051270477742516474
+          ],
+          "seed_difference_sd": 0.12584960869620285,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            1.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.06907655930489799,
+              -0.006568350971243214
+            ],
+            "ci90": [
+              -0.0640043286882882,
+              -0.011311037796190526
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.11983130577140745,
+              0.04172116857830114
+            ],
+            "ci90": [
+              -0.10686639710216593,
+              0.030473554189754913
+            ]
+          }
+        },
+        {
+          "contrast": "augmentation change in architecture x covariates interaction",
+          "difference": 0.06316509777854021,
+          "seed_differences": [
+            -0.05807852302941935,
+            -0.08477034908654268,
+            -0.02776181490693891,
+            0.10786409640620986,
+            0.1849322411870658,
+            -0.1464919804442918,
+            0.27810114503816785,
+            0.003280727335105982,
+            0.31408568487863464,
+            0.060489750407410614
+          ],
+          "seed_difference_sd": 0.1557725850814592,
+          "coefficients": [
+            1.0,
+            -1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            1.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.04221664714961616,
+              0.08575194344939151
+            ],
+            "ci90": [
+              0.04554589797720429,
+              0.08201253824753788
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.027548865429518534,
+              0.16016365349591088
+            ],
+            "ci90": [
+              -0.015175361370285988,
+              0.14401469777107268
+            ]
+          }
+        }
+      ],
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "primary_diagnostic": "clean: architecture x covariates interaction",
+      "multiple_comparisons": "eleven fixed exploratory contrasts; intervals are unadjusted",
+      "direction": "AUROC higher is better; negative architecture x covariates interaction means the covariate effect is less favorable for KAN than MLP",
+      "historical_engine_primary_diagnostic": "augmentation change in architecture x covariates interaction",
+      "analysis_role": "predeclared primary diagnostic; exploratory after target inspection"
+    },
+    "k128/ffpp": {
+      "status": "COMPUTED",
+      "seed_count": 10,
+      "videos": 840,
+      "clusters": 70,
+      "analysis_status": "EXPLORATORY_RETROSPECTIVE",
+      "estimand": "mean single-seed AUROC; no score ensemble",
+      "scope": "conditional on supplied source training data and declared training recipes",
+      "cell_order": [
+        "clean/kan_spline/cov0",
+        "clean/kan_spline/cov1",
+        "clean/mlp_gelu/cov0",
+        "clean/mlp_gelu/cov1",
+        "augmented/kan_spline/cov0",
+        "augmented/kan_spline/cov1",
+        "augmented/mlp_gelu/cov0",
+        "augmented/mlp_gelu/cov1"
+      ],
+      "cells": [
+        {
+          "cell": "clean/kan_spline/cov0",
+          "mean_auc": 0.8584897959183673,
+          "seed_aucs": [
+            0.8595102040816327,
+            0.8629897959183673,
+            0.8544489795918367,
+            0.8603367346938775,
+            0.8547857142857143,
+            0.8581326530612244,
+            0.8581632653061224,
+            0.8550408163265306,
+            0.8591734693877551,
+            0.8623163265306123
+          ],
+          "seed_sd": 0.0030182815642807877
+        },
+        {
+          "cell": "clean/kan_spline/cov1",
+          "mean_auc": 0.8619163265306122,
+          "seed_aucs": [
+            0.8654285714285714,
+            0.8631938775510204,
+            0.8625102040816327,
+            0.8634489795918368,
+            0.8605204081632654,
+            0.8638265306122449,
+            0.8602857142857143,
+            0.8594081632653061,
+            0.8596326530612245,
+            0.8609081632653062
+          ],
+          "seed_sd": 0.0020398399024704503
+        },
+        {
+          "cell": "clean/mlp_gelu/cov0",
+          "mean_auc": 0.8709693877551021,
+          "seed_aucs": [
+            0.8683061224489796,
+            0.867734693877551,
+            0.8689489795918367,
+            0.8741734693877551,
+            0.8734183673469388,
+            0.8711530612244898,
+            0.8736938775510205,
+            0.871295918367347,
+            0.8694591836734694,
+            0.8715102040816326
+          ],
+          "seed_sd": 0.00231032266548212
+        },
+        {
+          "cell": "clean/mlp_gelu/cov1",
+          "mean_auc": 0.8735489795918367,
+          "seed_aucs": [
+            0.8718061224489796,
+            0.8666326530612245,
+            0.8674693877551021,
+            0.877969387755102,
+            0.8775510204081632,
+            0.872734693877551,
+            0.8724489795918368,
+            0.8766734693877551,
+            0.8738775510204082,
+            0.8783265306122449
+          ],
+          "seed_sd": 0.004189396008850064
+        },
+        {
+          "cell": "augmented/kan_spline/cov0",
+          "mean_auc": 0.8462428571428571,
+          "seed_aucs": [
+            0.8472448979591837,
+            0.8471326530612245,
+            0.8457653061224489,
+            0.8501122448979592,
+            0.8447244897959184,
+            0.8467653061224489,
+            0.8424489795918367,
+            0.8444795918367347,
+            0.8531224489795919,
+            0.8406326530612245
+          ],
+          "seed_sd": 0.0035882557907154634
+        },
+        {
+          "cell": "augmented/kan_spline/cov1",
+          "mean_auc": 0.8518591836734695,
+          "seed_aucs": [
+            0.8503673469387755,
+            0.8514489795918367,
+            0.8488775510204082,
+            0.8538163265306122,
+            0.8518367346938776,
+            0.8536326530612245,
+            0.8492551020408163,
+            0.855530612244898,
+            0.8497653061224489,
+            0.8540612244897959
+          ],
+          "seed_sd": 0.002303476096846398
+        },
+        {
+          "cell": "augmented/mlp_gelu/cov0",
+          "mean_auc": 0.8593499999999998,
+          "seed_aucs": [
+            0.8549183673469388,
+            0.8563571428571428,
+            0.8641326530612244,
+            0.8590204081632653,
+            0.858938775510204,
+            0.8632551020408163,
+            0.8612755102040817,
+            0.8559795918367347,
+            0.8593367346938775,
+            0.8602857142857143
+          ],
+          "seed_sd": 0.003035729244041729
+        },
+        {
+          "cell": "augmented/mlp_gelu/cov1",
+          "mean_auc": 0.8654214285714286,
+          "seed_aucs": [
+            0.862734693877551,
+            0.8631122448979592,
+            0.8625,
+            0.865030612244898,
+            0.8641326530612244,
+            0.8659285714285714,
+            0.866295918367347,
+            0.8725612244897959,
+            0.8645204081632653,
+            0.8673979591836735
+          ],
+          "seed_sd": 0.002974267794891629
+        }
+      ],
+      "contrasts": [
+        {
+          "contrast": "clean: KAN minus MLP, cov0",
+          "difference": -0.012479591836734704,
+          "seed_differences": [
+            -0.008795918367346944,
+            -0.004744897959183647,
+            -0.014499999999999957,
+            -0.013836734693877584,
+            -0.018632653061224524,
+            -0.013020408163265329,
+            -0.015530612244898045,
+            -0.01625510204081637,
+            -0.010285714285714342,
+            -0.009193877551020302
+          ],
+          "seed_difference_sd": 0.004171912566052954,
+          "coefficients": [
+            1.0,
+            0.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.024101454081632643,
+              -0.0009180612244897898
+            ],
+            "ci90": [
+              -0.02204622448979595,
+              -0.002787755102040812
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.02477964285714288,
+              -0.00039063775510206073
+            ],
+            "ci90": [
+              -0.022712551020408197,
+              -0.002354081632653102
+            ]
+          }
+        },
+        {
+          "contrast": "clean: KAN minus MLP, cov1",
+          "difference": -0.011632653061224473,
+          "seed_differences": [
+            -0.0063775510204081565,
+            -0.003438775510204106,
+            -0.0049591836734693695,
+            -0.014520408163265275,
+            -0.01703061224489788,
+            -0.00890816326530608,
+            -0.01216326530612244,
+            -0.01726530612244903,
+            -0.014244897959183711,
+            -0.01741836734693869
+          ],
+          "seed_difference_sd": 0.0053385131205153594,
+          "coefficients": [
+            0.0,
+            1.0,
+            0.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.02377043367346938,
+              0.0007710204081632521
+            ],
+            "ci90": [
+              -0.021741224489795947,
+              -0.001320408163265318
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.024482984693877573,
+              0.001414311224489804
+            ],
+            "ci90": [
+              -0.022299030612244895,
+              -0.0008278571428571678
+            ]
+          }
+        },
+        {
+          "contrast": "clean: covariate effect, kan_spline",
+          "difference": 0.0034265306122449267,
+          "seed_differences": [
+            0.0059183673469387355,
+            0.00020408163265306367,
+            0.00806122448979596,
+            0.0031122448979592487,
+            0.0057346938775511,
+            0.005693877551020465,
+            0.0021224489795919066,
+            0.004367346938775496,
+            0.000459183673469421,
+            -0.0014081632653061282
+          ],
+          "seed_difference_sd": 0.003044234028763199,
+          "coefficients": [
+            -1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.00327471938775508,
+              0.010643979591836734
+            ],
+            "ci90": [
+              -0.0022337244897959268,
+              0.009514387755102032
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.004044081632653077,
+              0.011208316326530625
+            ],
+            "ci90": [
+              -0.002791020408163263,
+              0.00992892857142858
+            ]
+          }
+        },
+        {
+          "contrast": "clean: covariate effect, mlp_gelu",
+          "difference": 0.002579591836734696,
+          "seed_differences": [
+            0.0034999999999999476,
+            -0.0011020408163264772,
+            -0.0014795918367346284,
+            0.00379591836734694,
+            0.004132653061224456,
+            0.0015816326530612157,
+            -0.0012448979591836995,
+            0.005377551020408156,
+            0.00441836734693879,
+            0.00681632653061226
+          ],
+          "seed_difference_sd": 0.0029730685277865377,
+          "coefficients": [
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.005074821428571441,
+              0.010534362244897944
+            ],
+            "ci90": [
+              -0.003788979591836732,
+              0.00926459183673469
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.005967474489795895,
+              0.0111408163265306
+            ],
+            "ci90": [
+              -0.004516989795918388,
+              0.009750255102040804
+            ]
+          }
+        },
+        {
+          "contrast": "clean: architecture x covariates interaction",
+          "difference": 0.0008469387755102309,
+          "seed_differences": [
+            0.002418367346938788,
+            0.0013061224489795409,
+            0.009540816326530588,
+            -0.0006836734693876911,
+            0.0016020408163266442,
+            0.00411224489795925,
+            0.003367346938775606,
+            -0.0010102040816326596,
+            -0.003959183673469369,
+            -0.008224489795918388
+          ],
+          "seed_difference_sd": 0.004796178890014735,
+          "coefficients": [
+            -1.0,
+            1.0,
+            1.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.005543035714285721,
+              0.007452142857142847
+            ],
+            "ci90": [
+              -0.004468571428571427,
+              0.006311377551020386
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.007246071428571481,
+              0.009004183673469375
+            ],
+            "ci90": [
+              -0.005813418367346961,
+              0.00762984693877554
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: KAN minus MLP, cov0",
+          "difference": -0.01310714285714284,
+          "seed_differences": [
+            -0.00767346938775515,
+            -0.009224489795918278,
+            -0.01836734693877551,
+            -0.00890816326530608,
+            -0.014214285714285624,
+            -0.01648979591836741,
+            -0.01882653061224493,
+            -0.011499999999999955,
+            -0.006214285714285617,
+            -0.019653061224489843
+          ],
+          "seed_difference_sd": 0.0050356938958893,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.02281665816326529,
+              -0.003927321428571407
+            ],
+            "ci90": [
+              -0.02108903061224491,
+              -0.005231581632653042
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.023770459183673463,
+              -0.002980433673469393
+            ],
+            "ci90": [
+              -0.021876275510204067,
+              -0.004517244897959178
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: KAN minus MLP, cov1",
+          "difference": -0.013562244897959175,
+          "seed_differences": [
+            -0.012367346938775503,
+            -0.011663265306122494,
+            -0.013622448979591861,
+            -0.011214285714285732,
+            -0.012295918367346892,
+            -0.012295918367346892,
+            -0.01704081632653065,
+            -0.01703061224489788,
+            -0.014755102040816315,
+            -0.013336734693877528
+          ],
+          "seed_difference_sd": 0.002091288850323194,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.024648137755102044,
+              -0.0023385714285714477
+            ],
+            "ci90": [
+              -0.022749081632653073,
+              -0.0040805612244897895
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.024921760204081645,
+              -0.00187237244897959
+            ],
+            "ci90": [
+              -0.02301413265306123,
+              -0.0036457653061224243
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: covariate effect, kan_spline",
+          "difference": 0.005616326530612237,
+          "seed_differences": [
+            0.0031224489795917965,
+            0.004316326530612202,
+            0.0031122448979592487,
+            0.0037040816326530113,
+            0.007112244897959141,
+            0.006867346938775554,
+            0.006806122448979601,
+            0.011051020408163303,
+            -0.0033571428571429474,
+            0.013428571428571456
+          ],
+          "seed_difference_sd": 0.004644533100615004,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -4.701530612245257e-05,
+              0.011799056122449
+            ],
+            "ci90": [
+              0.0008336734693877629,
+              0.010733724489795933
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.0010572704081632431,
+              0.012707193877551034
+            ],
+            "ci90": [
+              9.683673469389873e-05,
+              0.011553163265306126
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: covariate effect, mlp_gelu",
+          "difference": 0.006071428571428572,
+          "seed_differences": [
+            0.00781632653061215,
+            0.006755102040816419,
+            -0.0016326530612243983,
+            0.006010204081632664,
+            0.005193877551020409,
+            0.002673469387755034,
+            0.005020408163265322,
+            0.01658163265306123,
+            0.005183673469387751,
+            0.007112244897959141
+          ],
+          "seed_difference_sd": 0.004578031654075869,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.0007663265306122599,
+              0.011612551020408143
+            ],
+            "ci90": [
+              0.0015098469387755174,
+              0.010641887755102039
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.0008411989795918483,
+              0.012760382653061257
+            ],
+            "ci90": [
+              0.000352653061224528,
+              0.011627653061224501
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: architecture x covariates interaction",
+          "difference": -0.0004551020408163353,
+          "seed_differences": [
+            -0.004693877551020353,
+            -0.0024387755102042163,
+            0.004744897959183647,
+            -0.002306122448979653,
+            0.001918367346938732,
+            0.0041938775510205195,
+            0.0017857142857142794,
+            -0.005530612244897926,
+            -0.008540816326530698,
+            0.006316326530612315
+          ],
+          "seed_difference_sd": 0.004962390833275268,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            1.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.006365382653061231,
+              0.005841122448979603
+            ],
+            "ci90": [
+              -0.005338928571428565,
+              0.0048624999999999806
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.007687984693877585,
+              0.007527576530612255
+            ],
+            "ci90": [
+              -0.006590153061224493,
+              0.006150255102040815
+            ]
+          }
+        },
+        {
+          "contrast": "augmentation change in architecture x covariates interaction",
+          "difference": -0.0013020408163265662,
+          "seed_differences": [
+            -0.007112244897959141,
+            -0.0037448979591837572,
+            -0.004795918367346941,
+            -0.0016224489795919617,
+            0.0003163265306120877,
+            8.163265306126988e-05,
+            -0.0015816326530613267,
+            -0.004520408163265266,
+            -0.004581632653061329,
+            0.014540816326530703
+          ],
+          "seed_difference_sd": 0.006043889792383851,
+          "coefficients": [
+            1.0,
+            -1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            1.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.007436887755102033,
+              0.00510104591836735
+            ],
+            "ci90": [
+              -0.006527602040816366,
+              0.004096428571428576
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.009327806122448993,
+              0.007513520408163297
+            ],
+            "ci90": [
+              -0.00809918367346935,
+              0.005831785714285693
+            ]
+          }
+        }
+      ],
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "primary_diagnostic": null,
+      "multiple_comparisons": "eleven fixed exploratory contrasts; intervals are unadjusted",
+      "direction": "AUROC higher is better; negative architecture x covariates interaction means the covariate effect is less favorable for KAN than MLP",
+      "historical_engine_primary_diagnostic": "augmentation change in architecture x covariates interaction",
+      "analysis_role": "predeclared secondary or sensitivity analysis"
+    },
+    "k128/celebdfpp": {
+      "status": "COMPUTED",
+      "seed_count": 10,
+      "videos": 5418,
+      "clusters": 129,
+      "analysis_status": "EXPLORATORY_RETROSPECTIVE",
+      "estimand": "mean single-seed AUROC; no score ensemble",
+      "scope": "conditional on supplied source training data and declared training recipes",
+      "cell_order": [
+        "clean/kan_spline/cov0",
+        "clean/kan_spline/cov1",
+        "clean/mlp_gelu/cov0",
+        "clean/mlp_gelu/cov1",
+        "augmented/kan_spline/cov0",
+        "augmented/kan_spline/cov1",
+        "augmented/mlp_gelu/cov0",
+        "augmented/mlp_gelu/cov1"
+      ],
+      "cells": [
+        {
+          "cell": "clean/kan_spline/cov0",
+          "mean_auc": 0.7273116262115104,
+          "seed_aucs": [
+            0.7396839351573892,
+            0.7295372673471138,
+            0.7346395488463847,
+            0.7226573891414358,
+            0.7268998198816365,
+            0.7213054292820996,
+            0.7127305086199502,
+            0.7326389484518397,
+            0.7458047431169054,
+            0.7072186722703491
+          ],
+          "seed_sd": 0.011814978202836703
+        },
+        {
+          "cell": "clean/kan_spline/cov1",
+          "mean_auc": 0.7215674586156617,
+          "seed_aucs": [
+            0.7498981473539754,
+            0.6889441633073162,
+            0.7271378334333991,
+            0.7088504588729737,
+            0.712318809503388,
+            0.7029783857963805,
+            0.6974183034565572,
+            0.7323537610429711,
+            0.7285348228836093,
+            0.7672399005060468
+          ],
+          "seed_sd": 0.02432372354978116
+        },
+        {
+          "cell": "clean/mlp_gelu/cov0",
+          "mean_auc": 0.740362702633159,
+          "seed_aucs": [
+            0.7445835834977271,
+            0.7472542670898019,
+            0.7327708208251137,
+            0.7348657689338708,
+            0.7407528518740887,
+            0.7424168024701947,
+            0.7425057895188266,
+            0.7336810618406381,
+            0.7490007719358436,
+            0.7357953083454841
+          ],
+          "seed_sd": 0.005795098167342389
+        },
+        {
+          "cell": "clean/mlp_gelu/cov1",
+          "mean_auc": 0.7663655759499098,
+          "seed_aucs": [
+            0.7668882408439832,
+            0.7816000514623895,
+            0.7698848529033365,
+            0.7565400120078909,
+            0.7611223089458787,
+            0.748177373702719,
+            0.7626640363667553,
+            0.7842535809246076,
+            0.7784940818251994,
+            0.7540312205163393
+          ],
+          "seed_sd": 0.012167858780112284
+        },
+        {
+          "cell": "augmented/kan_spline/cov0",
+          "mean_auc": 0.7150741916116305,
+          "seed_aucs": [
+            0.7165365811819195,
+            0.7081417788832661,
+            0.6985687022900763,
+            0.7207479200617549,
+            0.7125246590616691,
+            0.7221524144437773,
+            0.7259488378077023,
+            0.7069388455270607,
+            0.7293024701946994,
+            0.7098797066643795
+          ],
+          "seed_sd": 0.009575948038684709
+        },
+        {
+          "cell": "augmented/kan_spline/cov1",
+          "mean_auc": 0.7338452054207051,
+          "seed_aucs": [
+            0.763106827343683,
+            0.7352710352517369,
+            0.7472274637619006,
+            0.7327536666952569,
+            0.7287932069645767,
+            0.7276374474654773,
+            0.7202268633673556,
+            0.716996526288704,
+            0.7240157817994682,
+            0.742423235268891
+          ],
+          "seed_sd": 0.0139130160648169
+        },
+        {
+          "cell": "augmented/mlp_gelu/cov0",
+          "mean_auc": 0.7348620700746206,
+          "seed_aucs": [
+            0.7354189896217515,
+            0.7422152414443778,
+            0.7166711338879835,
+            0.7452032764388027,
+            0.7172377562398148,
+            0.7321093146925122,
+            0.7535605540783944,
+            0.7287685479029076,
+            0.7428831803756755,
+            0.7345527060639849
+          ],
+          "seed_sd": 0.011839774445949634
+        },
+        {
+          "cell": "augmented/mlp_gelu/cov1",
+          "mean_auc": 0.7571783600651856,
+          "seed_aucs": [
+            0.7758169654344284,
+            0.7701292992537954,
+            0.7420565657432027,
+            0.7643333476284415,
+            0.7342385710609829,
+            0.7326035680590102,
+            0.7426140749635475,
+            0.7627508791491552,
+            0.7661055836692684,
+            0.7811347456900248
+          ],
+          "seed_sd": 0.017707237601157326
+        }
+      ],
+      "contrasts": [
+        {
+          "contrast": "clean: KAN minus MLP, cov0",
+          "difference": -0.013051076421648522,
+          "seed_differences": [
+            -0.004899648340337959,
+            -0.017716999742688144,
+            0.0018687280212710267,
+            -0.012208379792434942,
+            -0.013853031992452136,
+            -0.021111373188095084,
+            -0.029775280898876377,
+            -0.001042113388798338,
+            -0.0031960288189382124,
+            -0.028576636075135053
+          ],
+          "seed_difference_sd": 0.011250767941460347,
+          "coefficients": [
+            1.0,
+            0.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.033513312818868914,
+              0.0071014348437135845
+            ],
+            "ci90": [
+              -0.030032666131890796,
+              0.004187164513348317
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.03522897719003899,
+              0.008956785241348417
+            ],
+            "ci90": [
+              -0.03141633359258073,
+              0.005157927113540054
+            ]
+          }
+        },
+        {
+          "contrast": "clean: KAN minus MLP, cov1",
+          "difference": -0.04479811733424821,
+          "seed_differences": [
+            -0.016990093490007796,
+            -0.09265588815507331,
+            -0.04274701946993742,
+            -0.047689553134917184,
+            -0.04880349944249074,
+            -0.04519898790633847,
+            -0.06524573291019808,
+            -0.0518998198816365,
+            -0.049959258941590146,
+            0.013208679989707539
+          ],
+          "seed_difference_sd": 0.02779366171716605,
+          "coefficients": [
+            0.0,
+            1.0,
+            0.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.06654516674727146,
+              -0.024183356337855913
+            ],
+            "ci90": [
+              -0.06268220239303658,
+              -0.027448674318852187
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.07215384426882786,
+              -0.018189376322376587
+            ],
+            "ci90": [
+              -0.06796932429803695,
+              -0.022220965600590257
+            ]
+          }
+        },
+        {
+          "contrast": "clean: covariate effect, kan_spline",
+          "difference": -0.00574416759584867,
+          "seed_differences": [
+            0.010214212196586248,
+            -0.040593104039797545,
+            -0.00750171541298561,
+            -0.013806930268462136,
+            -0.014581010378248549,
+            -0.01832704348571912,
+            -0.015312205163393044,
+            -0.0002851874088686257,
+            -0.0172699202332961,
+            0.06002122823569778
+          ],
+          "seed_difference_sd": 0.026568385555966755,
+          "coefficients": [
+            -1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.01694205089317106,
+              0.0044682833422956935
+            ],
+            "ci90": [
+              -0.014911229822572921,
+              0.002898330090899026
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.024519946639670092,
+              0.01441009736059064
+            ],
+            "ci90": [
+              -0.021488445306903334,
+              0.011295959807456228
+            ]
+          }
+        },
+        {
+          "contrast": "clean: covariate effect, mlp_gelu",
+          "difference": 0.026002873316751017,
+          "seed_differences": [
+            0.022304657346256085,
+            0.03434578437258762,
+            0.037114032078222836,
+            0.021674243074020105,
+            0.020369457071790054,
+            0.00576057123252427,
+            0.020158246847928663,
+            0.050572519083969536,
+            0.029493309889355834,
+            0.018235912170855184
+          ],
+          "seed_difference_sd": 0.012370655295249283,
+          "coefficients": [
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.015019521218779171,
+              0.037479859234916486
+            ],
+            "ci90": [
+              0.01677453808972868,
+              0.03554342889212201
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.011655796841364936,
+              0.040417894088286825
+            ],
+            "ci90": [
+              0.013954343279425754,
+              0.03798108719087717
+            ]
+          }
+        },
+        {
+          "contrast": "clean: architecture x covariates interaction",
+          "difference": -0.03174704091259969,
+          "seed_differences": [
+            -0.012090445149669837,
+            -0.07493888841238516,
+            -0.044615747491208446,
+            -0.03548117334248224,
+            -0.0349504674500386,
+            -0.02408761471824339,
+            -0.03547045201132171,
+            -0.05085770649283816,
+            -0.04676323012265193,
+            0.04178531606484259
+          ],
+          "seed_difference_sd": 0.030753443064385558,
+          "coefficients": [
+            -1.0,
+            1.0,
+            1.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.044785136526649984,
+              -0.01948019027913267
+            ],
+            "ci90": [
+              -0.04261767563505245,
+              -0.02157227766287976
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.05370380942861544,
+              -0.007616537469051744
+            ],
+            "ci90": [
+              -0.050372748500597135,
+              -0.011735282700775082
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: KAN minus MLP, cov0",
+          "difference": -0.01978787846298997,
+          "seed_differences": [
+            -0.01888240843983191,
+            -0.034073462561111656,
+            -0.018102431597907254,
+            -0.024455356377047766,
+            -0.00471309717814572,
+            -0.009956900248734857,
+            -0.027611716270692144,
+            -0.021829702375846916,
+            -0.013580710180976063,
+            -0.024672999399605433
+          ],
+          "seed_difference_sd": 0.00869990971354538,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.04182602919645669,
+              0.002285304193963397
+            ],
+            "ci90": [
+              -0.038162006115786844,
+              -0.001023320853469343
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.04298469189823482,
+              0.004062765027003812
+            ],
+            "ci90": [
+              -0.03895908860569778,
+              -2.4563781417961498e-05
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: KAN minus MLP, cov1",
+          "difference": -0.023333154644480658,
+          "seed_differences": [
+            -0.012710138090745393,
+            -0.03485826400205849,
+            0.005170898018697967,
+            -0.03157968093318464,
+            -0.005445364096406169,
+            -0.004966120593532852,
+            -0.022387211596191836,
+            -0.04575435286045115,
+            -0.04208980186980016,
+            -0.038711510421133855
+          ],
+          "seed_difference_sd": 0.017874234747255364,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.045346322008361,
+              -0.0012379560459505913
+            ],
+            "ci90": [
+              -0.04176699433310115,
+              -0.004482540849465209
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.04798661635550621,
+              0.0013952431247176082
+            ],
+            "ci90": [
+              -0.0440504458578299,
+              -0.002458949821373876
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: covariate effect, kan_spline",
+          "difference": 0.018771013809074522,
+          "seed_differences": [
+            0.04657024616176342,
+            0.027129256368470744,
+            0.04865876147182435,
+            0.012005746633501957,
+            0.01626854790290766,
+            0.005485033021700003,
+            -0.005721974440346611,
+            0.010057680761643373,
+            -0.005286688395231165,
+            0.032543528604511485
+          ],
+          "seed_difference_sd": 0.01946154985494021,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.006712404832755455,
+              0.031171486819021134
+            ],
+            "ci90": [
+              0.00851919564248453,
+              0.029002476497142743
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.0016920100440517367,
+              0.036529616441068405
+            ],
+            "ci90": [
+              0.004467624196448919,
+              0.03354715233296399
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: covariate effect, mlp_gelu",
+          "difference": 0.02231628999056521,
+          "seed_differences": [
+            0.0403979758126769,
+            0.02791405780941758,
+            0.02538543185521913,
+            0.01913007118963883,
+            0.01700081482116811,
+            0.0004942533664979987,
+            -0.010946479114846919,
+            0.03398233124624761,
+            0.02322240329359293,
+            0.046582039626039906
+          ],
+          "seed_difference_sd": 0.01736684427702971,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.01265691532797603,
+              0.03195458868595998
+            ],
+            "ci90": [
+              0.014258225982507039,
+              0.0304715507621853
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.006536733589622236,
+              0.0372913243119974
+            ],
+            "ci90": [
+              0.009139402540300313,
+              0.0350058211681274
+            ]
+          }
+        },
+        {
+          "contrast": "augmented: architecture x covariates interaction",
+          "difference": -0.003545276181490686,
+          "seed_differences": [
+            0.006172270349086517,
+            -0.0007848014409468362,
+            0.02327332961660522,
+            -0.007124324556136874,
+            -0.0007322669182604491,
+            0.0049907796552020045,
+            0.005224504674500308,
+            -0.023924650484604237,
+            -0.028509091688824095,
+            -0.014038511021528421
+          ],
+          "seed_difference_sd": 0.015421498058417102,
+          "coefficients": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            1.0,
+            1.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.013520808259339713,
+              0.0067376042574595766
+            ],
+            "ci90": [
+              -0.012082922130525748,
+              0.005100347351319732
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              -0.01886839573610727,
+              0.011930618689709422
+            ],
+            "ci90": [
+              -0.016399800295877794,
+              0.009384306256017156
+            ]
+          }
+        },
+        {
+          "contrast": "augmentation change in architecture x covariates interaction",
+          "difference": 0.028201764731109004,
+          "seed_differences": [
+            0.018262715498756354,
+            0.07415408697143833,
+            0.06788907710781367,
+            0.028356848786345368,
+            0.03421820053177815,
+            0.029078394373445393,
+            0.040694956685822015,
+            0.026933056008233924,
+            0.018254138433827838,
+            -0.055823827086371014
+          ],
+          "seed_difference_sd": 0.03518114745967543,
+          "coefficients": [
+            1.0,
+            -1.0,
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            1.0,
+            -1.0
+          ],
+          "conditional_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "test clusters conditional on fixed paired training seeds",
+            "status": "COMPUTED",
+            "ci95": [
+              0.0145919841300147,
+              0.042341903743904084
+            ],
+            "ci90": [
+              0.016753446224507706,
+              0.03987389609976161
+            ]
+          },
+          "crossed_seeds_clusters": {
+            "resamples_valid": 10000,
+            "resamples_requested": 10000,
+            "uncertainty": "paired training seeds and test clusters sampled independently",
+            "status": "COMPUTED",
+            "ci95": [
+              0.0007343467522969576,
+              0.05304128299537619
+            ],
+            "ci90": [
+              0.0054348775190047665,
+              0.04942762102340399
+            ]
+          }
+        }
+      ],
+      "minimum_seed_count_met": true,
+      "confirmatory_verdict": false,
+      "primary_diagnostic": null,
+      "multiple_comparisons": "eleven fixed exploratory contrasts; intervals are unadjusted",
+      "direction": "AUROC higher is better; negative architecture x covariates interaction means the covariate effect is less favorable for KAN than MLP",
+      "historical_engine_primary_diagnostic": "augmentation change in architecture x covariates interaction",
+      "analysis_role": "predeclared secondary or sensitivity analysis"
+    }
+  },
+  "historical_k16_reused": true,
+  "new_k128_runs": 80,
+  "original_verdict": "NOT_SUPPORTED; unchanged"
+}

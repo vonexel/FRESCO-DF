@@ -1,0 +1,627 @@
+{
+  "config": {
+    "experiment": {
+      "name": "main",
+      "synthetic": false,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "heads": [
+        "linear",
+        "mlp_relu",
+        "mlp_gelu",
+        "mlp_bspline",
+        "kan_spline",
+        "kan_fast",
+        "kan_rational",
+        "kan_wavelet"
+      ],
+      "budgets": [
+        "params",
+        "time"
+      ],
+      "ks": [
+        16
+      ],
+      "covariates": [
+        true
+      ],
+      "held_out_methods": [
+        null
+      ]
+    },
+    "stages": [
+      "train",
+      "report"
+    ],
+    "force": false,
+    "paths": {
+      "ffpp_root": "datasets/ff_c23/FaceForensics++_C23",
+      "celeb_root": "datasets/celebdfpp",
+      "data_dir": "data",
+      "output_dir": "outputs",
+      "feature_cache": "data/cache/clip_vitl14"
+    },
+    "preprocess": {
+      "frames": 32,
+      "workers": 4,
+      "detector": "yunet",
+      "limit": null
+    },
+    "features": {
+      "device": "cuda",
+      "batch_size": 32,
+      "encoder_name": "ViT-L-14",
+      "pretrained": "openai",
+      "recover_provenance": false,
+      "conditions": [
+        "clean",
+        "jpeg90",
+        "jpeg70",
+        "jpeg50",
+        "jpeg30",
+        "blur1",
+        "blur2",
+        "blur3",
+        "resize0.5",
+        "resize0.25"
+      ]
+    },
+    "model": {
+      "grid_size": 5,
+      "spline_degree": 3,
+      "grid_min": -3.0,
+      "grid_max": 3.0
+    },
+    "train": {
+      "device": "cuda",
+      "epochs": 30,
+      "patience": 6,
+      "batch_size": 1024,
+      "lrs": [
+        0.001,
+        0.0003,
+        0.003
+      ],
+      "weight_decay": 0.0001,
+      "wall_seconds": 60,
+      "target_hidden": 72,
+      "threads": 4
+    },
+    "eval": {
+      "bootstrap": 10000,
+      "margin": 0.01,
+      "interpretation_samples": 512,
+      "grid_points": 31,
+      "min_seeds_confirmatory": 10
+    }
+  },
+  "source": "8452e785332f681df547",
+  "runtime": {
+    "python": "3.11.17",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "torch": "2.6.0+cu124",
+    "cuda": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "source_sha256": "8452e785332f681df547",
+    "deterministic": true,
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "hydra-core": "1.3.2",
+      "matplotlib": "3.11.2",
+      "opencv-python-headless": "4.14.0.94",
+      "open-clip-torch": "2.32.0"
+    }
+  },
+  "dependency_files": {
+    "uv.lock": "aee0e25fbe0a9c8cbe4562868d7df0f64daafb775b4ffdcf3728187841f8d930",
+    "pyproject.toml": "0d4a3085c062bb5096d178cff072d85a39255453c9f869528c69a8c452eb5ae4"
+  },
+  "cache": {
+    "features.npy": "c7ef6368c63165213dfcbea4e057c00ee0e47360544778bfb012fdaf6244ed54",
+    "covariates.npy": "9fee8218e6eb5aaf99cc32e03430c7144bdb05c7737a57153b50aedc5882c5df",
+    "metadata.csv": "1d853f9f56526a1106b7048398167fd881349ad0487940c3c4f0ca7d5a2f0d34"
+  },
+  "environment": {
+    "python": "3.11.17",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "torch": "2.6.0+cu124",
+    "cuda": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "source_sha256": "8452e785332f681df547",
+    "deterministic": true,
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "hydra-core": "1.3.2",
+      "matplotlib": "3.11.2",
+      "opencv-python-headless": "4.14.0.94",
+      "open-clip-torch": "2.32.0"
+    }
+  },
+  "synthetic": false,
+  "cache_dir": "/home/ubuntu/FRESCO/data/cache/clip_vitl14",
+  "cache_provenance": {
+    "signature": "fd7bef9957a3a1fb57ec6ffcee5f8af85000bdd513d7f909ddaeeac9b8c7fb25",
+    "version": 5,
+    "faces_sha256": "4f8d683882fbef68b1dc19dd58944b7b7e57aeecdcba794a5d92f412283cd552",
+    "crop_stats_sha256": "c1df35e8681e6e3b5ac6de89aaffa527e731def31af5474c431d63fe49b323ab",
+    "crop_content_sha256": "a285a73f73565fe4624145e8157c04595e03741e89f0a1f1af8f9fdd39ecce2b",
+    "encoder": "ViT-L-14",
+    "pretrained": "openai",
+    "conditions": [
+      "clean",
+      "jpeg90",
+      "jpeg70",
+      "jpeg50",
+      "jpeg30",
+      "blur1",
+      "blur2",
+      "blur3",
+      "resize0.5",
+      "resize0.25"
+    ],
+    "activation_policy": "Match pretrained metadata quick_gelu; OpenAI CLIP uses QuickGELU, not default GELU.",
+    "checkpoint_policy": "OpenAI: original SHA-verified URL via load_openai_model(fp32); other tags: factory.",
+    "open_clip_torch_version": "2.32.0",
+    "torch_version": "2.6.0+cu124",
+    "feature": "visual.ln_post CLS BEFORE visual.proj, unnormalized fp32, 1024 dimensions",
+    "covariates": [
+      "jpeg_blockiness_proxy",
+      "log_laplacian_variance",
+      "face_size",
+      "high_frequency_ratio"
+    ],
+    "chunk_size": 256,
+    "condition_policy": "train/val: clean only; test: all configured paired conditions",
+    "rows": 2138662,
+    "frames": 337699,
+    "feature_dim": 1024,
+    "dtype": "float32",
+    "effective_batch_size": 4,
+    "device": "cuda",
+    "encoder_provenance": {
+      "loader": "open_clip.load_openai_model(precision=fp32)",
+      "url": "https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt",
+      "checkpoint_sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+      "checkpoint": "E:\\FRESCO\\data\\models\\open_clip\\ViT-L-14.pt",
+      "checkpoint_bytes": 932768134,
+      "activation": "QuickGELU",
+      "visual_parameter_count": 303966208,
+      "visual_trainable_parameter_count": 0,
+      "whole_clip_parameter_count": 427616513,
+      "whole_clip_trainable_parameter_count": 0,
+      "device_type": "cuda",
+      "device_name": "NVIDIA GeForce RTX 2060 SUPER",
+      "projection_consistency": {
+        "passed": true,
+        "rtol": 0.0002,
+        "atol": 0.0002,
+        "max_absolute_error": 0.0
+      }
+    },
+    "performance": {
+      "stage_wall_seconds": 98593.7489143,
+      "encoder_load_seconds": 48.67894520005211,
+      "encoder_call_seconds": 70269.28459829651,
+      "newly_encoded_rows": 2138662,
+      "encoder_rows_per_second": 30.435232295674265,
+      "scope": "encoder call includes OpenCLIP image transform, stack, device copy, forward and CPU synchronization; excludes video/face extraction, degradation/covariates, checkpoint load/download; stage wall includes cache validation, load/download, extraction, final arrays and hashing."
+    },
+    "features": "features.npy",
+    "covariates_file": "covariates.npy",
+    "metadata": "metadata.csv",
+    "features_sha256": "c7ef6368c63165213dfcbea4e057c00ee0e47360544778bfb012fdaf6244ed54",
+    "covariates_sha256": "9fee8218e6eb5aaf99cc32e03430c7144bdb05c7737a57153b50aedc5882c5df",
+    "metadata_sha256": "1d853f9f56526a1106b7048398167fd881349ad0487940c3c4f0ca7d5a2f0d34",
+    "face_extraction_coverage": {
+      "videos": 10558,
+      "crops": 337699,
+      "status_counts": {
+        "complete": 10514,
+        "partial": 44
+      },
+      "missing_detections": 157,
+      "decode_failures": 0,
+      "empty_videos": [],
+      "by_method": {
+        "AniTalker": {
+          "videos": 300,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "BlendFace": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "Celeb-DF-v2": {
+          "videos": 340,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "DaGAN": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 14
+        },
+        "Deepfakes": {
+          "videos": 1000,
+          "empty": 0,
+          "missing_detection": 4
+        },
+        "EDTalk": {
+          "videos": 300,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "EchoMimic": {
+          "videos": 300,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "FLOAT": {
+          "videos": 300,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "FSRT": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "Face2Face": {
+          "videos": 1000,
+          "empty": 0,
+          "missing_detection": 1
+        },
+        "FaceShifter": {
+          "videos": 140,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "FaceSwap": {
+          "videos": 1000,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "GHOST": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "HifiFace": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "HyperReenact": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "IP_LAP": {
+          "videos": 300,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "InSwapper": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "LIA": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 5
+        },
+        "LivePortrait": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 101
+        },
+        "MCNET": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 7
+        },
+        "MobileFaceSwap": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "NeuralTextures": {
+          "videos": 1000,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "Real3DPortrait": {
+          "videos": 300,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "SadTalker": {
+          "videos": 300,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "SimSwap": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "TPSMM": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 0
+        },
+        "UniFace": {
+          "videos": 200,
+          "empty": 0,
+          "missing_detection": 2
+        },
+        "real": {
+          "videos": 1178,
+          "empty": 0,
+          "missing_detection": 5
+        }
+      },
+      "limited": false
+    },
+    "faces_audit_sha256": "8e0d5da633479428e1cea97d9a02f4c26689c742eb9d67b05ab09674daceda84",
+    "standardization": "None here: fit feature/covariate scaler on FF++ train rows only in each experiment.",
+    "paired_conditions": "Every TEST frame has every configured condition; train/val have clean only."
+  },
+  "video_counts": [
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "AniTalker",
+      "videos": 300
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "BlendFace",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "Celeb-DF-v2",
+      "videos": 340
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "DaGAN",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "EDTalk",
+      "videos": 300
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "EchoMimic",
+      "videos": 300
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "FLOAT",
+      "videos": 300
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "FSRT",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "GHOST",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "HifiFace",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "HyperReenact",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "IP_LAP",
+      "videos": 300
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "InSwapper",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "LIA",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "LivePortrait",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "MCNET",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "MobileFaceSwap",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "Real3DPortrait",
+      "videos": 300
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "SadTalker",
+      "videos": 300
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "SimSwap",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "TPSMM",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "UniFace",
+      "videos": 200
+    },
+    {
+      "dataset": "celebdfpp",
+      "split": "test",
+      "method": "real",
+      "videos": 178
+    },
+    {
+      "dataset": "ffpp",
+      "split": "test",
+      "method": "Deepfakes",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "test",
+      "method": "Face2Face",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "test",
+      "method": "FaceShifter",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "test",
+      "method": "FaceSwap",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "test",
+      "method": "NeuralTextures",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "test",
+      "method": "real",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "train",
+      "method": "Deepfakes",
+      "videos": 720
+    },
+    {
+      "dataset": "ffpp",
+      "split": "train",
+      "method": "Face2Face",
+      "videos": 720
+    },
+    {
+      "dataset": "ffpp",
+      "split": "train",
+      "method": "FaceSwap",
+      "videos": 720
+    },
+    {
+      "dataset": "ffpp",
+      "split": "train",
+      "method": "NeuralTextures",
+      "videos": 720
+    },
+    {
+      "dataset": "ffpp",
+      "split": "train",
+      "method": "real",
+      "videos": 720
+    },
+    {
+      "dataset": "ffpp",
+      "split": "val",
+      "method": "Deepfakes",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "val",
+      "method": "Face2Face",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "val",
+      "method": "FaceSwap",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "val",
+      "method": "NeuralTextures",
+      "videos": 140
+    },
+    {
+      "dataset": "ffpp",
+      "split": "val",
+      "method": "real",
+      "videos": 140
+    }
+  ]
+}

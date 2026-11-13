@@ -1,0 +1,114 @@
+{
+  "status": "VERIFIED_WITHIN_HISTORICAL_FACTORIAL_CACHE",
+  "manifest_sha256": "cf6e3a20e0b5d9ca91dd84e24d5b63939936dd4829199866a36eb2a13fa8989c",
+  "source_pairs": 412776,
+  "source_clean_frames": 137592,
+  "held_out_frame_conditions_identical": 2001070,
+  "original_cache_features": {
+    "identity": "DIFFERENT",
+    "rtol": 0.0002,
+    "atol": 0.0002,
+    "values_outside_tolerance": 127389085,
+    "rows_outside_tolerance": 137592,
+    "total_values": 140894208,
+    "max_abs_difference": 0.2459864616394043,
+    "mean_abs_difference": 0.0033465472110878465
+  },
+  "source_quality_max_abs_difference": 4.76837158203125e-07,
+  "encoder_devices": {
+    "original": "NVIDIA GeForce RTX 2060 SUPER",
+    "factorial": "NVIDIA GeForce RTX 4090"
+  },
+  "sampled_test_logit_replays": [
+    {
+      "recipe": "clean",
+      "head": "kan_spline",
+      "covariates": false,
+      "seed": 0,
+      "test_frames": 4096,
+      "rtol": 0.0001,
+      "atol": 2e-05,
+      "max_abs_logit_difference": 5.9066772362115216e-08,
+      "frame_scores_sha256": "b5b36739d2cb82696ce1d2c1aa39fe9c9da7a492cb76df3a88e1e4e15c100abc"
+    },
+    {
+      "recipe": "clean",
+      "head": "mlp_gelu",
+      "covariates": false,
+      "seed": 0,
+      "test_frames": 4096,
+      "rtol": 0.0001,
+      "atol": 2e-05,
+      "max_abs_logit_difference": 8.92639158145414e-08,
+      "frame_scores_sha256": "9168048487b4e5610e2fbc99a87857f54f4d8f431edf8c7cb07b16799c47635c"
+    },
+    {
+      "recipe": "clean",
+      "head": "kan_spline",
+      "covariates": true,
+      "seed": 0,
+      "test_frames": 4096,
+      "rtol": 0.0001,
+      "atol": 2e-05,
+      "max_abs_logit_difference": 1.1883544903668053e-07,
+      "frame_scores_sha256": "3ffc1ee74fcf77b1e941e5e2fc6c4b8e83b224beb03ab442ba0aeff6acb4c908"
+    },
+    {
+      "recipe": "clean",
+      "head": "mlp_gelu",
+      "covariates": true,
+      "seed": 0,
+      "test_frames": 4096,
+      "rtol": 0.0001,
+      "atol": 2e-05,
+      "max_abs_logit_difference": 1.1915588382649389e-07,
+      "frame_scores_sha256": "e9fa5f64f47d68400fcb91b922cf1edd1ab27079dbd8ba220a21ccb72004d8bd"
+    },
+    {
+      "recipe": "augmented",
+      "head": "kan_spline",
+      "covariates": false,
+      "seed": 0,
+      "test_frames": 4096,
+      "rtol": 0.0001,
+      "atol": 2e-05,
+      "max_abs_logit_difference": 5.865478525102219e-08,
+      "frame_scores_sha256": "0593d370e6d4d96c85d567f76cb6de32fcad69a35236405bc7b08a6c019a8fd6"
+    },
+    {
+      "recipe": "augmented",
+      "head": "mlp_gelu",
+      "covariates": false,
+      "seed": 0,
+      "test_frames": 4096,
+      "rtol": 0.0001,
+      "atol": 2e-05,
+      "max_abs_logit_difference": 5.940246583513442e-08,
+      "frame_scores_sha256": "458f0d4d3abbd00d0e53a947df73aedd44e56dbc462acd6632d44dd14cf5aac5"
+    },
+    {
+      "recipe": "augmented",
+      "head": "kan_spline",
+      "covariates": true,
+      "seed": 0,
+      "test_frames": 4096,
+      "rtol": 0.0001,
+      "atol": 2e-05,
+      "max_abs_logit_difference": 5.872344965851539e-08,
+      "frame_scores_sha256": "788f2f4ef7cf38dcefc891d80051fb552a0b2541fa7fd058df8d1e07861ebb1c"
+    },
+    {
+      "recipe": "augmented",
+      "head": "mlp_gelu",
+      "covariates": true,
+      "seed": 0,
+      "test_frames": 4096,
+      "rtol": 0.0001,
+      "atol": 2e-05,
+      "max_abs_logit_difference": 5.8868408148171625e-08,
+      "frame_scores_sha256": "04e034097f8cf393acc3623d3274d5de71a6fd5736a80db9c6f604c0aa7370d7"
+    }
+  ],
+  "limitation": "The factorial uses the historical combined cache for every k16/k128 cell. The original baseline uses its own verified cache and remains separate; numerical cache differences do not establish their cause.",
+  "saved_factorial_runs_verified": 80
+}

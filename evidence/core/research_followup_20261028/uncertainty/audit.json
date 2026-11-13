@@ -1,0 +1,193 @@
+{
+  "analysis_status": "EXPLORATORY_RETROSPECTIVE",
+  "status": "COMPUTED",
+  "contrast": {
+    "head_a": "kan_spline",
+    "head_b": "mlp_gelu",
+    "budget": "params",
+    "k": 16,
+    "covariates": true,
+    "held_out": null,
+    "dataset": "celebdfpp"
+  },
+  "original_experiment": "E:\\from_server\\FRESCO\\outputs\\main\\074d119aafb7b25e8e28",
+  "original_artifacts_modified": false,
+  "notes": [
+    "The target benchmark has already been examined; this is not a new preregistered test.",
+    "Intervals are conditional on the supplied training dataset and training recipe.",
+    "G_block tests covariate-block sufficiency; it does not use or validate the saved PD curves.",
+    "Head timing excludes CLIP, crop extraction and feature-cache preparation.",
+    "Marginal train quantile box support is not spline-grid or joint-manifold support."
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "synthetic": false,
+  "training_source_fingerprint": "8452e785332f681df547",
+  "auroc": {
+    "status": "COMPUTED",
+    "difference": -0.09721636718414958,
+    "seed_differences": [
+      -0.16927695342653737,
+      0.1656960288189382,
+      0.016692040483746506,
+      -0.1863185093061155,
+      -0.1654612316665237,
+      -0.241140964062098,
+      0.053273758469851606,
+      -0.14368084741401493,
+      -0.3566901106441375,
+      0.05474311690539502
+    ],
+    "seed_count": 10,
+    "seed_difference_sd": 0.16187311850020272,
+    "videos": 5418,
+    "clusters": 129,
+    "estimand": "mean paired single-seed difference; no score ensemble",
+    "scope": "conditional on the supplied training data and training protocol",
+    "conditional_clusters": {
+      "resamples_valid": 10000,
+      "resamples_requested": 10000,
+      "uncertainty": "test clusters conditional on the fixed training seeds",
+      "status": "COMPUTED",
+      "ci95": [
+        -0.13230058541110995,
+        -0.06705782490751257
+      ],
+      "ci90": [
+        -0.12613954390764218,
+        -0.07171636659946441
+      ]
+    },
+    "crossed_seeds_clusters": {
+      "resamples_valid": 10000,
+      "resamples_requested": 10000,
+      "uncertainty": "paired training seeds and test clusters sampled independently",
+      "status": "COMPUTED",
+      "ci95": [
+        -0.19754116483293774,
+        0.004522684422942911
+      ],
+      "ci90": [
+        -0.18258909868229117,
+        -0.011206935008116215
+      ]
+    },
+    "confirmatory_seed_minimum_met": true,
+    "head_a_mean": 0.4794885388969895,
+    "head_b_mean": 0.576704906081139,
+    "direction": "higher AUROC is better; difference is head_a minus head_b"
+  },
+  "G_block": {
+    "status": "COMPUTED",
+    "difference": 0.11085922045859471,
+    "seed_differences": [
+      -0.039525006073318436,
+      0.28620021171701804,
+      0.023249302266615923,
+      0.21362595986956834,
+      0.18716252001386868,
+      -0.007817930528795536,
+      -0.12535212041996235,
+      0.16664733587410197,
+      0.21813140167950473,
+      0.18627053018734563
+    ],
+    "seed_count": 10,
+    "seed_difference_sd": 0.13646535452451714,
+    "videos": 5418,
+    "clusters": 129,
+    "estimand": "mean paired single-seed difference; no score ensemble",
+    "scope": "conditional on the supplied training data and training protocol",
+    "conditional_clusters": {
+      "resamples_valid": 10000,
+      "resamples_requested": 10000,
+      "uncertainty": "test clusters conditional on the fixed training seeds",
+      "status": "COMPUTED",
+      "ci95": [
+        0.08979351093082402,
+        0.13107656364837542
+      ],
+      "ci90": [
+        0.09306216533582906,
+        0.12780932697967817
+      ]
+    },
+    "crossed_seeds_clusters": {
+      "resamples_valid": 10000,
+      "resamples_requested": 10000,
+      "uncertainty": "paired training seeds and test clusters sampled independently",
+      "status": "COMPUTED",
+      "ci95": [
+        0.023568284540374684,
+        0.19025332705894954
+      ],
+      "ci90": [
+        0.037902596515914135,
+        0.17911127002175609
+      ]
+    },
+    "confirmatory_seed_minimum_met": true,
+    "head_a_mean": 0.7910719037532956,
+    "head_b_mean": 0.6802126832947009,
+    "head_a_rmse": [
+      0.5161728585173152,
+      0.5485668439784361,
+      0.5506422071516556,
+      0.4987254381269907,
+      0.748529223949251,
+      0.6097346128335643,
+      0.5820435769969216,
+      0.5420363485102196,
+      0.48054421904756117,
+      0.5354514486681382
+    ],
+    "head_b_rmse": [
+      0.7185464149316692,
+      0.7115194406928921,
+      0.6641911415539115,
+      0.8453507980702469,
+      0.7509312687761549,
+      0.9129233792271716,
+      0.7339843332551614,
+      0.6844042961196685,
+      1.2174668000120152,
+      0.8085772594339361
+    ],
+    "head_a_total_rms": [
+      0.6853467311965384,
+      0.6641736287408648,
+      0.7707909737532141,
+      0.5728793041519153,
+      0.8234498900886531,
+      0.8134604541873947,
+      0.9259419773650102,
+      0.6422686579792465,
+      0.5654289979960625,
+      0.6993016018676024
+    ],
+    "head_b_total_rms": [
+      0.9064763758751087,
+      1.3182664888782614,
+      0.9610128289762649,
+      1.2868135536457295,
+      1.0402819477309264,
+      1.2053791101662854,
+      0.9735207923200201,
+      1.0104997682094126,
+      1.927152017529679,
+      1.39548445571112
+    ],
+    "min_total_rms": 1e-06,
+    "direction": "lower G_block is better; difference is head_a minus head_b"
+  }
+}

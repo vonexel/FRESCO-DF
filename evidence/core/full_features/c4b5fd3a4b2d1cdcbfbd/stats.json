@@ -1,0 +1,67 @@
+{
+  "primary_paired_response": {
+    "status": "INCONCLUSIVE",
+    "contrast": "kan_spline minus mlp_gelu, k16, quality covariates, params",
+    "endpoint": "mean seed-specific sqrt(mean_video(error_sse/nframes) / mean_video(total_sse/nframes))",
+    "dataset": "celebdfpp",
+    "conditions": "all predeclared paired image degradations",
+    "reason": "Primary configuration absent or incomplete"
+  },
+  "H2a": [],
+  "comparator_selection": [
+    {
+      "budget": "params",
+      "k": 1024,
+      "covariates": false,
+      "held_out": "None",
+      "comparator": "mlp_gelu",
+      "criterion": "mean FF++ seen validation AUC"
+    },
+    {
+      "budget": "params",
+      "k": 1024,
+      "covariates": true,
+      "held_out": "None",
+      "comparator": "mlp_gelu",
+      "criterion": "mean FF++ seen validation AUC"
+    },
+    {
+      "budget": "time",
+      "k": 1024,
+      "covariates": false,
+      "held_out": "None",
+      "comparator": "mlp_gelu",
+      "criterion": "mean FF++ seen validation AUC"
+    },
+    {
+      "budget": "time",
+      "k": 1024,
+      "covariates": true,
+      "held_out": "None",
+      "comparator": "mlp_gelu",
+      "criterion": "mean FF++ seen validation AUC"
+    }
+  ],
+  "H2b": {
+    "status": "EXPLORATORY",
+    "reason": "Report paired degradation scores; no unadjusted multiple-testing PASS"
+  },
+  "H2c": {
+    "status": "INCONCLUSIVE",
+    "reason": "PD surrogate is not edge replacement; inspect stability and actual surrogate fidelity separately"
+  },
+  "H2c_intervention": {
+    "status": "MEASURED_NO_AUTOMATIC_VERDICT",
+    "reason": "Agreement gap tests partial explanation coverage, not causality"
+  },
+  "H2d": {
+    "status": "EXPLORATORY",
+    "reason": "Adapted first-layer plasticity; dataset/method shift is confounded"
+  },
+  "H2e": {
+    "status": "EXPLORATORY",
+    "reason": "Dimension association requires k_ablation; no causal dimensionality claim"
+  },
+  "inference": "Mean seed-specific AUC differences; source/target identity cluster bootstrap conditional on fixed seeds. Secondary co-source dependence remains.",
+  "TOST": "alpha=.05, 90% percentile CI strictly inside +/-margin; superiority uses 95% CI"
+}

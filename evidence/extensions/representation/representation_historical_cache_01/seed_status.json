@@ -1,0 +1,482 @@
+{
+  "k16/clean/kan_spline/cov0/seed0": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed1": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed2": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed3": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed4": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed5": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed6": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed7": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed8": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov0/seed9": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed0": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed1": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed2": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed3": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed4": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed5": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed6": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed7": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed8": {
+    "status": "REUSED"
+  },
+  "k16/clean/kan_spline/cov1/seed9": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed0": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed1": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed2": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed3": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed4": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed5": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed6": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed7": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed8": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov0/seed9": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed0": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed1": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed2": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed3": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed4": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed5": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed6": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed7": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed8": {
+    "status": "REUSED"
+  },
+  "k16/clean/mlp_gelu/cov1/seed9": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed0": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed1": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed2": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed3": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed4": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed5": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed6": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed7": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed8": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov0/seed9": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed0": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed1": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed2": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed3": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed4": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed5": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed6": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed7": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed8": {
+    "status": "REUSED"
+  },
+  "k16/augmented/kan_spline/cov1/seed9": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed0": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed1": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed2": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed3": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed4": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed5": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed6": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed7": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed8": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov0/seed9": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed0": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed1": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed2": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed3": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed4": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed5": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed6": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed7": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed8": {
+    "status": "REUSED"
+  },
+  "k16/augmented/mlp_gelu/cov1/seed9": {
+    "status": "REUSED"
+  },
+  "k128/clean/kan_spline/cov0/seed0": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed1": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed2": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed3": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed4": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed5": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed6": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed7": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed8": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov0/seed9": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed0": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed1": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed2": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed3": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed4": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed5": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed6": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed7": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed8": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/kan_spline/cov1/seed9": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed0": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed1": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed2": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed3": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed4": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed5": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed6": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed7": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed8": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov0/seed9": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed0": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed1": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed2": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed3": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed4": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed5": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed6": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed7": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed8": {
+    "status": "COMPLETED"
+  },
+  "k128/clean/mlp_gelu/cov1/seed9": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed0": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed1": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed2": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed3": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed4": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed5": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed6": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed7": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed8": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov0/seed9": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed0": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed1": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed2": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed3": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed4": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed5": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed6": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed7": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed8": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/kan_spline/cov1/seed9": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed0": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed1": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed2": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed3": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed4": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed5": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed6": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed7": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed8": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov0/seed9": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed0": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed1": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed2": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed3": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed4": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed5": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed6": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed7": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed8": {
+    "status": "COMPLETED"
+  },
+  "k128/augmented/mlp_gelu/cov1/seed9": {
+    "status": "COMPLETED"
+  }
+}
