@@ -9,7 +9,7 @@ paths:
   celeb_root: ${oc.env:CELEBDFPP_ROOT,datasets/celebdfpp}
   data_dir: data
   output_dir: outputs
-  feature_cache: ${paths.data_dir}/cache/clip_vitl14
+  feature_cache: ${paths.data_dir}/cache/${oc.select:experiment.cache_name,clip_vitl14}
 preprocess:
   frames: 32
   workers: 4
@@ -21,6 +21,7 @@ features:
   encoder_name: ViT-L-14
   pretrained: openai
   recover_provenance: false
+  source_conditions: ${oc.select:experiment.source_conditions,null}
   conditions: [clean, jpeg90, jpeg70, jpeg50, jpeg30, blur1, blur2, blur3, resize0.5, resize0.25]
 model:
   grid_size: 5
@@ -28,6 +29,15 @@ model:
   grid_min: -3.0
   grid_max: 3.0
 train:
+  conditions: ${oc.select:experiment.training_conditions,null}
+  target_params: ${oc.select:experiment.target_params,null}
+  max_steps: ${oc.select:experiment.training_max_steps,null}
+  validation_every_steps: ${oc.select:experiment.validation_every_steps,null}
+  covariate_indices: ${oc.select:experiment.covariate_indices,null}
+  covariate_scaling: ${oc.select:experiment.covariate_scaling,standard}
+  scaling_conditions: ${oc.select:experiment.scaling_conditions,null}
+  range_quantile: 0.995
+  range_limit: 2.5
   device: cuda
   epochs: 30
   patience: 6
@@ -43,6 +53,9 @@ eval:
   interpretation_samples: 512
   grid_points: 31
   min_seeds_confirmatory: 10
+  audit_batch_size: 4096
+  spline_support_samples: 512
+  response_zero_epsilon: 1.0e-8
 hydra:
   job:
     chdir: false
