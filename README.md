@@ -25,6 +25,10 @@ Values below are means ± standard deviations across ten seeds unless noted. The
 
 For the external AUROC difference KAN − MLP, the crossed seed × cluster 95% interval was [−0.1975, 0.0045]; this is not evidence of a universal performance ordering. For the normalized response-gap difference, the corresponding interval was [0.0236, 0.1903]. The denominators differ by model: absolute response RMSE was 0.5612 for KAN and 0.8048 for MLP, so the gap does not imply that MLP is better under every fidelity metric. A zero-change predictor has normalized gap 1 when the denominator is nonzero.
 
+Spline-KAN response curves had a median pairwise correlation of 0.9893 across the 180 evaluated comparisons between seeds, yet the main normalized response gap was 0.7911, above the prespecified 0.30 threshold. Repeatability alone therefore did not establish sufficient agreement with the model's actual response to image transformations. At batch size 256, mean **head-only** inference latency in the main experiment was 2.2873 ms for spline-KAN versus 0.2341 ms for GELU-MLP, approximately 9.8 times higher on the tested hardware. This excludes face extraction, CLIP, PCA and other pipeline costs. Taken together with the selective function-benchmark advantages, these results do not establish a joint accuracy-and-explanation advantage sufficient to justify the measured extra head cost in this setup.
+
+The follow-up GPU study used source-only expanded PD grids and covered 1,548,349 of 1,559,061 external frame–intervention pairs (99.3129%). Coverage is a property of this evaluation population, not evidence that training improved. In the clean follow-up, the MLP global PD gap was 0.6895 ± 0.1393, and its crossed interval for the difference from the zero-change baseline was [−0.3915, −0.2219]; global PD explanations were therefore useful relative to that baseline in this specific setting. The analogous clean KAN interval included zero. The augmentation and covariate contrasts are exploratory; a local KAN advantage does not imply universal superiority. These follow-up values must not be directly subtracted from the main gap as an isolated training effect because the models and evaluation support differ.
+
 The factorial representation analysis used a separately audited historical cache. That cache is numerically different from the original main-series cache, despite matching recorded provenance in other respects. Its 16- and 128-component cells share the historical cache and must not be merged with the original main baseline. Results of PD/ALE, surrogates and symbolic simplification are exploratory. None of the ten tested KAN copies became fully symbolic.
 
 ![Known-function regression MSE by head and budget](assets/figures/fig2_functions.png)
@@ -32,6 +36,8 @@ The factorial representation analysis used a separately audited historical cache
 ![Historical factorial comparison on Celeb-DF++](assets/figures/fig3_factorial.png)
 
 ![Response explanation gaps](assets/figures/fig4_response.png)
+
+![Transfer under real-world transformations of saved crops](assets/figures/fig5_degradation_reference)
 
 ## Requirements and inputs
 
