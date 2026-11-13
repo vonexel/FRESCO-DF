@@ -1,5 +1,5 @@
+"""Hydra entry point: preprocess, train, evaluate, aggregate, and resume."""
 from __future__ import annotations
-
 import itertools
 import json
 import traceback
@@ -12,14 +12,8 @@ from omegaconf import DictConfig, OmegaConf
 from tqdm.auto import tqdm
 from .provenance import read_cache_provenance
 from .training import Coordinates, build_model, fit_head
-from .utils import (atomic_json, complete, digest_file, environment, fingerprint, mark_complete, seed_everything, source_fingerprint)
-from .evaluation import evaluate_run
-from .controlled import run_controlled
-from .data import index_datasets
-from .preprocess import extract_faces
-from .features import extract_features
-from .synthetic import make_cache
-from .reporting import build_report
+from .utils import (atomic_json, complete, digest_file, environment, fingerprint,
+                    mark_complete, seed_everything, source_fingerprint)
 
 
 def load_cache(path: Path):
@@ -56,6 +50,7 @@ def load_cache(path: Path):
 
 
 def train_experiment(cfg, cache: Path) -> Path:
+    from .evaluation import evaluate_run
     cache_provenance = read_cache_provenance(cache, synthetic=bool(cfg.experiment.synthetic))
     features, covariates, meta = load_cache(cache)
     if cfg.experiment.get("conditions"):
@@ -72,32 +67,32 @@ def train_experiment(cfg, cache: Path) -> Path:
     out.mkdir(parents=True, exist_ok=True)
     OmegaConf.save(cfg, out / "config.yaml", resolve=True)
     atomic_json(out / "manifest.json", {**identity, "environment": environment(),
-                                        "synthetic": bool(cfg.experiment.synthetic), "cache_dir": str(cache.resolve()),
-                                        "cache_provenance": cache_provenance,
-                                        "video_counts": meta.drop_duplicates("video_id").groupby(["dataset", "split", "method"]).size().reset_index(name="videos").to_dict("records")})
+                "synthetic": bool(cfg.experiment.synthetic), "cache_dir": str(cache.resolve()),
+                "cache_provenance": cache_provenance,
+                "video_counts": meta.drop_duplicates("video_id").groupby(["dataset", "split", "method"]).size().reset_index(name="videos").to_dict("records")})
     atomic_json(out.parent / "LATEST.json", {"path": str(out.resolve()), "key": key})
     combinations = list(itertools.product(cfg.experiment.ks, cfg.experiment.covariates,
                                           cfg.experiment.held_out_methods))
     for k, cov, held_out in tqdm(combinations, desc="Feature/fold configurations"):
         coords = Coordinates().fit(features, covariates, meta, int(k), bool(cov), held_out,
-                                   covariate_indices=cfg.train.get("covariate_indices"),
-                                   covariate_scaling=str(cfg.train.get("covariate_scaling", "standard")),
-                                   scaling_conditions=cfg.train.get("scaling_conditions"),
-                                   range_quantile=float(cfg.train.get("range_quantile", .995)),
-                                   range_limit=float(cfg.train.get("range_limit", 2.5)))
+            covariate_indices=cfg.train.get("covariate_indices"),
+            covariate_scaling=str(cfg.train.get("covariate_scaling", "standard")),
+            scaling_conditions=cfg.train.get("scaling_conditions"),
+            range_quantile=float(cfg.train.get("range_quantile", .995)),
+            range_limit=float(cfg.train.get("range_limit", 2.5)))
         x = coords.transform(features, covariates)
         common = out / f"k{k}_cov{int(cov)}" / f"heldout_{held_out or 'none'}"
         common.mkdir(parents=True, exist_ok=True)
         coords.save(common / "coordinates.npz")
         atomic_json(common / "fit_provenance.json", {"dataset": "ffpp", "split": "train", "condition": "clean",
-                                                     "held_out_method": held_out, "video_ids": coords.train_videos,
-                                                     "head_training_conditions": list(cfg.train.get("conditions") or ["clean"]),
-                                                     "coordinate_fit_conditions": ["clean"],
-                                                     "covariate_indices": coords.covariate_indices.tolist(),
-                                                     "covariate_scaling": coords.covariate_scaling,
-                                                     "covariate_scaling_fit_conditions": coords.scaling_conditions.tolist(),
-                                                     "coordinates": ("native CLS coordinates, train-standardized; no compression" if int(k)==features.shape[1]
-                                                                     else "frozen train-only PCA on L2-normalized CLS; shared across seeds and heads")})
+                     "held_out_method": held_out, "video_ids": coords.train_videos,
+                     "head_training_conditions": list(cfg.train.get("conditions") or ["clean"]),
+                     "coordinate_fit_conditions": ["clean"],
+                     "covariate_indices": coords.covariate_indices.tolist(),
+                     "covariate_scaling": coords.covariate_scaling,
+                     "covariate_scaling_fit_conditions": coords.scaling_conditions.tolist(),
+                     "coordinates": ("native CLS coordinates, train-standardized; no compression" if int(k)==features.shape[1]
+                                     else "frozen train-only PCA on L2-normalized CLS; shared across seeds and heads")})
         for head, budget in tqdm(list(itertools.product(cfg.experiment.heads, cfg.experiment.budgets)),
                                  desc="Head/budget", leave=False):
             hpo_dir = common / head / budget
@@ -114,7 +109,7 @@ def train_experiment(cfg, cache: Path) -> Path:
                         model, matching = build_model(head, x.shape[1], budget, int(cfg.train.target_hidden),
                                                       cfg.get("model"), target_params=cfg.train.get("target_params"))
                         model, _, log = fit_head(model, x, meta, cfg.train, float(lr), int(cfg.experiment.seeds[0]),
-                                                 budget, held_out, progress=False)
+                                                budget, held_out, progress=False)
                         trials.append({"lr": float(lr), "validation_auc": log["validation_auc"],
                                        "wall_s": log["wall_s"], "matching": matching})
                     best = max(trials, key=lambda t: t["validation_auc"])
@@ -133,7 +128,7 @@ def train_experiment(cfg, cache: Path) -> Path:
                     model, matching = build_model(head, x.shape[1], budget, int(cfg.train.target_hidden),
                                                   cfg.get("model"), target_params=cfg.train.get("target_params"))
                     model, initial_state, training = fit_head(model, x, meta, cfg.train, hpo["best_lr"],
-                                                              int(seed), budget, held_out)
+                                                             int(seed), budget, held_out)
                     torch.save({"state": model.state_dict(), "initial_state": initial_state,
                                 "head": head, "in_features": x.shape[1], "matching": matching,
                                 "coordinates_sha256": digest_file(common / "coordinates.npz")},
@@ -155,9 +150,15 @@ def train_experiment(cfg, cache: Path) -> Path:
 
 def execute(cfg: DictConfig):
     if cfg.experiment.name == "functions":
+        from .controlled import run_controlled
         return run_controlled(cfg)
+    from .data import index_datasets
+    from .preprocess import extract_faces
+    from .features import extract_features
     data = Path(cfg.paths.data_dir)
     if cfg.experiment.synthetic:
+        from .synthetic import make_cache
+        # Integration fixture runs no downloads and never reads face videos.
         cfg.train.device, cfg.train.epochs, cfg.train.patience = "cpu", 2, 2
         cfg.train.wall_seconds, cfg.train.target_hidden = .12, 16
         cfg.train.lrs = [.001]
@@ -173,14 +174,14 @@ def execute(cfg: DictConfig):
                                    data / "splits", data / "index")
         if "faces" in cfg.stages:
             faces = extract_faces(index, data / "faces", frames=int(cfg.preprocess.frames),
-                                  workers=int(cfg.preprocess.workers), detector=str(cfg.preprocess.detector),
-                                  limit=cfg.preprocess.limit)
+                    workers=int(cfg.preprocess.workers), detector=str(cfg.preprocess.detector),
+                    limit=cfg.preprocess.limit)
         if "features" in cfg.stages:
             result = extract_features(faces, cache, device=str(cfg.features.device),
-                                      batch_size=int(cfg.features.batch_size), conditions=list(cfg.features.conditions),
-                                      encoder_name=str(cfg.features.encoder_name), pretrained=str(cfg.features.pretrained),
-                                      recover_provenance=bool(cfg.features.get("recover_provenance", False)),
-                                      source_conditions=cfg.features.get("source_conditions"))
+                      batch_size=int(cfg.features.batch_size), conditions=list(cfg.features.conditions),
+                      encoder_name=str(cfg.features.encoder_name), pretrained=str(cfg.features.pretrained),
+                      recover_provenance=bool(cfg.features.get("recover_provenance", False)),
+                      source_conditions=cfg.features.get("source_conditions"))
             cache = Path(result)
     if "train" in cfg.stages:
         out = train_experiment(cfg, cache)
@@ -190,6 +191,7 @@ def execute(cfg: DictConfig):
     if "report" in cfg.stages:
         if out is None:
             raise FileNotFoundError("No completed training experiment found; run stages=[train,report]")
+        from .reporting import build_report
         build_report(out, cfg)
         print(f"REPORT: {(out/'REPORT.md').resolve()}")
     return out
@@ -207,3 +209,4 @@ def main(cfg: DictConfig):
 
 if __name__ == "__main__":
     main()
+

@@ -1,3 +1,9 @@
+"""Held-out evaluation: frozen validation choices, paired responses and novelty.
+
+All score directions and populations are explicit. Real/fake classification,
+unseen-manipulation ranking, and cross-dataset shift are different endpoints.
+No test outcome selects a temperature, threshold, curve, or symbolic surrogate.
+"""
 from __future__ import annotations
 
 import copy
@@ -25,9 +31,10 @@ VIDEO_KEYS = ["dataset", "condition", "video_id", "label", "split", "method", "s
 
 
 def fit_video_temperature(meta: pd.DataFrame, logits: np.ndarray) -> tuple[float, dict]:
-    """Minimize equal-video BCE of mean(sigmoid(frame_logit / temperature))
-    Optimizing sigmoid(mean(logit)/T) is a different objective and is not used
-    Caller supplies only disjoint source validation rows, with seen methods
+    """Minimize equal-video BCE of mean(sigmoid(frame_logit / temperature)).
+
+    Optimizing sigmoid(mean(logit)/T) is a different objective and is not used.
+    Caller supplies only disjoint source validation rows, with seen methods.
     """
     meta = meta.reset_index(drop=True)
     logits = np.asarray(logits, dtype=float)
@@ -64,7 +71,7 @@ def _metric_records(table, level, thresholds):
             for calibration, column in [("raw", "probability"), ("temperature", "calibrated")]:
                 result = metrics(population.label, population[column], thresholds[level][calibration])
                 if level == "frame":
-                    # frames from a video are dependent
+                    # Frames from a video are dependent; do not report an iid frame CI.
                     result.pop("auc_ci_delong_video", None)
                 records.append({"dataset": str(dataset), "condition": str(condition), "level": level,
                                 "method": str(method), "calibration": calibration, **result})
@@ -166,7 +173,7 @@ def _interventions(model, X, meta, coords, device, out):
             grouped[f"{prefix}_residual_rmse"] = np.sqrt(grouped[source])
             # Undefined relative errors for zero response are missing, not forced to zero.
             grouped[f"{prefix}_relative_l2"] = np.divide(np.sqrt(grouped[source]), grouped.total_rms,
-                                                         out=np.full(len(grouped), np.nan), where=grouped.total_rms.to_numpy() > 1e-8)
+                out=np.full(len(grouped), np.nan), where=grouped.total_rms.to_numpy() > 1e-8)
         grouped["paired_response_agreement_gap"] = grouped.covariate_relative_l2
         grouped[columns].to_csv(out / "intervention.csv", index=False)
         result = {"status": "computed", "paired_frames": len(raw), "paired_video_conditions": len(grouped),
@@ -175,7 +182,7 @@ def _interventions(model, X, meta, coords, device, out):
                   "mean_covariate_residual_rmse": float(grouped.covariate_residual_rmse.mean()),
                   "mean_embedding_residual_rmse": float(grouped.embedding_residual_rmse.mean()),
                   "pooled_paired_response_agreement_gap": float(np.sqrt(grouped.error_sse.sum()/grouped.total_sse.sum()))
-                  if grouped.total_sse.sum() > 1e-12 else None,
+                    if grouped.total_sse.sum() > 1e-12 else None,
                   "covariate_train_support_fraction": float(raw._support.mean())}
     else:
         pd.DataFrame(columns=columns).to_csv(out / "intervention.csv", index=False)
@@ -262,6 +269,7 @@ def _openset(model, initial_state, X, meta, logits, device, out, held_out):
 
 
 def _additive_surrogate(X, logits, meta, held_out, out, maximum=10000):
+    """An actual additive Chebyshev logit surrogate; never replaces the classifier."""
     if X.shape[1]>256:
         result={"status":"not_applicable","reason":"Full-feature reference is not a low-dimensional interpretation model"}
         atomic_json(out/"symbolic_surrogate.json",result)
@@ -299,7 +307,7 @@ def _additive_surrogate(X, logits, meta, held_out, out, maximum=10000):
     # Scores are computed only after degree selection; each test row is retained.
     test_indices = np.flatnonzero((meta.split == "test").to_numpy())
     predictions = np.concatenate([design(X[idx], selected["degree"]) @ selected["coefficients"]
-                                  for idx in np.array_split(test_indices, max(1, int(np.ceil(len(test_indices)/4096))))])
+                                 for idx in np.array_split(test_indices, max(1, int(np.ceil(len(test_indices)/4096))))])
     truth = logits[test_indices]
     surrogate_video=video_predictions(meta.loc[meta.split=="test"],predictions)
     actual_video=video_predictions(meta.loc[meta.split=="test"],truth)
@@ -333,6 +341,7 @@ def _additive_surrogate(X, logits, meta, held_out, out, maximum=10000):
 
 def evaluate_run(model, initial_state: dict, X: np.ndarray, meta: pd.DataFrame, coords,
                  cfg, out: Path, held_out=None) -> dict[str, Any]:
+    """Evaluate one trained head; write auditable scores and diagnostic artifacts."""
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     X = np.asarray(X, dtype=np.float32)
@@ -366,9 +375,12 @@ def evaluate_run(model, initial_state: dict, X: np.ndarray, meta: pd.DataFrame, 
     pd.DataFrame(records).to_csv(out / "metrics.csv", index=False)
     pd.DataFrame(bins).to_csv(out / "calibration.csv", index=False)
     atomic_json(out / "temperature.json", {**calibration, "thresholds": thresholds,
-                                           "target_validation_fpr": .05})
+                                            "target_validation_fpr": .05})
     pd_result = _pd(model, X, meta, coords, cfg, device, out, held_out)
     intervention = _interventions(model, X, meta, coords, device, out)
+    # This separate audit predicts changes from frozen source-validation curves.
+    # The original intervention endpoint calls the full head on hybrid inputs;
+    # neither endpoint is substituted for the other in the primary verdict.
     from .response_audit import audit_responses
     response_audit = audit_responses(model, X, meta, coords, cfg, out, held_out, logits=logits)
     if X.shape[1]>256:
@@ -386,5 +398,5 @@ def evaluate_run(model, initial_state: dict, X: np.ndarray, meta: pd.DataFrame, 
         batch = torch.as_tensor(np.tile(X[:1], (size, 1)), device=device, dtype=torch.float32)
         compute[f"latency_batch{size}"] = benchmark(model, batch, warmup=warmup, repeats=repeats)
     return {"eval": records, "interp": {"pd": pd_result, "intervention": intervention,
-                                        "response_audit": response_audit, "symbolic": surrogate},
+            "response_audit": response_audit, "symbolic": surrogate},
             "openset": openset, "compute": compute, "temperature": {**calibration, "thresholds": thresholds}}

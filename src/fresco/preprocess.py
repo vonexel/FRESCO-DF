@@ -1,22 +1,16 @@
+"""Deterministic, resumable face extraction. Missing detections are never crops."""
 from __future__ import annotations
 
-import os
-import re
-import cv2
-import time
+import hashlib
 import json
 import math
-import hashlib
-import warnings
-import argparse
-import numpy as np
-from pathlib import Path
-import onnxruntime as ort
-from tqdm.auto import tqdm
-from collections import Counter
+import os
+import re
+import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from .data import read_csv, resolve_under, sha256_file, write_csv, write_json
+from pathlib import Path
 
+from .data import read_csv, resolve_under, sha256_file, write_csv, write_json
 
 FACE_COLUMNS = ["video_id", "frame_idx", "crop_path", "crop_sha256", "face_size", "source_width", "source_height",
                 "dataset", "label", "split", "method", "scenario", "compression", "group_id"]
@@ -26,7 +20,9 @@ PIPELINE_VERSION = 4
 
 
 class YuNetDetector:
+    """OpenCV's compact modern face detector, explicit local ONNX weights."""
     def __init__(self, path: Path):
+        import cv2
         self.cv2 = cv2
         self.model = cv2.FaceDetectorYN.create(str(path), "", (640, 640), .8, .3, 5000)
 
@@ -44,14 +40,14 @@ class YuNetDetector:
 
 
 class HaarDetector:
-    # no landmark alignment or identity tracking
+    """Portable frontal-face baseline; no landmark alignment or identity tracking."""
     def __init__(self):
+        import cv2
         self.cv2 = cv2
         self.model_path = Path(cv2.data.haarcascades) / "haarcascade_frontalface_default.xml"
         self.model = cv2.CascadeClassifier(str(self.model_path))
         if self.model.empty():
             raise RuntimeError(f"OpenCV Haar cascade unavailable: {self.model_path}")
-
 
     def detect(self, bgr):
         cv2 = self.cv2
@@ -65,7 +61,14 @@ class HaarDetector:
 
 
 class SCRFDDetector:
+    """Direct ONNX Runtime inference for 3-stride SCRFD exports (6/9 outputs).
+
+    Supply your authorized ONNX weights explicitly as ``scrfd:/path/model.onnx``.
+    No InsightFace dependency, weight download or license assumption is made.
+    """
     def __init__(self, path: Path):
+        import cv2
+        import onnxruntime as ort
         self.cv2 = cv2
         self.session = ort.InferenceSession(str(path), providers=["CPUExecutionProvider"])
         self.input_name = self.session.get_inputs()[0].name
@@ -73,6 +76,7 @@ class SCRFDDetector:
             raise ValueError("SCRFD adapter requires a 3-stride (6/9 output) ONNX export")
 
     def detect(self, bgr):
+        import numpy as np
         cv2 = self.cv2
         h, w = bgr.shape[:2]
         scale = 640.0 / max(h, w)
@@ -105,11 +109,13 @@ class SCRFDDetector:
 
 def _detector_key(detector: str) -> dict:
     if detector == "yunet" or detector.startswith("yunet:"):
+        import cv2
         path = Path(detector[len("yunet:"):] if detector.startswith("yunet:") else "data/models/face_detection_yunet_2023mar.onnx").resolve()
         if not path.is_file():
             raise FileNotFoundError(f"YuNet model missing: {path}. Download official weights from https://media.githubusercontent.com/media/opencv/opencv_zoo/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx")
         return {"name": "yunet", "path": str(path), "opencv": cv2.__version__, "model_sha256": sha256_file(path)}
     if detector == "haar":
+        import cv2
         path = Path(cv2.data.haarcascades) / "haarcascade_frontalface_default.xml"
         return {"name": "haar", "opencv": cv2.__version__, "model_sha256": sha256_file(path)}
     if detector.startswith("scrfd:"):
@@ -132,7 +138,8 @@ def _get_detector(detector: str):
 
 
 def square_crop(bgr, box, size: int = 224, margin: float = 1.3):
-    # keep a square FOV at borders using reflected padding
+    """Keep a square FOV at borders using reflected padding (never distort)."""
+    import cv2
     x, y, width, height = map(float, box[:4])
     side = max(2, int(math.ceil(max(width, height) * margin)))
     left, top = int(round(x + width / 2 - side / 2)), int(round(y + height / 2 - side / 2))
@@ -150,10 +157,13 @@ def square_crop(bgr, box, size: int = 224, margin: float = 1.3):
 
 
 def _video_job(task: tuple) -> dict:
+    import cv2
+    import numpy as np
     cv2.setNumThreads(1)
     row, roots, data_dir_str, frames, detector, key, margin = task
     data_dir = Path(data_dir_str)
     path = resolve_under(Path(roots[row["dataset"]]), row["path"])
+    # Paths are built from a hash rather than untrusted list identifiers.
     video_hash = hashlib.sha256(row["video_id"].encode()).hexdigest()[:24]
     directory = data_dir / "faces" / row["dataset"] / video_hash
     marker = directory / "complete.json"
@@ -169,9 +179,9 @@ def _video_job(task: tuple) -> dict:
         except (ValueError, OSError):
             previous = {}
         if previous.get("config_hash") == config_hash and all(
-                (data_dir / item["crop_path"]).is_file() and item.get("crop_sha256") == sha256_file(data_dir / item["crop_path"])
-                for item in previous.get("faces", [])):
-            # split's metadata correction does not require redetection
+            (data_dir / item["crop_path"]).is_file() and item.get("crop_sha256") == sha256_file(data_dir / item["crop_path"])
+            for item in previous.get("faces", [])):
+            # A split/group metadata correction does not require redetection.
             for face in previous.get("faces", []):
                 for field in ("dataset", "label", "split", "method", "scenario", "compression", "group_id"):
                     face[field] = row[field]
@@ -195,7 +205,8 @@ def _video_job(task: tuple) -> dict:
         selected = np.unique(np.linspace(0, total - 1, min(frames, total)).round().astype(int)).tolist()
         result["selected_frames"] = selected
         detector_model = _get_detector(detector)
-
+        # Sparse seeks repeatedly decode the same GOP. For normal short clips,
+        # grab sequentially and retrieve only selected frames (5x faster locally).
         sequential = total / max(1, len(selected)) <= 128
         result["decode_strategy"] = "sequential_grab" if sequential else "sparse_seek"
         decoded_index = -1
@@ -218,6 +229,7 @@ def _video_job(task: tuple) -> dict:
             if not boxes:
                 result["missing_detection"].append(frame_index)
                 continue
+            # Stable tie break: area, detector score, then left/top coordinate.
             box = max(boxes, key=lambda b: (b[2] * b[3], b[4], -b[0], -b[1]))
             crop = square_crop(image, box, margin=margin)
             output_path = directory / f"{frame_index:07d}.png"
@@ -236,6 +248,7 @@ def _video_job(task: tuple) -> dict:
         result["error"] = f"{type(error).__name__}: {error}"
     finally:
         capture.release()
+    # Failed videos are logged but retried on the next invocation.
     if result["status"] != "failed":
         write_json(marker, result)
     else:
@@ -245,6 +258,9 @@ def _video_job(task: tuple) -> dict:
 
 def extract_faces(index_csv: Path, data_dir: Path, frames: int = 32, workers: int = 4,
                   detector: str = "yunet", limit: int | None = None, margin: float = 1.3) -> Path:
+    from collections import Counter
+
+    from tqdm.auto import tqdm
     index_csv, data_dir = Path(index_csv), Path(data_dir).resolve()
     if frames < 1 or workers < 1 or margin < 1:
         raise ValueError("frames/workers must be positive and margin >= 1")
@@ -264,12 +280,14 @@ def extract_faces(index_csv: Path, data_dir: Path, frames: int = 32, workers: in
         if len(results) % 25 == 0 or len(results) == len(tasks):
             elapsed = time.monotonic() - start_time
             progress = {"completed_videos": len(results), "total_videos": len(tasks),
-                        "elapsed_seconds": elapsed, "estimated_remaining_seconds": elapsed / len(results) * (len(tasks) - len(results)),
-                        "crops": sum(len(r["faces"]) for r in results), "status_counts": dict(Counter(r["status"] for r in results)),
-                        "limited": limit is not None, "detector": key, "pid": os.getpid()}
+                       "elapsed_seconds": elapsed, "estimated_remaining_seconds": elapsed / len(results) * (len(tasks) - len(results)),
+                       "crops": sum(len(r["faces"]) for r in results), "status_counts": dict(Counter(r["status"] for r in results)),
+                       "limited": limit is not None, "detector": key, "pid": os.getpid()}
             try:
                 write_json(data_dir / "progress.json", progress)
             except PermissionError:
+                # A dashboard reader must not abort extraction of licensed data.
+                import warnings
                 warnings.warn("Progress file is locked; face extraction continues.", RuntimeWarning)
 
     if workers == 1:
@@ -285,6 +303,8 @@ def extract_faces(index_csv: Path, data_dir: Path, frames: int = 32, workers: in
 
 def _aggregate_results(index_csv, data_dir, rows, results, key, frames, limit=None,
                        audit_mode="source/crop SHA256 verified on resume; SHA256 computed at extraction"):
+    """One output schema for ordinary extraction and explicit metadata recovery."""
+    from collections import Counter
     results.sort(key=lambda result: result["video_id"])
     face_rows = [record for result in results for record in result["faces"]]
     path = data_dir / ("faces.csv" if limit is None else f"faces.limit{limit}.csv")
@@ -319,6 +339,14 @@ def _aggregate_results(index_csv, data_dir, rows, results, key, frames, limit=No
 
 def finalize_existing(index_csv: Path, data_dir: Path, frames: int = 32,
                       detector: str = "yunet", margin: float = 1.3) -> Path:
+    """Recover CSV/coverage after coordinator failure without redetecting faces.
+
+    This deliberately checks completion signatures, source size/mtime and PNG
+    presence/size, not every file's bytes. Crop SHA fields remain in the CSV and
+    extract_features rechecks them before consuming images. Normal extract_faces
+    retains full SHA verification; this is an explicit recovery operation.
+    """
+    from tqdm.auto import tqdm
     if frames < 1 or margin < 1:
         raise ValueError("frames must be positive and margin >= 1")
     index_csv, data_dir = Path(index_csv), Path(data_dir).resolve()
@@ -385,6 +413,7 @@ def finalize_existing(index_csv: Path, data_dir: Path, frames: int = 32,
 
 
 if __name__ == "__main__":
+    import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--index", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)

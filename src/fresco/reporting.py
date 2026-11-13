@@ -1,3 +1,4 @@
+"""Aggregate only measured artifacts; export SVG figures with companion CSVs."""
 from __future__ import annotations
 import itertools
 import json
@@ -66,9 +67,9 @@ def collect(out, synthetic=None):
     results.to_csv(out/"results.csv", index=False)
     group = ["head", "budget", "k", "covariates", "held_out", "dataset", "condition", "level", "method", "calibration"]
     summary = results.groupby(group, dropna=False).agg(auc_mean=("auc", "mean"), auc_std=("auc", "std"),
-                                                       seeds=("seed", "nunique"), params=("params", "mean"), head_latency_ms=("head_latency_ms", "mean"),
-                                                       train_wall_s=("train_wall_s", "mean"), ece_mean=("ece", "mean"),
-                                                       brier_mean=("brier", "mean"), nll_mean=("nll", "mean")).reset_index()
+        seeds=("seed", "nunique"), params=("params", "mean"), head_latency_ms=("head_latency_ms", "mean"),
+        train_wall_s=("train_wall_s", "mean"), ece_mean=("ece", "mean"),
+        brier_mean=("brier", "mean"), nll_mean=("nll", "mean")).reset_index()
     summary.to_csv(out/"results_summary.csv", index=False)
     novelty=[]
     symbolic=[]
@@ -85,6 +86,7 @@ def collect(out, synthetic=None):
 
 
 def response_audit_table(out, runs):
+    """Keep new curve fidelity and coverage separate from the original block gap."""
     rows = []
     identifiers = ["head", "budget", "k", "covariates", "held_out", "seed", "run_dir"]
     for run in runs:
@@ -125,6 +127,7 @@ def _aligned_scores(out, selected, dataset, condition):
 
 
 def agreement_test(out, runs, cfg):
+    """Prespecified spline vs GELU contrast, equal video weights, paired clusters."""
     chosen = validate_covariate_indices(cfg.train.get("covariate_indices")) if "train" in cfg else np.arange(4)
     if not np.array_equal(chosen, np.arange(4)):
         return {"status": "NOT_APPLICABLE", "reason": "Historical primary contrast requires all four covariates; this is a subset ablation"}
@@ -181,8 +184,9 @@ def agreement_test(out, runs, cfg):
     _,aa=_aligned_scores(out,a,"celebdfpp","clean")
     labels,bb=_aligned_scores(out,b,"celebdfpp","clean")
     discrimination=paired_auc_bootstrap(labels.label,aa,bb,labels.group_id,
-                                        resamples=int(cfg.eval.bootstrap),margin=float(cfg.eval.margin))
-
+                        resamples=int(cfg.eval.bootstrap),margin=float(cfg.eval.margin))
+    # Recompute coverage from the declared seed/grid specification and the
+    # actual curves; a descriptive median in an old CSV cannot certify it.
     _,kval=_curves(out,a,cfg)
     defined=kval.median_seed_correlation.dropna()
     stability=float(defined.median()) if len(defined) else None
@@ -216,6 +220,7 @@ def agreement_test(out, runs, cfg):
 
 
 def hypothesis_tests(out, runs, cfg):
+    # Architecture comparator is chosen on FF++ validation only, within each budget/fold.
     comparisons, selection = [], []
     keys = sorted({(r["budget"], r["k"], r["covariates"], str(r["held_out"])) for r in runs})
     for budget, k, cov, held in keys:
@@ -249,7 +254,7 @@ def hypothesis_tests(out, runs, cfg):
             if not a.index.equals(b.index):
                 raise ValueError("Unpaired model video predictions")
             test = paired_auc_bootstrap(a.label, aa, bb, groups=a.group_id,
-                                        resamples=int(cfg.eval.bootstrap), margin=float(cfg.eval.margin))
+                     resamples=int(cfg.eval.bootstrap), margin=float(cfg.eval.margin))
             info.update(test)
             seed_n = len(selected)
             feasible = all(r["budget_feasible"] for r in selected+reference)
@@ -292,6 +297,11 @@ def hypothesis_tests(out, runs, cfg):
 
 
 def _curves(out, runs, cfg=None):
+    """Descriptive correlations plus complete declared seed/covariate coverage.
+
+    A constant, missing, nonfinite, duplicated, or off-grid curve cannot satisfy
+    the confirmatory criterion. Valid remaining pairs are still descriptive.
+    """
     rows, stability, frames, load_errors, cells = [], [], {}, {}, {}
     cellcols=["head", "budget", "k", "covariates", "held_out"]
     for run in runs:
@@ -318,7 +328,7 @@ def _curves(out, runs, cfg=None):
     declared_seeds=cfg.experiment.get("seeds") if cfg is not None else None
     for keys, selected in cells.items():
         seeds=sorted(set(int(s) for s in (declared_seeds if declared_seeds is not None
-                                          else [r["seed"] for r in selected])))
+                                         else [r["seed"] for r in selected])))
         expected_pairs=len(seeds)*(len(seeds)-1)//2
         common_grid=(np.linspace(-2,2,int(cfg.eval.get("grid_points",31))) if cfg is not None else None)
         unexpected=sorted(set(r["seed"] for r in selected)-set(seeds))
@@ -377,7 +387,9 @@ def _curves(out, runs, cfg=None):
 def figures(out, results, summary, runs, cfg=None):
     directory = out/"figures"
     all_primary = summary[(summary.dataset == "celebdfpp") & (summary.condition == "clean") &
-                          (summary.level == "video") & (summary.method == "all") & (summary.calibration == "raw")]
+                      (summary.level == "video") & (summary.method == "all") & (summary.calibration == "raw")]
+    # Generic plots show a single declared capacity/covariate/fold cell.
+    # Ablation plots below use all cells explicitly; no hidden averaging of budgets.
     display_k=16 if 16 in set(summary.k) else int(summary.k.min())
     display_cov=True if True in set(summary.covariates) else False
     cell=summary[(summary.k==display_k)&(summary.covariates==display_cov)]
@@ -410,7 +422,7 @@ def figures(out, results, summary, runs, cfg=None):
         ax.set(xlabel="Head latency per batch of 256 (ms, fp32)",ylabel="Video AUROC")
         _save(fig,directory,"pareto_auc_latency",primary)
     bymethod = onebudget[(onebudget.dataset == "celebdfpp") & (onebudget.condition == "clean") &
-                         (onebudget.level == "video") & (onebudget.method != "all") & (onebudget.calibration == "raw")]
+              (onebudget.level == "video") & (onebudget.method != "all") & (onebudget.calibration == "raw")]
     if len(bymethod):
         mat = bymethod.pivot_table(index="head",columns="method",values="auc_mean")
         fig,ax = plt.subplots(figsize=(max(7,len(mat.columns)*.42),4))
@@ -525,6 +537,7 @@ def figures(out, results, summary, runs, cfg=None):
         ax.plot([0,1],[0,1],"k--",lw=.7)
         ax.set(xlabel="Mean predicted fake probability",ylabel="Observed fake frequency")
         _save(fig,directory,"calibration_reliability",d)
+    # Dimension and covariate ablations retain all conditions in companion CSVs.
     for variable,name in [("k","dimension_ablation"),("covariates","covariate_ablation")]:
         if len(all_primary) and all_primary[variable].nunique()>1:
             fig,ax=plt.subplots(figsize=(7,4))
@@ -590,6 +603,10 @@ def pareto_table(out,results,runs):
     keys=["head","budget","k","covariates","held_out"]
     objectives=["A","P","C","R","I_gap"]
     numeric=objectives+["train_wall_s"]
+    # Clean-only references and covariate ablations legitimately lack R/I.
+    # All-None columns otherwise have object dtype and disappear under
+    # mean(numeric_only=True), crashing report generation. Missing measurements
+    # stay unavailable, rather than becoming zero or a lower-dimensional front.
     measured[numeric]=measured[numeric].apply(pd.to_numeric,errors="coerce").replace([np.inf,-np.inf],np.nan)
     grouped=measured.groupby(keys,dropna=False)
     counts=grouped[objectives].count().add_suffix("_observed_runs")
@@ -633,9 +650,9 @@ def build_report(out: Path, cfg):
     figures(out,results,summary,runs,cfg)
     stats=hypothesis_tests(out,runs,cfg)
     primary=summary[(summary.dataset=="celebdfpp") & (summary.condition=="clean") &
-                    (summary.level=="video") & (summary.method=="all") & (summary.calibration=="raw")]
+            (summary.level=="video") & (summary.method=="all") & (summary.calibration=="raw")]
     lines=["# FRESCO empirical report", "", "SYNTHETIC INTEGRATION FIXTURE — NO SCIENTIFIC EVIDENCE." if cfg.experiment.synthetic
-    else "Measured results from the supplied face videos. No target data were used for model selection.", "",
+           else "Measured results from the supplied face videos. No target data were used for model selection.", "",
            f"Seeds = {len(set(r['seed'] for r in runs))} (paper §6 recommends ≥10). "
            f"Seeds: {sorted(set(r['seed'] for r in runs))}.", "",
            "Primary interpretation question: how much of the real paired image response is captured by an observed-quality partial response? "
@@ -648,8 +665,8 @@ def build_report(out: Path, cfg):
         lines += ["", "Analysis role: **EXPLORATORY FOLLOW-UP**. " + _analysis_role(cfg),
                   "The original main experiment and its negative result remain separate.", ""]
     lines += ["", "## Hypothesis assessment", "", "See [stats.json](stats.json) for paired conditional intervals and budget feasibility. "
-                                                  "TOST uses 90% intervals. Failure to demonstrate equivalence is inconclusive. Comparators are selected with FF++ validation only. "
-                                                  "Mean single-seed AUC contrasts are used; scores are not ensembled for inference.", "",
+              "TOST uses 90% intervals. Failure to demonstrate equivalence is inconclusive. Comparators are selected with FF++ validation only. "
+              "Mean single-seed AUC contrasts are used; scores are not ensembled for inference.", "",
               "| Comparison | Budget | k | Covariates | Held-out method | Verdict | Reason |", "|---|---|---|---|---|---|---|"]
     for r in stats["H2a"]:
         lines.append(f"|{r['head']} vs {r['comparator']}|{r['budget']}|{r['k']}|{r['covariates']}|{r['held_out']}|{r['status']}|{r.get('reason','')}|")
@@ -685,26 +702,26 @@ def build_report(out: Path, cfg):
         lines += ["Per-run artifacts: curve_predictor.csv, curve_intervention.csv, response_support.csv, spline_support.csv. "
                   "Actual spline-grid support uses deterministic capped samples; covariate-box diagnostics use all rows.", ""]
     lines += ["", "## Article criteria and limitations", "",
-              "A: frame/video AUROC, AP, EER, Brier, NLL and equal-width ECE. "
-              "EER is the FPR=FNR crossing of the linearly interpolated empirical ROC, retaining all thresholds. "
-              "P: every trainable coefficient counted; "
-              "fixed CLIP and PCA state are not trainable head parameters. C: separate parameter and train-wall-time budgets, "
-              "head b1/b256 latency and training memory. Encoder/crop timing must be read from the feature/preprocessing manifests; "
-              "head latency alone is not pipeline latency.", "",
-              "R: paired degradations and cross-dataset transfer. I: observed-covariate response stability and intervention decomposition. "
-              "Symbolic PD approximation is a diagnostic, not validated full-model symbolification. "
-              "No universal monotonic direction of fake score versus JPEG quality is assumed. "
-              "E: resolved configs, source/data hashes, initialization checkpoints, completed-stage checksums and failed-run logs.", "",
-              "Intervals are conditional on the fixed seeds; training-seed dispersion must be reported separately. "
-              "Identity clustering holds target identities together; "
-              "cross-role identity/source dependencies can remain. DeLong video intervals are secondary descriptive intervals. "
-              "Unknown-method detection and cross-dataset shift are distinct tasks; the latter confounds dataset and generator. "
-              "The adapted first-layer plasticity score does not reproduce the complete Canevaro pipeline.", "",
-              "Non-goals retained transparently: no LN tuning, no claim of exact upstream KAN implementations, "
-              "no fabricated c40 condition when c40 videos are absent, no automatic Pareto recommendation from point estimates alone.", "",
-              "## Artifacts", "", "[Results](results.csv), [seed summary](results_summary.csv), "
-                                  "[descriptive Pareto table](pareto.csv), [novelty results](openset_results.csv), "
-                                  "[surrogate fidelity](symbolic_fidelity.csv), [environment and data provenance](manifest.json).", ""]
+        "A: frame/video AUROC, AP, EER, Brier, NLL and equal-width ECE. "
+        "EER is the FPR=FNR crossing of the linearly interpolated empirical ROC, retaining all thresholds. "
+        "P: every trainable coefficient counted; "
+        "fixed CLIP and PCA state are not trainable head parameters. C: separate parameter and train-wall-time budgets, "
+        "head b1/b256 latency and training memory. Encoder/crop timing must be read from the feature/preprocessing manifests; "
+        "head latency alone is not pipeline latency.", "",
+        "R: paired degradations and cross-dataset transfer. I: observed-covariate response stability and intervention decomposition. "
+        "Symbolic PD approximation is a diagnostic, not validated full-model symbolification. "
+        "No universal monotonic direction of fake score versus JPEG quality is assumed. "
+        "E: resolved configs, source/data hashes, initialization checkpoints, completed-stage checksums and failed-run logs.", "",
+        "Intervals are conditional on the fixed seeds; training-seed dispersion must be reported separately. "
+        "Identity clustering holds target identities together; "
+        "cross-role identity/source dependencies can remain. DeLong video intervals are secondary descriptive intervals. "
+        "Unknown-method detection and cross-dataset shift are distinct tasks; the latter confounds dataset and generator. "
+        "The adapted first-layer plasticity score does not reproduce the complete Canevaro pipeline.", "",
+        "Non-goals retained transparently: no LN tuning, no claim of exact upstream KAN implementations, "
+        "no fabricated c40 condition when c40 videos are absent, no automatic Pareto recommendation from point estimates alone.", "",
+        "## Artifacts", "", "[Results](results.csv), [seed summary](results_summary.csv), "
+        "[descriptive Pareto table](pareto.csv), [novelty results](openset_results.csv), "
+        "[surrogate fidelity](symbolic_fidelity.csv), [environment and data provenance](manifest.json).", ""]
     for path in sorted((out/"figures").glob("*.svg")):
         lines.append(f"- [{path.stem}](figures/{path.name}) · [source data](figures/{path.stem}.csv)")
     failures=list(out.rglob("FAILED.json"))
@@ -715,3 +732,4 @@ def build_report(out: Path, cfg):
     names += [str(p.relative_to(out)) for p in sorted((out/"figures").glob("*"))]
     atomic_json(reportdir/"artifacts.json",{n:digest_file(out/n) for n in names})
     mark_complete(reportdir,reportkey,["artifacts.json"])
+

@@ -1,16 +1,37 @@
-import time
-import math
-import torch
-from typing import Any
-from torch import Tensor, nn
+"""Small, original PyTorch classifier heads used by the FRESCO comparison.
+
+These implementations use published mathematical *ideas*, not vendored library
+code. ``kan_spline`` follows the edge-function construction of Liu et al.,
+https://arxiv.org/abs/2404.19756; ``kan_fast`` uses Gaussian radial basis
+functions as in FastKAN, https://arxiv.org/abs/2405.06721. ``kan_rational`` is a
+grouped rational-activation control inspired by KAT,
+https://arxiv.org/abs/2409.10594, not a reproduction of its architecture or CUDA
+kernels. ``kan_wavelet`` is our Mexican-hat edge-function implementation, inspired
+by Wav-KAN, https://arxiv.org/abs/2405.12832. None is claimed numerically equivalent
+to an upstream package. The frozen representation is supplied by the caller.
+"""
+
 from __future__ import annotations
+
+import math
+import time
+from typing import Any
+
+import torch
+from torch import Tensor, nn
 from torch.nn import functional as F
 
 
-HEAD_NAMES = ("linear", "mlp_relu", "mlp_gelu", "mlp_bspline", "kan_spline", "kan_fast", "kan_rational", "kan_wavelet")
+HEAD_NAMES = (
+    "linear", "mlp_relu", "mlp_gelu", "mlp_bspline", "kan_spline",
+    "kan_fast", "kan_rational", "kan_wavelet",
+)
 
 
-def open_uniform_knots(grid_size: int = 8, degree: int = 3, low: float = -3.0, high: float = 3.0) -> Tensor:
+def open_uniform_knots(
+    grid_size: int = 8, degree: int = 3, low: float = -3.0, high: float = 3.0
+) -> Tensor:
+    """Open uniform knots: ``grid_size`` intervals, ``grid_size+degree`` bases."""
     if grid_size < 1 or degree < 0 or high <= low:
         raise ValueError("Require grid_size >= 1, degree >= 0, and high > low")
     interior = torch.linspace(low, high, grid_size + 1)
@@ -20,7 +41,7 @@ def open_uniform_knots(grid_size: int = 8, degree: int = 3, low: float = -3.0, h
 def bspline_basis(x: Tensor, knots: Tensor, degree: int = 3) -> Tensor:
     """Cox-de Boor basis with a closed right endpoint and zero support outside.
 
-    Output is [*x.shape, number_of_basis_functions]. Repeated-knot divisions
+    Output is ``[*x.shape, number_of_basis_functions]``. Repeated-knot divisions
     are replaced by zero terms before division, so backward has no NaN branches.
     Modules below clamp their spline argument explicitly; this standalone basis
     retains the mathematical compact support convention.
@@ -39,8 +60,8 @@ def bspline_basis(x: Tensor, knots: Tensor, degree: int = 3) -> Tensor:
             right_denom > 0, right_denom, 1
         )
         basis = (
-                left * basis[..., :width] * (left_denom > 0)
-                + right * basis[..., 1 : width + 1] * (right_denom > 0)
+            left * basis[..., :width] * (left_denom > 0)
+            + right * basis[..., 1 : width + 1] * (right_denom > 0)
         )
     endpoint = torch.zeros_like(basis)
     endpoint[..., -1] = 1
@@ -198,7 +219,7 @@ class WaveletEdgeLayer(nn.Module):
 
     def edges(self, x: Tensor) -> Tensor:
         u = (x.unsqueeze(1) - self.shift) / (F.softplus(self.raw_scale) + 0.05)
-        # Beyond |u|=30 the wavelet is numerically zero; clipping avoids inf*0
+        # Beyond |u|=30 the wavelet is numerically zero; clipping avoids inf*0.
         u2 = u.clamp(-30, 30).square()
         wavelet = (1 - u2) * torch.exp(-0.5 * u2)
         return self.base_weight * F.silu(x).unsqueeze(1) + self.amplitude * wavelet
@@ -263,6 +284,7 @@ def make_head(name: str, in_features: int, hidden: int = 32, **kwargs: Any) -> n
 
 
 def count_params(module: nn.Module) -> int:
+    """Count *all* parameters, including frozen ones; fixed buffers are excluded."""
     return sum(parameter.numel() for parameter in module.parameters())
 
 
@@ -309,6 +331,7 @@ def match_parameters(name: str, in_features: int, target: int,
 
 def benchmark(module: nn.Module, x: Tensor, warmup: int = 20,
               repeats: int = 100) -> dict[str, Any]:
+    """Forward-only warm latency, CUDA events or CPU perf_counter, batch stated."""
     if warmup < 0 or repeats < 1:
         raise ValueError("Require warmup >= 0 and repeats >= 1")
     was_training = module.training

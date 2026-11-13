@@ -1,3 +1,8 @@
+"""Controlled analytic-function contour recommended by the article, section 6.
+
+This is a real regression benchmark with known derivatives. Its outcomes are
+evidence about approximation on the declared functions, never about faces.
+"""
 from __future__ import annotations
 
 import copy
@@ -5,6 +10,7 @@ import json
 import math
 import time
 from pathlib import Path
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -23,7 +29,7 @@ TASKS = ("smooth_additive", "composition", "oscillatory", "piecewise_smooth", "n
 
 
 def target_function(x: torch.Tensor, task: str) -> torch.Tensor:
-    # analytic scalar ground truth on [-1,1]^8; noisy case returns it's clean mean
+    """Analytic scalar ground truth on [-1,1]^8; noisy case returns its clean mean."""
     if x.ndim != 2 or x.shape[1] != 8:
         raise ValueError("Controlled functions require [N,8] inputs")
     if task in {"smooth_additive", "noisy_additive"}:
@@ -41,6 +47,7 @@ def target_function(x: torch.Tensor, task: str) -> torch.Tensor:
 
 
 def generate_data(task, sizes=(2048, 512, 2048), seed=2026, noise_std=.1):
+    """Fixed, independent uniform splits shared by every head and training seed."""
     if len(sizes) != 3 or min(sizes) < 1 or noise_std < 0:
         raise ValueError("Require three positive split sizes and nonnegative noise")
     generator = torch.Generator().manual_seed(int(seed))
@@ -109,10 +116,10 @@ def _fit(model, data, cfg, lr, seed, budget):
     with torch.inference_mode():
         final_mse = float((model(tx)-ty).square().mean())
     return model, {"val_mse": best, "initial_train_mse": initial_mse, "train_mse": final_mse,
-                   "wall_s": elapsed, "epochs": epoch, "lr": float(lr), "history": history,
-                   "requested_wall_s": float(cfg.wall_seconds) if budget == "time" else None,
-                   "time_budget_relative_error": abs(elapsed-float(cfg.wall_seconds))/float(cfg.wall_seconds) if budget == "time" else None,
-                   "peak_allocated_mb": torch.cuda.max_memory_allocated(device)/2**20 if device.startswith("cuda") else None}
+        "wall_s": elapsed, "epochs": epoch, "lr": float(lr), "history": history,
+        "requested_wall_s": float(cfg.wall_seconds) if budget == "time" else None,
+        "time_budget_relative_error": abs(elapsed-float(cfg.wall_seconds))/float(cfg.wall_seconds) if budget == "time" else None,
+        "peak_allocated_mb": torch.cuda.max_memory_allocated(device)/2**20 if device.startswith("cuda") else None}
 
 
 def _test(model, data, task, device):
@@ -171,6 +178,7 @@ def _aggregate(rows, directory):
 
 
 def run_controlled(cfg) -> Path:
+    """Run/resume equal-LR-search regression trials and export selected test scores."""
     experiment = cfg.experiment
     tasks = list(experiment.get("tasks", TASKS))
     if any(task not in TASKS for task in tasks) or not tasks:
@@ -187,9 +195,9 @@ def run_controlled(cfg) -> Path:
     directory = Path(cfg.paths.output_dir)/"functions"/key
     directory.mkdir(parents=True, exist_ok=True)
     atomic_json(directory / "protocol.json", {"configuration": settings, "source": source_fingerprint(),"runtime":runtime,
-                                              "data_unit": "independent uniform points on [-1,1]^8", "known_functions": True,
-                                              "scientific_face_evidence": False, "HPO": "same learning-rate candidates per head/function/budget/seed; validation MSE only",
-                                              "gradient_evaluation": "underlying analytic derivative; excludes piecewise kink neighborhoods"})
+        "data_unit": "independent uniform points on [-1,1]^8", "known_functions": True,
+        "scientific_face_evidence": False, "HPO": "same learning-rate candidates per head/function/budget/seed; validation MSE only",
+        "gradient_evaluation": "underlying analytic derivative; excludes piecewise kink neighborhoods"})
     rows = []
     total = len(tasks)*len(heads)*len(budgets)*len(seeds)
     with tqdm(total=total, desc="Controlled functions") as progress:
@@ -212,6 +220,8 @@ def run_controlled(cfg) -> Path:
                             seed_everything(int(seed))
                             model, budget_info = build_model(head, 8, budget, int(cfg.train.target_hidden),cfg.get("model"))
                             model, info = _fit(model, data, cfg.train, float(lr), int(seed), budget)
+                            # Keep the best HPO trial on CPU, so its storage cannot
+                            # contaminate later trials' GPU peak-memory readings.
                             model.cpu()
                             trials.append({k: v for k, v in info.items() if k != "history"})
                             if selected_info is None or info["val_mse"] < selected_info["val_mse"]:

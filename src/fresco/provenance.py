@@ -1,8 +1,10 @@
+"""Keep scientific labels tied to recorded data and training configuration."""
 from __future__ import annotations
 
-import re
 import json
+import re
 from pathlib import Path
+
 from omegaconf import OmegaConf
 
 
@@ -17,7 +19,12 @@ def _read_manifest(path: Path) -> dict:
 
 
 def cache_is_synthetic(manifest: dict) -> bool:
-    # recognize explicit labels and the original audited real feature schema
+    """Recognize explicit labels and the original audited real feature schema.
+
+    Legacy v5 real caches predate the explicit flag. Accept them only with the
+    recorded encoder/frozen state and artifact hashes, without rewriting them.
+    An absent manifest/unknown origin never becomes face evidence by default.
+    """
     if "synthetic" in manifest:
         if type(manifest["synthetic"]) is not bool:
             raise ValueError("Cache provenance synthetic flag must be a boolean")
@@ -25,13 +32,13 @@ def cache_is_synthetic(manifest: dict) -> bool:
     encoder = manifest.get("encoder_provenance")
     hashes = [manifest.get(name + "_sha256", "") for name in ("features", "covariates", "metadata")]
     legacy_real = (
-            isinstance(manifest.get("version"), int) and manifest["version"] >= 5
-            and isinstance(manifest.get("signature"), str)
-            and re.fullmatch(r"[0-9a-f]{64}", manifest["signature"]) is not None
-            and bool(manifest.get("encoder")) and isinstance(encoder, dict)
-            and encoder.get("visual_trainable_parameter_count") == 0
-            and encoder.get("whole_clip_trainable_parameter_count") == 0
-            and all(isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) for value in hashes)
+        isinstance(manifest.get("version"), int) and manifest["version"] >= 5
+        and isinstance(manifest.get("signature"), str)
+        and re.fullmatch(r"[0-9a-f]{64}", manifest["signature"]) is not None
+        and bool(manifest.get("encoder")) and isinstance(encoder, dict)
+        and encoder.get("visual_trainable_parameter_count") == 0
+        and encoder.get("whole_clip_trainable_parameter_count") == 0
+        and all(isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) for value in hashes)
     )
     if legacy_real:
         return False
@@ -46,6 +53,12 @@ def read_cache_provenance(cache: Path, *, synthetic: bool) -> dict:
 
 
 def report_configuration(out: Path, requested):
+    """Use the saved scientific settings; only force may change during report.
+
+    A report-only invocation normally composes today's defaults. Those defaults
+    must not silently change the provenance, seed requirement or margins of an
+    already trained experiment.
+    """
     manifest = _read_manifest(Path(out) / "manifest.json")
     synthetic = manifest.get("synthetic")
     saved = manifest.get("config")

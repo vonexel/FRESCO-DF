@@ -1,15 +1,19 @@
-import re
-import csv
-import time
-import json
-import hashlib
-from collections import Counter
+"""Strict, auditable indexing of the locally supplied FF++ and Celeb-DF++ videos.
+
+Labels everywhere in FRESCO are 0=real, 1=fake. Celeb-DF++'s official text
+file uses the opposite convention. No random frame/video split is performed.
+"""
 from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import re
+import time
+from collections import Counter
 from pathlib import Path, PurePosixPath
 
-
-INDEX_COLUMNS = ["dataset", "video_id", "path", 
-                 "label", "split", "method",
+INDEX_COLUMNS = ["dataset", "video_id", "path", "label", "split", "method",
                  "scenario", "compression", "group_id"]
 CORE_METHODS = ("Deepfakes", "Face2Face", "FaceSwap", "NeuralTextures")
 SPLIT_URL = "https://raw.githubusercontent.com/ondyari/FaceForensics/master/dataset/splits/{split}.json"
@@ -24,6 +28,7 @@ def sha256_file(path: Path) -> str:
 
 
 def replace_file(source: Path, target: Path) -> None:
+    """Retry transient Windows sharing violations without hiding permanent errors."""
     for attempt in range(8):
         try:
             Path(source).replace(target)
@@ -59,6 +64,7 @@ def read_csv(path: Path) -> list[dict]:
 
 
 def safe_relative_path(value: str) -> str:
+    """Reject absolute paths, drives, ambiguous separators and traversal."""
     if not value or "\\" in value or ":" in value or "\x00" in value:
         raise ValueError(f"Unsafe relative path: {value!r}")
     raw_parts = value.split("/")
@@ -77,6 +83,7 @@ def resolve_under(root: Path, relative: str) -> Path:
 
 
 def load_official_splits(split_dir: Path) -> tuple[dict[str, str], dict[str, str], dict]:
+    """Use official paired sources; a connected source pair stays in one split."""
     mapping, groups, provenance = {}, {}, {}
     for split in ("train", "val", "test"):
         path = Path(split_dir) / f"{split}.json"
@@ -85,6 +92,7 @@ def load_official_splits(split_dir: Path) -> tuple[dict[str, str], dict[str, str
         pairs = json.loads(path.read_text(encoding="utf-8"))
         if not isinstance(pairs, list):
             raise ValueError(f"Invalid official split {path}")
+        # Union-find also supports future official lists with >2 connected sources.
         parent: dict[str, str] = {}
 
         def find(x: str) -> str:
@@ -111,6 +119,7 @@ def load_official_splits(split_dir: Path) -> tuple[dict[str, str], dict[str, str
 
 
 def parse_celeb_test_list(path: Path, root: Path) -> list[dict]:
+    """Only official listed videos are eligible; missing listed files are fatal."""
     rows, seen, missing = [], set(), []
     for number, line in enumerate(Path(path).read_text(encoding="utf-8-sig").splitlines(), 1):
         if not line.strip():
@@ -132,6 +141,9 @@ def parse_celeb_test_list(path: Path, root: Path) -> list[dict]:
         is_fake = segments[0] == "Celeb-synthesis" and len(segments) == 4
         if not (is_real or is_fake) or (official_label == "1") != is_real:
             raise ValueError(f"Official label/path disagreement on line {number}: {line}")
+        # The first celebrity identity token is shared across methods/real
+        # videos. Treat it as a conservative nominal cluster, without joining
+        # every donor/target into one giant connected component.
         identities = re.findall(r"id\d+", PurePosixPath(relative).stem)
         group = "celeb:" + (identities[0] if identities else "/".join(segments[:1] + (PurePosixPath(relative).stem,)))
         rows.append({"dataset": "celebdfpp", "video_id": f"celebdfpp/{relative[:-4]}",
@@ -152,6 +164,7 @@ def index_datasets(ffpp_root: Path, celeb_root: Path, split_dir: Path, out_dir: 
     ff_rows, counts, exclusions = [], {}, {}
     for method in ("original", *CORE_METHODS, "FaceShifter"):
         directory = ffpp_root / method
+        # Support the upstream download layout as well as the supplied flat one.
         if not directory.is_dir():
             directory = ffpp_root / ("original_sequences/youtube" if method == "original" else f"manipulated_sequences/{method}") / "c23/videos"
         if not directory.is_dir():
@@ -185,6 +198,7 @@ def index_datasets(ffpp_root: Path, celeb_root: Path, split_dir: Path, out_dir: 
         if method == "original" and {p.stem for p in files} != expected_names:
             raise ValueError("FF++ original files do not exactly match official source IDs")
         if method != "original":
+            # Every official source occurs once as the target in each fake method.
             targets = [p.stem.split("_")[0] for p in files]
             if set(targets) != set(split_map) or len(targets) != len(set(targets)):
                 raise ValueError(f"FF++ {method}: expected one manipulated target per official source; got {len(files)}")

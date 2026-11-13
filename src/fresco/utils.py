@@ -1,14 +1,15 @@
-import os
-import json
-import torch
-import random
-import hashlib
-import platform
-import numpy as np
-from pathlib import Path
-from .data import replace_file
+"""Determinism, atomic artifacts and content-addressed completion records."""
 from __future__ import annotations
+import hashlib
+import json
+import os
+import platform
+import random
 from importlib.metadata import version, PackageNotFoundError
+from pathlib import Path
+import numpy as np
+import torch
+from .data import replace_file
 
 
 def seed_everything(seed: int) -> None:
@@ -66,7 +67,8 @@ def complete(path: Path, key: str) -> bool:
         record = json.loads((path / "DONE.json").read_text(encoding="utf-8"))
         return record["key"] == key and all(
             (path / name).is_file() and digest_file(path / name) == sha
-            for name, sha in record["files"].items())
+            for name, sha in record["files"].items()
+        )
     except (OSError, KeyError, ValueError):
         return False
 
@@ -87,3 +89,4 @@ def environment() -> dict:
             "torch": torch.__version__, "cuda": torch.version.cuda,
             "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
             "source_sha256": source_fingerprint(), "deterministic": True,"packages":versions}
+

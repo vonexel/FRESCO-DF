@@ -1,12 +1,13 @@
+"""Video-level metrics and paired, cluster-resampled inference."""
 from __future__ import annotations
-
 import numpy as np
-from scipy.stats import norm
 from scipy.optimize import minimize_scalar
+from scipy.stats import norm
 from sklearn.metrics import average_precision_score, roc_auc_score, roc_curve, log_loss
 
 
 def auc_delong(y, scores, alpha=0.05):
+    """Single-model U-statistic/DeLong CI; independence is at video level."""
     y, scores = np.asarray(y), np.asarray(scores)
     pos, neg = np.sort(scores[y == 1]), np.sort(scores[y == 0])
     if min(len(pos), len(neg)) < 2:
@@ -21,6 +22,7 @@ def auc_delong(y, scores, alpha=0.05):
 
 def reliability(y, p, bins=15):
     y, p = np.asarray(y), np.asarray(p)
+    # Equal-width bins. Tied confidences stay together.
     ids = np.minimum((p*bins).astype(int), bins-1)
     result = []
     for i in range(bins):
@@ -38,8 +40,8 @@ def metrics(y, p, threshold=0.5):
     if len(np.unique(y)) < 2:
         return {"n": len(y), "auc": None, "reason": "single class; supply shared real controls"}
     fpr, tpr, _ = roc_curve(y, p, drop_intermediate=False)
-
-    # the nearest threshold's mean(FPR, FNR) is not an equal-error rate on a stepwise ROC
+    # Interpolate adjacent empirical ROC points at FPR = FNR. The nearest
+    # threshold's mean(FPR, FNR) is not an equal-error rate on a stepwise ROC.
     difference = fpr - (1-tpr)
     right = int(np.flatnonzero(difference >= 0)[0])
     left = right - 1
@@ -67,6 +69,7 @@ def fit_temperature(y, logits):
 
 def validation_threshold(y, p, target_fpr=0.05):
     real = np.sort(np.asarray(p)[np.asarray(y) == 0])
+    # Strictly above a real validation quantile; conservative under tied scores.
     return float(np.nextafter(np.quantile(real, 1-target_fpr, method="higher"), np.inf))
 
 
@@ -78,7 +81,7 @@ def _auc_plan(y, scores):
 
 
 def _weighted_auc(plan, weights):
-    # the repeated-video AUC
+    """Exactly the repeated-video AUC, using fixed order and half credit for ties."""
     order,starts,labels=plan
     w=weights[order]
     positive=np.add.reduceat(w*labels,starts)
@@ -91,6 +94,7 @@ def _weighted_auc(plan, weights):
 
 def paired_auc_bootstrap(y, a, b, groups=None, resamples=10000, seed=2026, margin=.01):
     """Paired percentile CIs, 90% for alpha=.05 TOST and 95% for differences.
+
     Inputs are aligned [seed,video] scores (or a single [video] vector).
     Statistic is MEAN of seed-specific AUC differences, never AUC of an ensemble.
     Groups resample source/identity clusters together. With few fixed seeds this
@@ -108,9 +112,9 @@ def paired_auc_bootstrap(y, a, b, groups=None, resamples=10000, seed=2026, margi
     plans=[(_auc_plan(y,aa),_auc_plan(y,bb)) for aa,bb in zip(a,b)]
     rng, values = np.random.default_rng(seed), []
     for _ in range(resamples):
-        counts = np.bincount(rng.integers(0,len(unique),len(unique)), minlength = len(unique))
-        weights = counts[inverse]
-        differences = [_weighted_auc(pa,weights)-_weighted_auc(pb,weights) for pa,pb in plans]
+        counts=np.bincount(rng.integers(0,len(unique),len(unique)),minlength=len(unique))
+        weights=counts[inverse]
+        differences=[_weighted_auc(pa,weights)-_weighted_auc(pb,weights) for pa,pb in plans]
         if np.isfinite(differences).all():
             values.append(np.mean(differences))
     if len(values) < .9*resamples:
@@ -123,3 +127,4 @@ def paired_auc_bootstrap(y, a, b, groups=None, resamples=10000, seed=2026, margi
             "equivalent_tost_percentile": bool(ci90[0] > -margin and ci90[1] < margin),
             "superior_beyond_margin": bool(ci95[0] > margin), "clusters": len(unique),
             "resamples_valid": len(values), "unit": "source/identity cluster; paired videos"}
+

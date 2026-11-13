@@ -1,23 +1,16 @@
+"""Frozen CLIP pre-projection CLS caches and paired, controlled degradations."""
 from __future__ import annotations
 
-import os
-import io
-import cv2
-import time
-import json
-import torch
 import hashlib
-import warnings
-import open_clip
-import numpy as np
-from pathlib import Path
-from tqdm.auto import tqdm
-from PIL import Image, ImageFilter
+import io
+import json
+import os
+import time
 from importlib.metadata import version
-from open_clip.pretrained import download_pretrained_from_url
+from pathlib import Path
+
 from .data import read_csv, resolve_under, sha256_file, write_csv, write_json
 from .checkpoints import EncoderCheckpoint, resolve_encoder_checkpoint, verify_checkpoint_file
-
 
 DEFAULT_CONDITIONS = ["clean", "jpeg90", "jpeg70", "jpeg50", "jpeg30", "blur1", "blur2", "blur3", "resize0.5", "resize0.25"]
 COVARIATE_NAMES = ["jpeg_blockiness_proxy", "log_laplacian_variance", "face_size", "high_frequency_ratio"]
@@ -53,6 +46,7 @@ def _read_encoder_provenance(path, signature, identity):
 
 
 def _manifest_encoder_provenance(manifest, signatures, identity):
+    """Legacy evidence is usable only when it binds the actual known weights."""
     provenance = manifest.get("encoder_provenance") or {}
     if (manifest.get("signature") in signatures
             and provenance.get("checkpoint_sha256") == identity["sha256"]
@@ -64,6 +58,8 @@ def _manifest_encoder_provenance(manifest, signatures, identity):
 
 
 def degrade_image(image, condition: str):
+    """Deterministic PIL transformations applied to the exact same clean crops."""
+    from PIL import Image, ImageFilter
     if condition == "clean":
         return image.copy()
     if condition.startswith("jpeg"):
@@ -90,9 +86,12 @@ def degrade_image(image, condition: str):
 
 
 def quality_covariates(image, face_size: float):
+    """Measurable proxies; blockiness is explicitly NOT an estimated JPEG Q."""
+    import cv2
+    import numpy as np
     gray = np.asarray(image.convert("L"), dtype=np.float32) / 255.0
     dx, dy = np.abs(np.diff(gray, axis=1)), np.abs(np.diff(gray, axis=0))
-    # pixel boundaries 7 -> 8, 15 -> 16 , align to the 8x8 JPEG block grid
+    # Pixel boundaries 7->8,15->16,... align to the 8x8 JPEG block grid.
     bx, by = dx[:, 7::8], dy[7::8, :]
     boundary = (float(bx.mean()) + float(by.mean())) / 2
     global_difference = (float(dx.mean()) + float(dy.mean())) / 2
@@ -107,12 +106,15 @@ def quality_covariates(image, face_size: float):
 
 
 class CLIPCLSExtractor:
+    """Frozen CLIP with a verified hook on the final LayerNorm before projection."""
     def __init__(self, encoder_name: str = "ViT-L-14", pretrained: str = "openai", device: str = "cuda",
                  checkpoint: EncoderCheckpoint | None = None):
         model_cache = Path(os.environ.get("FRESCO_MODEL_CACHE", "data/models/open_clip")).resolve()
         model_cache.mkdir(parents=True, exist_ok=True)
         os.environ.setdefault("HF_HOME", str(model_cache / "huggingface"))
         os.environ.setdefault("TORCH_HOME", str(model_cache / "torch"))
+        import open_clip
+        import torch
         self.torch = torch
         self.device = torch.device(device)
         if self.device.type == "cuda" and not torch.cuda.is_available():
@@ -121,7 +123,12 @@ class CLIPCLSExtractor:
         verify_checkpoint_file(checkpoint)
         pretrained_metadata = checkpoint.metadata
         if pretrained == "openai":
-            checkpoint_path = Path(download_pretrained_from_url(checkpoint.identity["url"], cache_dir = str(model_cache)))
+            # This dedicated loader uses the original, SHA-verified OpenAI URL,
+            # preserves QuickGELU and explicitly handles its TorchScript archive.
+            # Generic factory + openai can otherwise use GELU, or fail to read
+            # the original JIT checkpoint with torch>=2.6 weights_only=True.
+            from open_clip.pretrained import download_pretrained_from_url
+            checkpoint_path = Path(download_pretrained_from_url(checkpoint.identity["url"], cache_dir=str(model_cache)))
             if sha256_file(checkpoint_path) != checkpoint.identity["sha256"]:
                 raise ValueError("Official OpenAI checkpoint SHA256 mismatch before loading")
             self.model = open_clip.load_openai_model(encoder_name, precision="fp32", device=self.device,
@@ -133,6 +140,7 @@ class CLIPCLSExtractor:
                                "checkpoint": str(checkpoint_path), "checkpoint_bytes": checkpoint_path.stat().st_size,
                                "activation": "QuickGELU"}
         else:
+            # A tag was already resolved/hash-bound; never resolve it again in the factory.
             self.model, _, self.transform = open_clip.create_model_and_transforms(
                 encoder_name, pretrained=str(checkpoint.path), device=self.device, cache_dir=str(model_cache),
                 force_quick_gelu=bool(pretrained_metadata.get("quick_gelu", False)),
@@ -168,6 +176,7 @@ class CLIPCLSExtractor:
         batch = torch.stack([self.transform(image) for image in images]).to(self.device)
         with torch.inference_mode():
             self.captured = None
+            # fp32 keeps an exact, transparent comparison to the projection.
             projected = self.model.encode_image(batch, normalize=False)
             if self.captured is None:
                 raise RuntimeError("CLIP ln_post hook did not run")
@@ -181,7 +190,7 @@ class CLIPCLSExtractor:
                 if not torch.allclose(reconstructed.float(), projected.float(), rtol=2e-4, atol=2e-4):
                     raise RuntimeError("Captured LayerNorm output does not reproduce projected CLIP features")
                 self.provenance["projection_consistency"] = {"passed": True, "rtol": 2e-4, "atol": 2e-4,
-                                                             "max_absolute_error": float((reconstructed.float() - projected.float()).abs().max().item())}
+                    "max_absolute_error": float((reconstructed.float() - projected.float()).abs().max().item())}
                 self.verified = True
             return features.float().cpu().numpy()
 
@@ -191,15 +200,33 @@ class CLIPCLSExtractor:
 
 def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", batch_size: int = 32,
                      conditions: list[str] | None = None, encoder_name: str = "ViT-L-14",
-                     pretrained: str = "openai", recover_provenance: bool = False) -> Path:
+                     pretrained: str = "openai", recover_provenance: bool = False,
+                     source_conditions: list[str] | None = None) -> Path:
+    """Cache paired rows; source augmentation is explicit and never uses target train rows.
+
+    The default clean-only source policy retains the v6 signature and legacy-v5
+    migration. A non-default source policy belongs in a separate cache directory.
+    Every selected source condition is generated for every FF++ train/val frame,
+    irrespective of class or manipulation method.
+    """
+    import numpy as np
+    import torch
+    from PIL import Image
+    from tqdm.auto import tqdm
     wall_start = time.perf_counter()
     faces_csv, cache_dir = Path(faces_csv).resolve(), Path(cache_dir).resolve()
     model_cache = Path(os.environ.get("FRESCO_MODEL_CACHE", "data/models/open_clip")).resolve()
     checkpoint = resolve_encoder_checkpoint(encoder_name, pretrained, model_cache)
     conditions = list(DEFAULT_CONDITIONS if conditions is None else conditions)
+    if isinstance(source_conditions, str):
+        raise ValueError("source_conditions must be a list, not a string")
+    source_conditions = list(["clean"] if source_conditions is None else source_conditions)
     if not conditions or len(set(conditions)) != len(conditions):
         raise ValueError("conditions must be nonempty and unique")
-    for condition in conditions:
+    if (not source_conditions or len(set(source_conditions)) != len(source_conditions)
+            or "clean" not in source_conditions):
+        raise ValueError("source_conditions must be nonempty, unique, and include clean")
+    for condition in dict.fromkeys(conditions + source_conditions):
         degrade_image(Image.new("RGB", (224, 224)), condition)
     if batch_size < 1:
         raise ValueError("batch_size must be positive")
@@ -214,6 +241,10 @@ def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", bat
         raise ValueError("Duplicate video/frame IDs in faces manifest")
     if "clean" not in conditions:
         raise ValueError("Conditions must include clean for source fitting and paired response curves")
+    if any(row["dataset"] != "ffpp" and row["split"] != "test" for row in faces):
+        raise ValueError("Target dataset must be TEST ONLY; source augmentation is restricted to FF++")
+    if any(row["split"] not in {"train", "val", "test"} for row in faces):
+        raise ValueError("Unknown face split; expected train, val, or test")
     crop_digests = []
     for row in faces:
         crop = resolve_under(faces_csv.parent, row["crop_path"])
@@ -223,6 +254,7 @@ def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", bat
         if row.get("crop_sha256") and row["crop_sha256"] != digest:
             raise ValueError(f"Crop content changed: {crop}; rerun faces stage to repair it")
         crop_digests.append((row["crop_path"], digest))
+    # Source manifests contain crop provenance; include both content and crop stats.
     crop_stats = [(r["crop_path"], (faces_csv.parent / r["crop_path"]).stat().st_size,
                    (faces_csv.parent / r["crop_path"]).stat().st_mtime_ns) for r in faces]
     specification = {"version": 5, "faces_sha256": sha256_file(faces_csv),
@@ -235,6 +267,11 @@ def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", bat
                      "feature": "visual.ln_post CLS BEFORE visual.proj, unnormalized fp32, 1024 dimensions",
                      "covariates": COVARIATE_NAMES, "chunk_size": 256}
     specification["condition_policy"] = "train/val: clean only; test: all configured paired conditions"
+    if source_conditions != ["clean"]:
+        specification["source_conditions"] = source_conditions
+        specification["condition_policy"] = (
+            "FF++ train/val: all configured source conditions, identical for every class/method; "
+            "all test: all configured paired conditions; target is test only")
     legacy_signature = _signature(specification)
     specification.update({"version": FEATURE_VERSION, "weights_identity": checkpoint.identity})
     signature = _signature(specification)
@@ -252,7 +289,7 @@ def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", bat
     metadata = []
     row_faces = []
     for face_index, face in enumerate(faces):
-        selected_conditions = ["clean"] if face["split"] in {"train", "val"} else conditions
+        selected_conditions = source_conditions if face["split"] in {"train", "val"} else conditions
         for condition in selected_conditions:
             record = {key: face.get(key, "") for key in METADATA_COLUMNS}
             record.update({"row": len(metadata), "condition": condition})
@@ -296,6 +333,7 @@ def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", bat
                         and f.dtype == np.float32 and c.dtype == np.float32):
                     valid_chunks.add(start)
         except (OSError, ValueError, KeyError, TypeError):
+            # A broken completion record is not evidence of a completed chunk.
             pass
 
     if valid_chunks and not provenance_encoded and not recover_provenance:
@@ -320,6 +358,7 @@ def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", bat
 
     try:
         if valid_chunks and not provenance_encoded:
+            import warnings
             warnings.warn("Explicitly recovering encoder provenance by loading the configured weights and "
                           "comparing a cached row; this does not independently recompute every cached row.", RuntimeWarning)
             load_extractor()
@@ -366,6 +405,8 @@ def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", bat
                     features[position - start:batch_end - start] = extractor(images)
                     encoder_call_seconds += time.perf_counter() - encode_start
                     encoded_rows += batch_end - position
+                    # Persist the first successful projection check before any
+                    # chunk can claim completion, including the last chunk.
                     if not provenance_encoded:
                         persist_encoded()
                 except torch.cuda.OutOfMemoryError:
@@ -397,22 +438,25 @@ def extract_features(faces_csv: Path, cache_dir: Path, device: str = "cuda", bat
         target.with_suffix(".npy.tmp").replace(target)
     write_csv(cache_dir / "metadata.csv", metadata, METADATA_COLUMNS)
     write_json(cache_dir / "manifest.json", {"signature": signature, **specification, "synthetic": False,
-                                             "rows": total, "frames": len(faces), "feature_dim": 1024, "dtype": "float32",
-                                             "effective_batch_size": effective_batch_size, "device": device,
-                                             "encoder_provenance": encoder_provenance,
-                                             "performance": {"stage_wall_seconds": time.perf_counter() - wall_start,
-                                                             "encoder_load_seconds": encoder_load_seconds, "encoder_call_seconds": encoder_call_seconds,
-                                                             "newly_encoded_rows": encoded_rows,
-                                                             "encoder_rows_per_second": encoded_rows / encoder_call_seconds if encoder_call_seconds else None,
-                                                             "scope": "encoder call includes OpenCLIP image transform, stack, device copy, forward and CPU synchronization; excludes video/face extraction, degradation/covariates, checkpoint load/download; stage wall includes cache validation, load/download, extraction, final arrays and hashing."},
-                                             "features": "features.npy", "covariates_file": "covariates.npy", "metadata": "metadata.csv",
-                                             "features_sha256": sha256_file(cache_dir / "features.npy"),
-                                             "covariates_sha256": sha256_file(cache_dir / "covariates.npy"),
-                                             "metadata_sha256": sha256_file(cache_dir / "metadata.csv"),
-                                             "face_extraction_coverage": ({key: faces_audit.get(key) for key in
-                                                                           ["videos", "crops", "status_counts", "missing_detections", "decode_failures", "empty_videos", "by_method", "limited"]}
-                                                                          if faces_audit else None),
-                                             "faces_audit_sha256": sha256_file(faces_audit_path) if faces_audit_path.is_file() else None,
-                                             "standardization": "None here: fit feature/covariate scaler on FF++ train rows only in each experiment.",
-                                             "paired_conditions": "Every TEST frame has every configured condition; train/val have clean only."})
+               "rows": total, "frames": len(faces), "feature_dim": 1024, "dtype": "float32",
+               "effective_batch_size": effective_batch_size, "device": device,
+               "encoder_provenance": encoder_provenance,
+               "performance": {"stage_wall_seconds": time.perf_counter() - wall_start,
+                   "encoder_load_seconds": encoder_load_seconds, "encoder_call_seconds": encoder_call_seconds,
+                   "newly_encoded_rows": encoded_rows,
+                   "encoder_rows_per_second": encoded_rows / encoder_call_seconds if encoder_call_seconds else None,
+                   "scope": "encoder call includes OpenCLIP image transform, stack, device copy, forward and CPU synchronization; excludes video/face extraction, degradation/covariates, checkpoint load/download; stage wall includes cache validation, load/download, extraction, final arrays and hashing."},
+               "features": "features.npy", "covariates_file": "covariates.npy", "metadata": "metadata.csv",
+               "features_sha256": sha256_file(cache_dir / "features.npy"),
+               "covariates_sha256": sha256_file(cache_dir / "covariates.npy"),
+               "metadata_sha256": sha256_file(cache_dir / "metadata.csv"),
+               "face_extraction_coverage": ({key: faces_audit.get(key) for key in
+                   ["videos", "crops", "status_counts", "missing_detections", "decode_failures", "empty_videos", "by_method", "limited"]}
+                   if faces_audit else None),
+               "faces_audit_sha256": sha256_file(faces_audit_path) if faces_audit_path.is_file() else None,
+               "standardization": "None here: fit feature/covariate scaler on FF++ train rows only in each experiment.",
+               "paired_conditions": ("Every TEST frame has every configured condition; train/val have clean only."
+                   if source_conditions == ["clean"] else
+                   "Every FF++ train/val frame has every configured source condition, independent of label/method; "
+                   "every TEST frame has every configured test condition; targets are evaluation only.")})
     return cache_dir

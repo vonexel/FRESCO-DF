@@ -1,3 +1,4 @@
+"""Deterministic integration fixture; NEVER scientific evidence about faces."""
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -11,7 +12,7 @@ def make_cache(directory: Path) -> Path:
         for v in range(number):
             label, dataset = v % 2, "celebdfpp" if split == "external" else "ffpp"
             method = "real" if label == 0 else (["Deepfakes", "Face2Face", "FaceSwap", "NeuralTextures"][v//2 % 4]
-                                                if dataset == "ffpp" else "NovelGenerator")
+                                                 if dataset == "ffpp" else "NovelGenerator")
             base = rng.normal(size=32)
             base[0] += 1.5 * label
             for frame in range(4):
@@ -40,3 +41,4 @@ def make_cache(directory: Path) -> Path:
            [("features", "features.npy"), ("covariates", "covariates.npy"), ("metadata", "metadata.csv")]},
     })
     return directory
+
